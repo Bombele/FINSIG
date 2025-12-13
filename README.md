@@ -71,3 +71,70 @@ Disponible en docs/en, docs/fr, docs/es :
 - Licence libre (à définir)
 - Fichier CITATION.cff pour citation académique
 - Alignement avec les standards ITCAA et auditabilité internationale
+
+# FINSIG – README
+
+## 🌍 Vision
+FINSIG est une **infrastructure institutionnelle et technique** conçue pour renforcer la confiance, la robustesse et la traçabilité dans les systèmes financiers et humanitaires.  
+Son objectif est de fournir un cadre **certifié, auditable et transmissible** pour les régulateurs, banques, ONG et institutions académiques.
+
+---
+
+## 🎯 Objectifs
+- **Robustesse** : architecture modulaire et auditable.  
+- **Traçabilité** : chaque étape est journalisée et signée.  
+- **Institutionnalisation** : schémas et pipelines documentés pour onboarding international.  
+- **Impact** : crédibilité renforcée auprès des régulateurs et institutions financières.  
+
+---
+
+## 🧭 Gouvernance
+FINSIG repose sur une gouvernance claire et institutionnelle :
+- **Certification** : critères validés selon des standards internationaux.  
+- **Auditabilité** : traçabilité et reproductibilité garanties.  
+- **Transmission collective** : guides multilingues pour adoption internationale.  
+- **Éthique** : IA responsable, explicabilité et conformité aux droits humains.  
+
+---
+
+## 📂 Structure documentaire
+Chaque module est accompagné d’un **`MODULE_GUIDE.md`** qui détaille son rôle, ses fichiers et son impact institutionnel.  
+Un **`INDEX_GUIDE.md`** central relie l’ensemble des modules pour assurer cohérence et onboarding.
+
+Principaux modules :
+- `architecture/` → socle technique  
+- `governance/` → pilier institutionnel  
+- `methods/` → socle méthodologique  
+- `sciences/` → socle scientifique  
+- `checks/` → gardien de l’intégrité  
+- `gates/` → filtre institutionnel  
+- `reports/` → transmission collective  
+- `ai_ethics/` → socle éthique  
+- `signals/` → système nerveux  
+- `quantum/` → socle quantique  
+- `data/` → gestion des datasets  
+- `docs/` → socle documentaire  
+- `tests/` → validation institutionnelle  
+- `utils/` → socle transversal  
+- `core/` → noyau institutionnel  
+- `domains/` → socle disciplinaire  
+- `principles/` → principes fondateurs  
+
+---
+
+## 📑 Artefacts institutionnels
+- **BITACORA.md** → journal des corrections techniques et institutionnelles.  
+- **QUALITY_GUIDE.md** → standards qualité et reproductibilité.  
+- **PRINCIPLES_GUIDE.md** → principes fondateurs et cadre institutionnel.  
+- **TRANSMISSION_GUIDE.md** → guides multilingues pour adoption collective.  
+
+---
+
+## ✅ Conclusion
+FINSIG est une **infrastructure de confiance** :  
+- robuste,  
+- auditable,  
+- institutionnalisée,  
+- et transmissible.  
+
+Il constitue un cadre stratégique pour les régulateurs, banques, ONG et institutions académiques, garantissant transparence et adoption internationale.
