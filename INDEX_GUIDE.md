@@ -1,80 +1,84 @@
 # FINSIG – INDEX_GUIDE.md
 
-## 🧭 Sommaire institutionnel
-
-Ce guide présente la **charpente complète du projet FINSIG**, en reliant chaque module à sa fonction stratégique, son rôle institutionnel et son impact dans l’architecture globale.  
-Chaque dossier est accompagné d’un `MODULE_GUIDE.md` dédié, garantissant traçabilité, robustesse et onboarding international.
-
----
-
-## 🔹 Modules techniques et scientifiques
-
-| Dossier         | Rôle stratégique | Description synthétique |
-|----------------|------------------|--------------------------|
-| `architecture/` | Socle technique | Orchestration, normalisation, traçabilité des flux |
-| `methods/`      | Socle méthodologique | Heuristiques, clustering, tests séquentiels |
-| `sciences/`     | Socle scientifique | BOCPD, CUSUM, graphes causaux, tests probabilistes |
-| `quantum/`      | Socle quantique | Superposition, entropie, renormalisation, corrélations non locales |
-| `data/`         | Gestion des datasets | Collecte, preprocessing, intégrité et transmission |
-| `utils/`        | Socle transversal | Fonctions utilitaires, logs signés, horodatage |
+## 🧭 Introduction
+Ce document présente l’**index général des branches `feature/...`** du projet FINSIG.  
+Chaque branche correspond à un module disciplinaire ou institutionnel, avec son rôle stratégique et sa synthèse.  
+L’objectif est de garantir cohérence, traçabilité et onboarding international.
 
 ---
 
-## 🔹 Modules institutionnels et éthiques
+## 🔹 Branches techniques
 
-| Dossier           | Rôle stratégique | Description synthétique |
-|------------------|------------------|--------------------------|
-| `governance/`     | Pilier institutionnel | Certification, auditabilité, conformité DIH |
-| `principles/`     | Principes fondateurs | Cadre institutionnel, robustesse, transmission |
-| `ai_ethics/`      | Socle éthique | Fairness, SHAP, LOF, Isolation Forest, explicabilité |
-| `checks/`         | Gardien de l’intégrité | Validation, cohérence, reproductibilité |
-| `gates/`          | Filtre institutionnel | Quality gates, security gates, validation |
-| `reports/`        | Transmission collective | Bulletins, rapports de risques, artefacts multilingues |
+- **feature/architecture**  
+  *Socle technique* : orchestration des modules, normalisation des flux, robustesse technique.  
 
----
+- **feature/utils**  
+  *Socle transversal* : fonctions utilitaires, logs signés, horodatage, support multilingue.  
 
-## 🔹 Modules disciplinaires et documentaires
+- **feature/core**  
+  *Noyau institutionnel* : initialisation, configuration et synchronisation inter-modules.  
 
-| Dossier         | Rôle stratégique | Description synthétique |
-|----------------|------------------|--------------------------|
-| `domains/`      | Socle disciplinaire | Finance, droit numérique, informatique, data science, humanitaire |
-| `docs/`         | Socle documentaire | Guides multilingues, BITACORA, QUALITY_GUIDE, PRINCIPLES_GUIDE |
-| `tests/`        | Validation institutionnelle | Tests unitaires, intégration, performance, sécurité |
-| `core/`         | Noyau institutionnel | Initialisation, configuration, synchronisation des modules |
-| `signals/`      | Système nerveux | Indicateurs, anomalies, corrélations, transmission |
+- **feature/data**  
+  *Gestion des datasets* : collecte, preprocessing, intégrité et transmission des données.  
 
 ---
 
-## 🔹 Branches stratégiques
+## 🔹 Branches scientifiques
 
-| Branche Git      | Rôle institutionnel |
-|------------------|---------------------|
-| `finsig/`         | Branche principale – socle institutionnel |
-| `feature/ci-cd`   | Expérimentation et durcissement des workflows |
-| `feature/architecture` → `feature/utils` | Développement modulaire par pilier |
-| `feature/principles` → `feature/governance` | Consolidation du cadre institutionnel |
-| `release/v1.0.0` → `release/v1.1.0` | Stabilisation et publication officielle |
-| `hotfix/critical-bug` | Corrections urgentes et traçables |
+- **feature/sciences**  
+  *Socle scientifique* : BOCPD, CUSUM, graphes causaux, tests probabilistes.  
+
+- **feature/quantum**  
+  *Socle quantique* : superposition, entropie, renormalisation, corrélations non locales.  
+
+- **feature/signals**  
+  *Système nerveux* : indicateurs, anomalies, corrélations, transmission vers les modules.  
 
 ---
 
-## 📑 Fichiers institutionnels
+## 🔹 Branches institutionnelles et éthiques
 
-- `README.md` → Vitrine institutionnelle  
-- `INDEX_GUIDE.md` → Sommaire global  
-- `BITACORA.md` → Journal des corrections et migrations  
-- `QUALITY_GUIDE.md` → Standards qualité et reproductibilité  
-- `PRINCIPLES_GUIDE.md` → Principes fondateurs  
-- `TRANSMISSION_GUIDE.md` → Onboarding multilingue  
-- `pyproject.toml`, `mypy.ini`, `pytest.ini` → Configuration technique  
-- `.github/workflows/` → Workflows CI/CD stables
+- **feature/governance**  
+  *Pilier institutionnel* : certification, conformité DIH, gouvernance technique et diplomatique.  
+
+- **feature/principles**  
+  *Principes fondateurs* : cadre institutionnel, robustesse, transmission intergénérationnelle.  
+
+- **feature/ai-ethics**  
+  *Socle éthique* : fairness, SHAP, LOF, Isolation Forest, explicabilité et conformité humanitaire.  
+
+- **feature/checks**  
+  *Gardien de l’intégrité* : validation, cohérence, reproductibilité, auditabilité des modules.  
+
+- **feature/gates**  
+  *Filtre institutionnel* : quality gates, security gates, validation technique et institutionnelle.  
+
+---
+
+## 🔹 Branches disciplinaires et transmission
+
+- **feature/domains**  
+  *Socle disciplinaire* : finance, droit numérique, informatique, data science, humanitaire.  
+
+- **feature/reports**  
+  *Transmission collective* : bulletins, rapports de risques, artefacts multilingues et diplomatiques.  
+
+- **feature/objectives**  
+  *Objectifs stratégiques* : définition des finalités, indicateurs d’impact, alignement continental.  
+
+---
+
+## 🔹 Branches de validation et CI/CD
+
+- **feature/tests**  
+  *Validation institutionnelle* : tests unitaires, intégration, performance, sécurité.  
+
+- **feature/ci-cd**  
+  *Laboratoire CI/CD* : expérimentation et durcissement des workflows avant fusion dans `finsig/`.  
 
 ---
 
 ## ✅ Conclusion
-
-FINSIG est une **infrastructure de confiance** : modulaire, auditable, institutionnalisée.  
-Ce guide permet à tout acteur (régulateur, banque, ONG, institution académique) de comprendre la logique, la robustesse et la traçabilité du projet.
-
-Chaque module est un pilier. Chaque branche est une étape. Chaque fichier est un artefact.  
-La documentation est le socle de l’adoption continentale.
+Chaque branche `feature/...` est un **pilier disciplinaire ou institutionnel**.  
+Une fois validée, elle est fusionnée dans la branche principale `finsig/`, avec traçabilité dans la Bitácora.  
+Cet index assure une vision claire et synthétique de la charpente FINSIG, garantissant robustesse, transparence et adoption internationale.
