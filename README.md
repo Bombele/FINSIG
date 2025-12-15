@@ -1,28 +1,66 @@
 🛡️ FINSIG – Financial Security, Integrity & Governance
 
-FINSIG est un module institutionnel dédié à la détection, l’explication et la gouvernance des manipulations financières. Il s’appuie sur des principes de robustesse CI/CD, d’auditabilité, d’éthique algorithmique et d’intégration quantum-inspired.
+# FINSIG – Infrastructure technique modulaire
 
-📌 Objectifs
+---
 
-- Détecter les manipulations de marché (wash trading, spoofing, pump & dump)
-- Scorer les entités et portefeuilles selon leur exposition au risque
-- Fournir des explications transparentes et traçables
-- Intégrer des principes de gouvernance, conformité et audit
-- Offrir une documentation multilingue et un onboarding institutionnel
+## 🇫🇷 Français
 
-🧱 Architecture modulaire
+### 📌 Description
+FINSIG est une **infrastructure technique modulaire** conçue pour fournir des briques spécialisées dans la finance, l’assurance et la gouvernance des données.  
+Contrairement à une startup ou une plateforme bancaire intégrée, FINSIG ne cherche pas à offrir un package complet.  
+Son objectif est de proposer des **modules indépendants, audités et conformes**, adoptables progressivement par les institutions.
 
-- src/finsig/data: ingestion, validation et sources (exchanges, blockchains, réseaux sociaux)
-- src/finsig/features: extraction de signaux et microstructure
-- src/finsig/detection: règles, heuristiques, modèles ML et quantum-inspired
-- src/finsig/scoring: calculs de scores de risque et d’exposition
-- src/finsig/explainability: SHAP, contre-factuels, rapports
-- src/finsig/api: endpoints REST, audit trail, sécurité
-- src/finsig/pipelines: ETL, détection, scoring
-- src/finsig/storage: adaptateurs, modèles, repositories
-- src/finsig/monitoring: Prometheus, alertes
+### 📂 Modules principaux
+- 🔍 **Détection de fraude** : algorithmes d’anomalies et audit des flux financiers.  
+- 📊 **Scoring crédit** : modèles statistiques et explicables pour la solvabilité.  
+- 🛡️ **Assurance scoring** : évaluation des risques assurantiels et certification.  
+- 📑 **Data governance** : validation d’intégrité et reproductibilité des données.  
+- ⛓️ **Blockchain / Web3** : smart contracts, traçabilité et conformité réglementaire.  
+- 📏 **Conformité ISO/IEC** : sécurité, qualité et certification progressive.  
 
-🚀 Démarrage rapide
+### ✅ Conclusion
+FINSIG est une **boîte à outils institutionnelle** qui garantit robustesse, traçabilité et conformité internationale.
+
+---
+
+## 🇬🇧 English
+
+### 📌 Description
+FINSIG is a **modular technical infrastructure** designed to provide specialized building blocks for finance, insurance, and data governance.  
+Unlike a startup or an integrated banking platform, FINSIG does not aim to deliver a full package.  
+Its purpose is to offer **independent, audited, and compliant modules**, progressively adoptable by institutions.
+
+### 📂 Main Modules
+- 🔍 **Fraud detection**: anomaly algorithms and financial flow auditing.  
+- 📊 **Credit scoring**: statistical and explainable models for solvency.  
+- 🛡️ **Insurance scoring**: risk evaluation and institutional certification.  
+- 📑 **Data governance**: integrity validation and reproducibility of data.  
+- ⛓️ **Blockchain / Web3**: smart contracts, traceability, and regulatory compliance.  
+- 📏 **ISO/IEC compliance**: security, quality, and progressive certification.  
+
+### ✅ Conclusion
+FINSIG is an **institutional toolbox** ensuring robustness, traceability, and international compliance.
+
+---
+
+## 🇪🇸 Español
+
+### 📌 Descripción
+FINSIG es una **infraestructura técnica modular** diseñada para proporcionar bloques especializados en finanzas, seguros y gobernanza de datos.  
+A diferencia de una startup o una plataforma bancaria integrada, FINSIG no busca ofrecer un paquete completo.  
+Su objetivo es proporcionar **módulos independientes, auditados y conformes**, adoptables progresivamente por las instituciones.
+
+### 📂 Módulos principales
+- 🔍 **Detección de fraude**: algoritmos de anomalías y auditoría de flujos financieros.  
+- 📊 **Scoring de crédito**: modelos estadísticos y explicables para la solvencia.  
+- 🛡️ **Scoring de seguros**: evaluación de riesgos aseguradores y certificación.  
+- 📑 **Gobernanza de datos**: validación de integridad y reproducibilidad de datos.  
+- ⛓️ **Blockchain / Web3**: contratos inteligentes, trazabilidad y cumplimiento regulatorio.  
+- 📏 **Conformidad ISO/IEC**: seguridad, calidad y certificación progresiva.  
+
+### ✅ Conclusión
+FINSIG es una **caja de herramientas institucional** que garantiza robustez, trazabilidad y cumplimiento internacional.
 
 `bash
 
