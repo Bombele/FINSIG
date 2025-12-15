@@ -1,15 +1,15 @@
-# MODULE_GUIDE – Simulation
+# SOUS_MODULE_GUIDE – Simulation
 
-## 🎯 Objectif du module
-La branche `feature/simulation` a pour mission de mettre en place des **scénarios de crise** et des **stress tests** appliqués aux domaines financiers et humanitaires.  
-Ce module permet de tester la résilience de FINSIG face à des événements extrêmes, en fournissant des preuves institutionnelles de robustesse et de préparation.
+## 🎯 Objectif du sous-module
+Le sous-module `simulation` a pour mission de mettre en place des **scénarios de crise** et des **stress tests** appliqués aux domaines financiers et humanitaires.  
+Il permet de tester la résilience de FINSIG face à des événements extrêmes, en fournissant des preuves institutionnelles de robustesse et de préparation.
 
 ---
 
 ## 📑 Portée
 - **Finance** : simulation de crises économiques, stress tests bancaires et scénarios de liquidité.  
 - **Humanitaire** : simulation de crises humanitaires (conflits, catastrophes naturelles, pandémies).  
-- **Interopérabilité** : intégration avec les modules security, observability et audit pour validation croisée.  
+- **Interopérabilité** : intégration avec les sous-modules security, observability et audit pour validation croisée.  
 - **Traçabilité** : journalisation des résultats et export des rapports pour certification.  
 
 ---
@@ -35,7 +35,7 @@ Ce module permet de tester la résilience de FINSIG face à des événements ext
 - **simulation.yml**  
   → Pipeline de simulation :  
   - Exécution de `stress_test.py` et `humanitarian_scenario.py`.  
-  - Vérification de la robustesse des modules face aux scénarios extrêmes.  
+  - Vérification de la robustesse des sous-modules face aux scénarios extrêmes.  
   - Export des résultats dans `reports/simulation/`.  
 
 - **resilience.yml**  
@@ -63,11 +63,11 @@ Ce module permet de tester la résilience de FINSIG face à des événements ext
 ## ✅ Impact institutionnel
 - **Préparation** : anticipation des crises financières et humanitaires.  
 - **Crédibilité** : démonstration de la robustesse institutionnelle.  
-- **Interopérabilité** : intégration avec les modules security, observability et audit.  
+- **Interopérabilité** : intégration avec les sous-modules security, observability et audit.  
 - **Adoption** : renforce la légitimité de FINSIG auprès des régulateurs et partenaires.  
 
 ---
 
 ## 📌 Conclusion
-La branche `feature/simulation` est le **pilier de la préparation et de la résilience** dans FINSIG.  
-Elle garantit que l’infrastructure peut résister à des crises majeures, renforçant la confiance et l’adoption institutionnelle.
+Le sous-module `simulation` est le **pilier de la préparation et de la résilience** dans FINSIG.  
+Il garantit que l’infrastructure peut résister à des crises majeures, renforçant la confiance et l’adoption institutionnelle.
