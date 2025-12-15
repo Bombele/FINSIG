@@ -6,48 +6,58 @@ Il regroupe les méthodes statistiques, causales et probabilistes pour assurer r
 
 ---
 
-## 📂 Structure des fichiers
+## 📂 Structure des dossiers
 
-- **cusum.py**  
-  Implémente le test CUSUM (cumulative sum).  
-  Détection des changements séquentiels dans les flux financiers.
+### 📂 docs/
+- **SCIENCES_GUIDE.md** → description des méthodes scientifiques, méthodologie et standards de validation.
 
-- **bocpd.py**  
-  Implémente le BOCPD (Bayesian Online Change Point Detection).  
-  Détection des ruptures en temps réel.
+### 📂 methods/
+- **cusum.py** → Implémente le test CUSUM (cumulative sum).  
+- **bocpd.py** → Implémente le BOCPD (Bayesian Online Change Point Detection).  
+- **causal_graphs.py** → Construction et analyse de graphes causaux.  
+- **statistical_tests.py** → Tests statistiques fondamentaux : Z, T, KS, Chi².  
+- **probabilistic_models.py** → Modèles probabilistes pour évaluer l’incertitude.  
+- **reproducibility.py** → Vérifie la reproductibilité des résultats scientifiques.  
 
-- **causal_graphs.py**  
-  Construction et analyse de graphes causaux.  
-  Vérifie les relations de causalité entre signaux et anomalies.
+### 📂 utils/
+- **utils.py** → Fonctions utilitaires : calculs mathématiques, logs signés, hashage.
 
-- **statistical_tests.py**  
-  Tests statistiques fondamentaux : Z, T, KS, Chi².  
-  Validation de la robustesse des signaux.
+### 📂 conformity/
+- **compliance_rules.toml** → règles de conformité et paramètres de validation scientifique.
 
-- **probabilistic_models.py**  
-  Modèles probabilistes pour évaluer l’incertitude.  
-  Intègre distributions et mesures de confiance.
+### 📂 schemas/
+- **sciences_schema.json** → schéma JSON pour la traçabilité et la validation des méthodes scientifiques.
 
-- **reproducibility.py**  
-  Vérifie la reproductibilité des résultats scientifiques.  
-  Génère des artefacts pour audit institutionnel.
-
-- **utils.py**  
-  Fonctions utilitaires : calculs mathématiques, logs signés, hashage.
-
-- **tests/**  
-  - Vérification de la robustesse des méthodes scientifiques.  
-  - Validation de la reproductibilité et cohérence.
+### 📂 tests/
+- **test_cusum.py** → Vérifie la validité du test CUSUM.  
+- **test_bocpd.py** → Vérifie la détection des ruptures par BOCPD.  
+- **test_causal_graphs.py** → Vérifie la cohérence des graphes causaux.  
+- **test_statistical_tests.py** → Vérifie la robustesse des tests statistiques.  
+- **test_probabilistic_models.py** → Vérifie la validité des modèles probabilistes.  
+- **test_reproducibility.py** → Vérifie la reproductibilité et la génération d’artefacts.  
 
 ---
 
-## 🧪 Tests
-- `tests/test_cusum.py` → Vérifie la validité du test CUSUM.  
-- `tests/test_bocpd.py` → Vérifie la détection des ruptures par BOCPD.  
-- `tests/test_causal_graphs.py` → Vérifie la cohérence des graphes causaux.  
-- `tests/test_statistical_tests.py` → Vérifie la robustesse des tests statistiques.  
-- `tests/test_probabilistic_models.py` → Vérifie la validité des modèles probabilistes.  
-- `tests/test_reproducibility.py` → Vérifie la reproductibilité et la génération d’artefacts.  
+## 🔄 Workflows CI/CD intégrés
+
+### 📂 .github/workflows/
+- **sciences-validation.yml**  
+  → Pipeline principal :  
+  - Exécution des méthodes scientifiques (`cusum.py`, `bocpd.py`, `causal_graphs.py`).  
+  - Vérification de la robustesse des tests statistiques et probabilistes.  
+  - Export des résultats dans `reports/sciences/`.
+
+- **reproducibility-check.yml**  
+  → Pipeline de reproductibilité :  
+  - Exécution de `reproducibility.py`.  
+  - Génération d’artefacts signés et hashés.  
+  - Journalisation des résultats dans `BITACORA.md`.
+
+- **compliance-sciences.yml**  
+  → Pipeline de conformité :  
+  - Vérification des règles définies dans `compliance_rules.toml`.  
+  - Contrôle de la traçabilité via `sciences_schema.json`.  
+  - Signature et hash des rapports pour audit institutionnel.
 
 ---
 
@@ -61,4 +71,4 @@ Il regroupe les méthodes statistiques, causales et probabilistes pour assurer r
 
 ## ✅ Conclusion
 Le sous-module `sciences/` est le **socle scientifique de FINSIG**.  
-Il regroupe CUSUM, BOCPD, graphes causaux et tests statistiques pour garantir rigueur, transparence et reproductibilité.
+Il regroupe CUSUM, BOCPD, graphes causaux et tests statistiques dans une structure factorisée (`methods/`, `utils/`, `tests/`) et des workflows CI/CD dédiés pour garantir rigueur, transparence et reproductibilité.
