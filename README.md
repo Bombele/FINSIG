@@ -1,178 +1,44 @@
-🛡️ FINSIG – Financial Security, Integrity & Governance
-
-# FINSIG – Infrastructure technique modulaire
-
----
-
-## 🇫🇷 Français
-
-### 📌 Description
-FINSIG est une **infrastructure technique modulaire** conçue pour fournir des briques spécialisées dans la finance, l’assurance et la gouvernance des données.  
-Contrairement à une startup ou une plateforme bancaire intégrée, FINSIG ne cherche pas à offrir un package complet.  
-Son objectif est de proposer des **modules indépendants, audités et conformes**, adoptables progressivement par les institutions.
-
-### 📂 Modules principaux
-- 🔍 **Détection de fraude** : algorithmes d’anomalies et audit des flux financiers.  
-- 📊 **Scoring crédit** : modèles statistiques et explicables pour la solvabilité.  
-- 🛡️ **Assurance scoring** : évaluation des risques assurantiels et certification.  
-- 📑 **Data governance** : validation d’intégrité et reproductibilité des données.  
-- ⛓️ **Blockchain / Web3** : smart contracts, traçabilité et conformité réglementaire.  
-- 📏 **Conformité ISO/IEC** : sécurité, qualité et certification progressive.  
-
-### ✅ Conclusion
-FINSIG est une **boîte à outils institutionnelle** qui garantit robustesse, traçabilité et conformité internationale.
-
----
-
-## 🇬🇧 English
-
-### 📌 Description
-FINSIG is a **modular technical infrastructure** designed to provide specialized building blocks for finance, insurance, and data governance.  
-Unlike a startup or an integrated banking platform, FINSIG does not aim to deliver a full package.  
-Its purpose is to offer **independent, audited, and compliant modules**, progressively adoptable by institutions.
-
-### 📂 Main Modules
-- 🔍 **Fraud detection**: anomaly algorithms and financial flow auditing.  
-- 📊 **Credit scoring**: statistical and explainable models for solvency.  
-- 🛡️ **Insurance scoring**: risk evaluation and institutional certification.  
-- 📑 **Data governance**: integrity validation and reproducibility of data.  
-- ⛓️ **Blockchain / Web3**: smart contracts, traceability, and regulatory compliance.  
-- 📏 **ISO/IEC compliance**: security, quality, and progressive certification.  
-
-### ✅ Conclusion
-FINSIG is an **institutional toolbox** ensuring robustness, traceability, and international compliance.
-
----
-
-## 🇪🇸 Español
-
-### 📌 Descripción
-FINSIG es una **infraestructura técnica modular** diseñada para proporcionar bloques especializados en finanzas, seguros y gobernanza de datos.  
-A diferencia de una startup o una plataforma bancaria integrada, FINSIG no busca ofrecer un paquete completo.  
-Su objetivo es proporcionar **módulos independientes, auditados y conformes**, adoptables progresivamente por las instituciones.
-
-### 📂 Módulos principales
-- 🔍 **Detección de fraude**: algoritmos de anomalías y auditoría de flujos financieros.  
-- 📊 **Scoring de crédito**: modelos estadísticos y explicables para la solvencia.  
-- 🛡️ **Scoring de seguros**: evaluación de riesgos aseguradores y certificación.  
-- 📑 **Gobernanza de datos**: validación de integridad y reproducibilidad de datos.  
-- ⛓️ **Blockchain / Web3**: contratos inteligentes, trazabilidad y cumplimiento regulatorio.  
-- 📏 **Conformidad ISO/IEC**: seguridad, calidad y certificación progresiva.  
-
-### ✅ Conclusión
-FINSIG es una **caja de herramientas institucional** que garantiza robustez, trazabilidad y cumplimiento internacional.
-
-`bash
-
-Installation
-make setup
-
-Lancement local
-docker compose up
-
-Test de robustesse
-make lint test
-
-Documentation
-make docs
-`
-
-🧪 Tests
-
-- tests/unit: tests unitaires des modules critiques
-- tests/integration: tests API, pipelines, stockage
-- tests/e2e: scénarios de bout en bout
-
-📚 Documentation
-
-Disponible en docs/en, docs/fr, docs/es :
-- Architecture, onboarding, API, scoring, détection, conformité, CI/CD
-- Guides visuels et schémas pour transmission familiale et internationale
-
-🛡️ Gouvernance & Sécurité
-
-- Politiques d’éthique, audit, réponse aux incidents
-- SBOM, listes de dépendances, scans de sécurité
-- Standards de traçabilité et d’interopérabilité
-
-🌐 CI/CD
-
-- Linting, tests, SBOM, release, documentation
-- GitHub Actions : ci.yml, security.yml, docs.yml, release.yml, compliance.yml
-
-📦 Dépendances critiques
-
-- sentence-transformers, FAISS, scikit-learn, networkx, torch, shap, fastapi, pydantic, sqlalchemy, graphene, qiskit
-
-🧭 Licence & conformité
-
-- Licence libre (à définir)
-- Fichier CITATION.cff pour citation académique
-- Alignement avec les standards ITCAA et auditabilité internationale
-
-# FINSIG – README
+# FINSIG – Infrastructure Régulée pour Finance & Assurance
 
 ## 🌍 Vision
-FINSIG est une **infrastructure institutionnelle et technique** conçue pour renforcer la confiance, la robustesse et la traçabilité dans les systèmes financiers et humanitaires.  
-Son objectif est de fournir un cadre **certifié, auditable et transmissible** pour les régulateurs, banques, ONG et institutions académiques.
+FINSIG est une **infrastructure institutionnelle et modulaire** qui fournit des solutions de scoring et de transfert financier adaptées aux marchés émergents.  
+Notre mission : **réduire le risque, renforcer la confiance et accélérer l’inclusion financière** en Afrique et en Amérique Latine.
 
 ---
 
-## 🎯 Objectifs
-- **Robustesse** : architecture modulaire et auditable.  
-- **Traçabilité** : chaque étape est journalisée et signée.  
-- **Institutionnalisation** : schémas et pipelines documentés pour onboarding international.  
-- **Impact** : crédibilité renforcée auprès des régulateurs et institutions financières.  
+## 🧩 Modules Clés
+- **Scoring Crédit** : évalue les profils bancarisés et non bancarisés grâce à des données alternatives (mobile money, factures, historique communautaire).  
+- **Scoring Assurance** : permet aux assureurs de tarifer correctement les primes (santé, agriculture, transport).  
+- **Blockchain Transfers** : solution régulée pour transferts internationaux, même en contexte de blocus (ex. Venezuela).  
+- **Compliance & Governance** : cadre documentaire intégré (ISO/IEC, BCC, GDPR), avec journalisation (`BITACORA.md`) et workflows CI/CD pour auditabilité.  
 
 ---
 
-## 🧭 Gouvernance
-FINSIG repose sur une gouvernance claire et institutionnelle :
-- **Certification** : critères validés selon des standards internationaux.  
-- **Auditabilité** : traçabilité et reproductibilité garanties.  
-- **Transmission collective** : guides multilingues pour adoption internationale.  
-- **Éthique** : IA responsable, explicabilité et conformité aux droits humains.  
+## 📊 Cas d’Usage
+- **RDC** : inclusion financière des populations non bancarisées via scoring crédit et assurance.  
+- **Venezuela** : transferts d’argent vers l’extérieur et scoring alternatif pour banques et fintechs.  
+- **Extension continentale** : adoption progressive en Afrique et Amérique Latine.  
 
 ---
 
-## 📂 Structure documentaire
-Chaque module est accompagné d’un **`MODULE_GUIDE.md`** qui détaille son rôle, ses fichiers et son impact institutionnel.  
-Un **`INDEX_GUIDE.md`** central relie l’ensemble des modules pour assurer cohérence et onboarding.
-
-Principaux modules :
-- `architecture/` → socle technique  
-- `governance/` → pilier institutionnel  
-- `methods/` → socle méthodologique  
-- `sciences/` → socle scientifique  
-- `checks/` → gardien de l’intégrité  
-- `gates/` → filtre institutionnel  
-- `reports/` → transmission collective  
-- `ai_ethics/` → socle éthique  
-- `signals/` → système nerveux  
-- `quantum/` → socle quantique  
-- `data/` → gestion des datasets  
-- `docs/` → socle documentaire  
-- `tests/` → validation institutionnelle  
-- `utils/` → socle transversal  
-- `core/` → noyau institutionnel  
-- `domains/` → socle disciplinaire  
-- `principles/` → principes fondateurs  
+## 🚀 Différenciation
+- **Infrastructure régulée et certifiable** : conformité ISO/IEC et alignement sur les régulateurs nationaux.  
+- **Traçabilité documentaire** : chaque décision est journalisée et auditable.  
+- **Interopérabilité** : APIs ouvertes et standards institutionnels.  
+- **Multilingue** : documentation en FR, EN, ES pour adoption internationale.  
 
 ---
 
-## 📑 Artefacts institutionnels
-- **BITACORA.md** → journal des corrections techniques et institutionnelles.  
-- **QUALITY_GUIDE.md** → standards qualité et reproductibilité.  
-- **PRINCIPLES_GUIDE.md** → principes fondateurs et cadre institutionnel.  
-- **TRANSMISSION_GUIDE.md** → guides multilingues pour adoption collective.  
+## 📈 Potentiel de Marché
+- **RDC** : 25 milliards USD de crédits projetés d’ici 2030 → FINSIG peut capter 1–3 % (250–750M USD).  
+- **Venezuela** : marché des remesas = 3–4,2 milliards USD/an + scoring alternatif estimé à 120–180M USD/an.  
+- **Vision long terme** : extension régionale → valorisation potentielle > 1 milliard USD.  
 
 ---
 
-## ✅ Conclusion
-FINSIG est une **infrastructure de confiance** :  
-- robuste,  
-- auditable,  
-- institutionnalisée,  
-- et transmissible.  
-
-Il constitue un cadre stratégique pour les régulateurs, banques, ONG et institutions académiques, garantissant transparence et adoption internationale.
+## 🏛️ Positionnement
+FINSIG est la **colonne vertébrale institutionnelle** pour :  
+- Les banques et microfinances (réduction du risque).  
+- Les assurances (tarification fiable).  
+- Les régulateurs (conformité et auditabilité).  
+- Les ONG et fintechs (inclusion et transferts sécurisés).
