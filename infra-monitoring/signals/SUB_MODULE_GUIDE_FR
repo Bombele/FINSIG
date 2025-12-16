@@ -1,64 +1,118 @@
-# SUB_MODULE_GUIDE_FR – Signals
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>SUB_MODULE_GUIDE_FR – Observability</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <main>
+    <h1>SUB_MODULE_GUIDE_FR – Observability</h1>
+    <hr />
 
----
+    <section>
+      <h2>🎯 Objectif du sous-module</h2>
+      <p>
+        Le sous-module <code>observability/</code> définit l’ossature technique et institutionnelle de
+        l’observabilité dans FINSIG. Il permet de mesurer, tracer et comprendre le comportement des
+        systèmes en production afin de garantir <strong>robustesse, transparence et auditabilité</strong>.
+        Ce sous-module est intégré dans le module principal <code>infra-monitoring</code> aux côtés de
+        <code>security/</code> et <code>signals/</code>.
+      </p>
+    </section>
 
-## 🎯 Objectif du sous-module
-Le sous-module `signals/` définit l’ossature technique et institutionnelle de la **gestion des signaux** dans FINSIG.  
-Il permet de collecter, traiter et analyser les signaux provenant des différents modules pour améliorer la supervision et la prise de décision.
+    <section>
+      <h2>📑 Portée</h2>
+      <ul>
+        <li><strong>Collecte de métriques :</strong> performance, disponibilité, consommation de ressources.</li>
+        <li><strong>Logs centralisés :</strong> journalisation des événements applicatifs et systèmes.</li>
+        <li><strong>Traces distribuées :</strong> suivi des requêtes multi-modules pour détecter les goulots d’étranglement.</li>
+        <li><strong>Dashboards :</strong> visualisation en temps réel pour les équipes techniques et institutionnelles.</li>
+        <li><strong>Alertes :</strong> détection proactive des anomalies et notification aux responsables.</li>
+        <li><strong>Auditabilité :</strong> intégration avec <code>BITACORA.md</code> pour traçabilité institutionnelle.</li>
+      </ul>
+    </section>
 
----
+    <section>
+      <h2>📂 Organisation des fichiers</h2>
 
-## 📑 Portée
-- **Collecte de signaux** : événements systèmes, métriques, alertes.  
-- **Normalisation** : uniformisation des formats de signaux pour interopérabilité.  
-- **Analyse** : détection de patterns et corrélation multi-modules.  
-- **Diffusion** : transmission des signaux aux modules observability et security.  
-- **Auditabilité** : journalisation des signaux critiques dans `BITACORA.md`.  
+      <h3>📂 docs/</h3>
+      <ul>
+        <li><code>OBSERVABILITY_GUIDE.md</code> → principes et méthodologie de l’observabilité.</li>
+        <li><code>METRICS_GUIDE.md</code> → description des métriques collectées.</li>
+        <li><code>LOGGING_GUIDE.md</code> → bonnes pratiques de journalisation.</li>
+        <li><code>TRACING_GUIDE.md</code> → guide sur les traces distribuées.</li>
+        <li><code>DASHBOARD_GUIDE.md</code> → configuration des visualisations.</li>
+      </ul>
 
----
+      <h3>📂 conformity/</h3>
+      <ul>
+        <li><code>observability_validator.py</code> → vérifie la cohérence des métriques et logs.</li>
+        <li><code>metrics_checker.py</code> → contrôle la validité des métriques collectées.</li>
+        <li><code>logging_checker.py</code> → assure la conformité des logs avec les standards ISO/IEC.</li>
+        <li><code>tracing_checker.py</code> → valide la traçabilité des requêtes distribuées.</li>
+      </ul>
 
-## 📂 Organisation des fichiers
+      <h3>📂 modules/</h3>
+      <ul>
+        <li><code>metrics_collector.py</code> → moteur de collecte des métriques.</li>
+        <li><code>logging_engine.py</code> → moteur de journalisation centralisée.</li>
+        <li><code>tracing_engine.py</code> → moteur de traçage distribué.</li>
+        <li><code>dashboard_renderer.py</code> → génération des tableaux de bord.</li>
+        <li><code>alerts_manager.py</code> → gestion des alertes et notifications.</li>
+      </ul>
 
-### 📂 docs/
-- **SIGNALS_GUIDE.md** → principes et méthodologie de gestion des signaux.  
-- **COLLECTION_GUIDE.md** → guide sur la collecte des signaux.  
-- **ANALYSIS_GUIDE.md** → guide sur l’analyse et la corrélation.  
-- **DISSEMINATION_GUIDE.md** → guide sur la diffusion des signaux.  
+      <h3>📂 tests/</h3>
+      <ul>
+        <li><code>test_metrics_collector.py</code> → tests sur la robustesse de la collecte de métriques.</li>
+        <li><code>test_logging_engine.py</code> → tests sur la validité et la conformité des logs.</li>
+        <li><code>test_tracing_engine.py</code> → tests sur la traçabilité des requêtes.</li>
+        <li><code>test_dashboard_renderer.py</code> → tests sur la génération des dashboards.</li>
+        <li><code>test_alerts_manager.py</code> → tests sur la détection et la notification des anomalies.</li>
+      </ul>
 
-### 📂 conformity/
-- **signals_validator.py** → vérifie la cohérence des signaux collectés.  
-- **collection_checker.py** → contrôle la validité des signaux.  
-- **analysis_checker.py** → assure la conformité des analyses.  
-- **dissemination_checker.py** → valide la diffusion des signaux.  
+      <h3>📂 workflows/</h3>
+      <ul>
+        <li><code>observability-validation.yml</code> → vérifie la conformité globale du sous-module.</li>
+        <li><code>metrics-validation.yml</code> → contrôle la qualité des métrriques.</li>
+        <li><code>logging-validation.yml</code> → assure la conformité des logs.</li>
+        <li><code>tracing-validation.yml</code> → valide la traçabilité distribuée.</li>
+        <li><code>alerts-validation.yml</code> → vérifie la robustesse du système d’alertes.</li>
+      </ul>
+    </section>
 
-### 📂 modules/
-- **signals_collector.py** → moteur de collecte des signaux.  
-- **signals_normalizer.py** → moteur de normalisation.  
-- **signals_analyzer.py** → moteur d’analyse et corrélation.  
-- **signals_dispatcher.py** → moteur de diffusion des signaux.  
+    <section>
+      <h2>⚙️ Fonctionnement</h2>
+      <ul>
+        <li>Les métriques sont collectées en continu par <code>metrics_collector.py</code>.</li>
+        <li>Les logs sont centralisés et validés par <code>logging_engine.py</code>.</li>
+        <li>Les traces distribuées permettent de suivre les flux inter-modules.</li>
+        <li>Les dashboards offrent une visualisation en temps réel.</li>
+        <li>Les alertes sont générées automatiquement en cas d’anomalie.</li>
+        <li>Les workflows CI/CD garantissent traçabilité et conformité.</li>
+      </ul>
+    </section>
 
-### 📂 tests/
-- **test_signals_collector.py** → tests sur la collecte des signaux.  
-- **test_signals_normalizer.py** → tests sur la normalisation.  
-- **test_signals_analyzer.py** → tests sur l’analyse et corrélation.  
-- **test_signals_dispatcher.py** → tests sur la diffusion.  
+    <section>
+      <h2>✅ Impact institutionnel</h2>
+      <ul>
+        <li><strong>Fiabilité :</strong> suivi en temps réel des performances et anomalies.</li>
+        <li><strong>Transparence :</strong> journalisation et traçabilité accessibles aux régulateurs.</li>
+        <li><strong>Auditabilité :</strong> intégration avec <code>BITACORA.md</code> pour certification institutionnelle.</li>
+        <li><strong>Proactivité :</strong> détection et correction rapide des incidents.</li>
+        <li><strong>Adoption :</strong> crédibilité renforcée auprès des partenaires et institutions.</li>
+      </ul>
+    </section>
 
-### 📂 workflows/
-- **signals-validation.yml** → vérifie la conformité globale du sous-module.  
-- **collection-validation.yml** → contrôle la collecte.  
-- **analysis-validation.yml** → validation des analyses.  
-- **dissemination-validation.yml** → validation de la diffusion.  
-
----
-
-## ✅ Impact institutionnel
-- **Fiabilité** : collecte et traitement cohérents des signaux.  
-- **Interopérabilité** : uniformisation des formats pour intégration multi-modules.  
-- **Auditabilité** : journalisation des signaux critiques.  
-- **Proactivité** : amélioration de la supervision et de la prise de décision.  
-
----
-
-## 📌 Conclusion
-Le sous-module `signals/` est un **pilier du module infra-monitoring**.  
-Il assure la collecte, l’analyse et la diffusion des signaux, renforçant la supervision et l’efficacité institutionnelle.
+    <section>
+      <h2>📌 Conclusion</h2>
+      <p>
+        Le sous-module <code>observability/</code> est un <strong>pilier du module infra-monitoring</strong>.
+        Il assure la collecte, la traçabilité et la visualisation des données critiques, garantissant
+        robustesse, transparence et adoption institutionnelle. Son intégration avec <code>security/</code>
+        et <code>signals/</code> permet une supervision complète et proactive de l’infrastructure FINSIG.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
