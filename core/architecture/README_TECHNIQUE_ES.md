@@ -1,17 +1,16 @@
----
+
 
 ## 🇪🇸 README_TECHNIQUE_ES.md – core/architecture
 
 ```markdown
 # README Técnico – core/architecture
 
----
 
 ## 🎯 Objetivo
-Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`).  
+Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`).  
 Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
 
----
+
 
 ## 📂 Estructura
 
@@ -23,60 +22,38 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - `conformity/structure_validator.py` → Script de validación documental  
 - `conformity/workflow_checker.py` → Script de control de flujos  
 
-### core/architecture/modules/collection
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Carta del módulo  
-- `BITACORA_FR/EN/ES.md` → Registro de actividades trilingüe  
-- `README_TECHNIQUE_FR/EN/ES.md` → Manual técnico trilingüe  
+### modules/collection
 - `data_collection.py` → Script de recolección y validación de datos  
 - `logs/collection_log.txt` → Archivo de trazabilidad de las recolecciones  
 
-### core/architecture/modules/normalization
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Carta del módulo  
-- `BITACORA_FR/EN/ES.md` → Registro de actividades trilingüe  
-- `README_TECHNIQUE_FR/EN/ES.md` → Manual técnico trilingüe  
+### modules/normalization
 - `data_normalization.py` → Script de normalización de datos (fechas, cadenas, números, campos obligatorios, duplicados)  
 
-### core/architecture/modules/orchestration
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Carta del módulo  
-- `BITACORA_FR/EN/ES.md` → Registro de actividades trilingüe  
-- `README_TECHNIQUE_FR/EN/ES.md` → Manual técnico trilingüe  
+### modules/orchestration
 - `pipeline_orchestrator.py` → Script de orquestación del pipeline (recolección → normalización → conformidad → auditoría/scoring)  
 
----
+### modules/schemas
+- `base_schema.py` → Esquema institucional genérico (id, timestamp, source, valor, metadatos)  
+- `finance_schema.py` → Esquema para transacciones financieras  
+- `audit_schema.py` → Esquema para registros de auditoría  
+- `compliance_schema.py` → Esquema para validaciones regulatorias  
+
+
 
 ## ⚙️ Requisitos
-
-### core/architecture
 - Python 3.10+  
 - Frameworks: `pytest`, `pydantic`  
 - CI/CD: GitHub Actions o pipelines en `infra_technical/ci-cd/`
 
-### modules/collection
-- Python 3.10+  
-- Módulos estándar (`csv`, `json`, `datetime`)  
 
-### modules/normalization
-- Python 3.10+  
-- Módulos estándar (`datetime`)  
-
-### modules/orchestration
-- Python 3.10+  
-- Dependencias internas (`data_collection`, `data_normalization`, `structure_validator`, `workflow_checker`)  
-
----
 
 ## 🚀 Uso
 
 ### core/architecture
 ```bash
-# Validar la conformidad documental
-python conformity/structure_validator.py
-
-# Verificar los flujos de trabajo
-python conformity/workflow_checker.py
-
-# Ejecutar las pruebas
-pytest tests/
+python conformity/structure_validator.py   # Validar la conformidad documental
+python conformity/workflow_checker.py      # Verificar los flujos de trabajo
+pytest tests/                              # Ejecutar las pruebas
 
 # Recolectar datos JSON
 python data_collection.py
@@ -95,3 +72,7 @@ python pipeline_orchestrator.py
 
 # Validar la integración del pipeline
 pytest tests/
+
+python finance_schema.py                   # Validar una transacción financiera
+python audit_schema.py                     # Validar un registro de auditoría
+python compliance_schema.py                # Validar una regla de conformidad
