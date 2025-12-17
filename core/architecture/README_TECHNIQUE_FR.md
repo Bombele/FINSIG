@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Objectif
-Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`).  
+Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`).  
 Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA` (journaux des activités).
 
 ---
@@ -19,23 +19,20 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 - `conformity/workflow_checker.py` → Script de contrôle des workflows  
 
 ### core/architecture/modules/collection
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Charte du module  
-- `BITACORA_FR/EN/ES.md` → Journal de bord trilingue  
-- `README_TECHNIQUE_FR/EN/ES.md` → Manuel technique trilingue  
 - `data_collection.py` → Script de collecte et validation des données  
 - `logs/collection_log.txt` → Fichier de traçabilité des collectes  
 
 ### core/architecture/modules/normalization
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Charte du module  
-- `BITACORA_FR/EN/ES.md` → Journal de bord trilingue  
-- `README_TECHNIQUE_FR/EN/ES.md` → Manuel technique trilingue  
 - `data_normalization.py` → Script de normalisation des données (dates, chaînes, nombres, champs obligatoires, doublons)  
 
 ### core/architecture/modules/orchestration
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Charte du module  
-- `BITACORA_FR/EN/ES.md` → Journal de bord trilingue  
-- `README_TECHNIQUE_FR/EN/ES.md` → Manuel technique trilingue  
 - `pipeline_orchestrator.py` → Script d’orchestration du pipeline (collecte → normalisation → conformité → audit/scoring)  
+
+### core/architecture/modules/schemas
+- `base_schema.py` → Schéma institutionnel générique (id, timestamp, source, valeur, métadonnées)  
+- `finance_schema.py` → Schéma pour les transactions financières  
+- `audit_schema.py` → Schéma pour les journaux d’audit  
+- `compliance_schema.py` → Schéma pour les validations réglementaires  
 
 ---
 
@@ -58,6 +55,11 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 - Python 3.10+  
 - Dépendances internes (`data_collection`, `data_normalization`, `structure_validator`, `workflow_checker`)  
 
+### modules/schemas
+- Python 3.10+  
+- Framework : `pydantic` pour la validation des schémas  
+- CI/CD : tests automatiques pour garantir la conformité des schémas  
+
 ---
 
 ## 🚀 Utilisation
@@ -73,20 +75,20 @@ python conformity/workflow_checker.py
 # Lancer les tests
 pytest tests/
 
-# Normaliser un jeu de données
-python data_normalization.py
-
-# Vérifier la conformité des données normalisées
-pytest tests/
-
 # Collecter des données JSON
 python data_collection.py
 
-# Vérifier la conformité des données
-pytest tests/
+# Normaliser un jeu de données
+python data_normalization.py
 
-# Exécuter le pipeline complet (collecte → normalisation → conformité)
+# Exécuter le pipeline complet
 python pipeline_orchestrator.py
 
-# Vérifier l’intégration du pipeline
-pytest tests/
+# Valider un enregistrement financier
+python finance_schema.py
+
+# Valider un journal d’audit
+python audit_schema.py
+
+# Valider une règle de conformité
+python compliance_schema.py
