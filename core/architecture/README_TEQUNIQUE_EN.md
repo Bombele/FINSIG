@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Purpose
-This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`collection`, `normalization`).  
+This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`).  
 It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA` (activity logs).
 
 ---
@@ -31,6 +31,12 @@ It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA
 - `README_TECHNIQUE_FR/EN/ES.md` → Trilingual technical manual  
 - `data_normalization.py` → Data normalization script (dates, strings, numbers, mandatory fields, duplicates)  
 
+### core/architecture/modules/orchestration
+- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Module charter  
+- `BITACORA_FR/EN/ES.md` → Trilingual activity log  
+- `README_TECHNIQUE_FR/EN/ES.md` → Trilingual technical manual  
+- `pipeline_orchestrator.py` → Pipeline orchestration script (collection → normalization → conformity → audit/scoring)  
+
 ---
 
 ## ⚙️ Requirements
@@ -43,12 +49,14 @@ It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA
 ### modules/collection
 - Python 3.10+  
 - Standard modules (`csv`, `json`, `datetime`)  
-- CI/CD: GitHub Actions or pipelines in `infra_technical/ci-cd/`
 
 ### modules/normalization
 - Python 3.10+  
 - Standard modules (`datetime`)  
-- CI/CD: GitHub Actions or pipelines in `infra_technical/ci-cd/`
+
+### modules/orchestration
+- Python 3.10+  
+- Internal dependencies (`data_collection`, `data_normalization`, `structure_validator`, `workflow_checker`)  
 
 ---
 
@@ -75,4 +83,10 @@ pytest tests/
 python data_normalization.py
 
 # Validate normalized data
+pytest tests/
+
+# Run the full pipeline (collection → normalization → conformity)
+python pipeline_orchestrator.py
+
+# Validate pipeline integration
 pytest tests/
