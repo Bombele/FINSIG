@@ -1,16 +1,14 @@
 
 ## 🇪🇸 README_TECHNIQUE_ES.md – core/architecture & modules/collection
 
-```markdown
+markdown
 # README Técnico – core/architecture & modules/collection
 
----
 
 ## 🎯 Objetivo
 Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` y su módulo `collection`.  
 Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
 
----
 
 ## 📂 Estructura
 
@@ -29,7 +27,6 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - `data_collection.py` → Script de recolección y validación de datos.  
 - `logs/collection_log.txt` → Archivo de trazabilidad de las recolecciones.
 
----
 
 ## ⚙️ Requisitos
 
@@ -43,7 +40,6 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - Módulos estándar (`csv`, `json`, `datetime`)  
 - CI/CD: GitHub Actions o pipelines en `infra_technical/ci-cd/`
 
----
 
 ## 🚀 Uso
 
