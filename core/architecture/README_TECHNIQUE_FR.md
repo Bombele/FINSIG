@@ -35,3 +35,37 @@ python conformity/workflow_checker.py
 
 # Lancer les tests
 pytest tests/
+
+# README Technique – core/architecture/modules/collection
+
+---
+
+## 🎯 Objectif
+Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `collection`.  
+Il complète le `SUB_MODULE_GUIDE` (charte institutionnelle) et la `BITACORA` (journal des activités).
+
+---
+
+## 📂 Structure
+- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Charte du sous-module.  
+- `BITACORA_FR/EN/ES.md` → Journal de bord trilingue.  
+- `README_TECHNIQUE_FR/EN/ES.md` → Manuel technique trilingue.  
+- `data_collection.py` → Script de collecte et validation des données.  
+- `logs/collection_log.txt` → Fichier de traçabilité des collectes.
+
+---
+
+## ⚙️ Prérequis
+- Python 3.10+  
+- Modules standards (`csv`, `json`, `datetime`)  
+- CI/CD : GitHub Actions ou pipelines `infra_technical/ci-cd/`
+
+---
+
+## 🚀 Utilisation
+```bash
+# Collecter des données JSON
+python data_collection.py
+
+# Vérifier la conformité des données
+pytest tests/
