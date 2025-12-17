@@ -2,11 +2,10 @@
 workflow_checker.py – core/architecture/conformity
 
 🎯 Purpose:
-This script validates the institutional workflow of FINSIG.
-It ensures that each sub-module follows the correct sequence:
+This script checks that each sub-module in FINSIG follows the required workflow:
 1. SUB_MODULE_GUIDE (FR/EN/ES)
 2. BITACORA (FR/EN/ES)
-3. README_TECHNIQUE.md
+3. README_TECHNIQUE (FR/EN/ES)
 4. Technical files (framework, compliance, integration, tests)
 
 ✅ Impact:
@@ -16,14 +15,16 @@ Guarantees that workflows are documented, reproducible, and compliant with insti
 import os
 
 # Expected workflow files
-REQUIRED_SEQUENCE = [
+REQUIRED_FILES = [
     "SUB_MODULE_GUIDE_FR.md",
     "SUB_MODULE_GUIDE_EN.md",
     "SUB_MODULE_GUIDE_ES.md",
     "BITACORA_FR.md",
     "BITACORA_EN.md",
     "BITACORA_ES.md",
-    "README_TECHNIQUE.md",
+    "README_TECHNIQUE_FR.md",
+    "README_TECHNIQUE_EN.md",
+    "README_TECHNIQUE_ES.md",
 ]
 
 def check_workflow(path: str) -> dict:
@@ -32,7 +33,7 @@ def check_workflow(path: str) -> dict:
     Returns a dictionary with missing files and compliance status.
     """
     missing = []
-    for file in REQUIRED_SEQUENCE:
+    for file in REQUIRED_FILES:
         if not os.path.exists(os.path.join(path, file)):
             missing.append(file)
 
