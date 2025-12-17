@@ -1,84 +1,80 @@
-# FINSIG – INDEX_GUIDE.md
-
-## 🧭 Introduction
-Ce document présente l’**index général des branches `feature/...`** du projet FINSIG.  
-Chaque branche correspond à un module disciplinaire ou institutionnel, avec son rôle stratégique et sa synthèse.  
-L’objectif est de garantir cohérence, traçabilité et onboarding international.
+# INDEX_GUIDE – FINSIG
 
 ---
 
-## 🔹 Branches techniques
-
-- **feature/architecture**  
-  *Socle technique* : orchestration des modules, normalisation des flux, robustesse technique.  
-
-- **feature/utils**  
-  *Socle transversal* : fonctions utilitaires, logs signés, horodatage, support multilingue.  
-
-- **feature/core**  
-  *Noyau institutionnel* : initialisation, configuration et synchronisation inter-modules.  
-
-- **feature/data**  
-  *Gestion des datasets* : collecte, preprocessing, intégrité et transmission des données.  
+## 🎯 Objectif
+Cet index présente la structure complète du projet **FINSIG**, en listant les dossiers principaux et leur fonction institutionnelle ou technique.  
+Il sert de **carte de navigation** pour l’onboarding, la documentation et la gouvernance du projet.
 
 ---
 
-## 🔹 Branches scientifiques
+## 📂 Dossiers principaux
 
-- **feature/sciences**  
-  *Socle scientifique* : BOCPD, CUSUM, graphes causaux, tests probabilistes.  
+1. **.github/**  
+   - Contient les workflows CI/CD et les automatisations GitHub Actions.  
+   - Rôle : assurer la validation continue et l’intégration automatisée.
 
-- **feature/quantum**  
-  *Socle quantique* : superposition, entropie, renormalisation, corrélations non locales.  
+2. **MODULE_AI/**  
+   - Composants liés à l’intelligence artificielle.  
+   - Rôle : moteurs de scoring, analyse et traitement intelligent.
 
-- **feature/signals**  
-  *Système nerveux* : indicateurs, anomalies, corrélations, transmission vers les modules.  
+3. **MODULE_RESEARCH/**  
+   - Composants liés à la recherche et au développement.  
+   - Rôle : expérimentations, prototypes et documentation scientifique.
+
+4. **artefacts/**  
+   - Sorties techniques, journaux et preuves de conformité.  
+   - Rôle : traçabilité et archivage des résultats.
+
+5. **compliance/**  
+   - Module de conformité bancaire et réglementaire.  
+   - Rôle : règles KYC/AML, standards de régulation et validation institutionnelle.
+
+6. **core/**  
+   - Constitution numérique et architecture centrale.  
+   - Rôle : intégration des sous-modules et cohérence documentaire.
+
+7. **docs/**  
+   - Documentation générale et guides institutionnels.  
+   - Rôle : point d’entrée documentaire.
+
+8. **docs-core/**  
+   - Documentation trilingue des modules fondamentaux :  
+     - `audit/` → audits et vérifications.  
+     - `data/` → gestion et traçabilité des données.  
+     - `governance/` → gouvernance institutionnelle et conformité.  
+     - `reports/` → reporting et traçabilité.  
+
+9. **docs-disciplinary/**  
+   - Guides trilingues par domaine disciplinaire (finance, droit, informatique, etc.).  
+   - Rôle : transmission pédagogique et adoption sectorielle.
+
+10. **docs-institutional/**  
+    - Guides institutionnels pour adoption régionale et continentale.  
+    - Rôle : cadre normatif et gouvernance interinstitutionnelle.
+
+11. **infra-config/**  
+    - Fichiers de configuration technique : `makefile`, `mypy.ini`, `poetry.lock`, `pyproject.toml`, `pytest.ini`.  
+    - Rôle : automatisation, qualité du code, gestion des dépendances et tests.
+
+12. **infra-monitoring/**  
+    - Outils de supervision et suivi technique.  
+    - Rôle : monitoring, alertes et résilience opérationnelle.
+
+13. **infra-support/**  
+    - Support technique et maintenance.  
+    - Rôle : assistance, documentation de dépannage et gestion des incidents.
+
+14. **infra_technical/**  
+    - Scripts et outils techniques complémentaires.  
+    - Rôle : utilitaires, automatisations spécifiques et intégrations.
+
+15. **tests/**  
+    - Tests unitaires et d’intégration.  
+    - Rôle : validation technique et robustesse logicielle.
 
 ---
 
-## 🔹 Branches institutionnelles et éthiques
-
-- **feature/governance**  
-  *Pilier institutionnel* : certification, conformité DIH, gouvernance technique et diplomatique.  
-
-- **feature/principles**  
-  *Principes fondateurs* : cadre institutionnel, robustesse, transmission intergénérationnelle.  
-
-- **feature/ai-ethics**  
-  *Socle éthique* : fairness, SHAP, LOF, Isolation Forest, explicabilité et conformité humanitaire.  
-
-- **feature/checks**  
-  *Gardien de l’intégrité* : validation, cohérence, reproductibilité, auditabilité des modules.  
-
-- **feature/gates**  
-  *Filtre institutionnel* : quality gates, security gates, validation technique et institutionnelle.  
-
----
-
-## 🔹 Branches disciplinaires et transmission
-
-- **feature/domains**  
-  *Socle disciplinaire* : finance, droit numérique, informatique, data science, humanitaire.  
-
-- **feature/reports**  
-  *Transmission collective* : bulletins, rapports de risques, artefacts multilingues et diplomatiques.  
-
-- **feature/objectives**  
-  *Objectifs stratégiques* : définition des finalités, indicateurs d’impact, alignement continental.  
-
----
-
-## 🔹 Branches de validation et CI/CD
-
-- **feature/tests**  
-  *Validation institutionnelle* : tests unitaires, intégration, performance, sécurité.  
-
-- **feature/ci-cd**  
-  *Laboratoire CI/CD* : expérimentation et durcissement des workflows avant fusion dans `finsig/`.  
-
----
-
-## ✅ Conclusion
-Chaque branche `feature/...` est un **pilier disciplinaire ou institutionnel**.  
-Une fois validée, elle est fusionnée dans la branche principale `finsig/`, avec traçabilité dans la Bitácora.  
-Cet index assure une vision claire et synthétique de la charpente FINSIG, garantissant robustesse, transparence et adoption internationale.
+## 📌 Conclusion
+Cet index constitue la **table des matières exécutive** de FINSIG.  
+Chaque dossier est une **chambre institutionnelle** ou technique, contribuant à la robustesse, la traçabilité et l’adoption continentale du projet.
