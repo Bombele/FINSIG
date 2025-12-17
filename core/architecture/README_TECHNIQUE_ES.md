@@ -2,7 +2,7 @@
 
 ## 🇪🇸 README_TECHNIQUE_ES.md – core/architecture
 
-```markdown
+markdown
 # README Técnico – core/architecture
 
 
