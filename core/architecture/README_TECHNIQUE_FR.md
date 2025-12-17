@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Objectif
-Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`collection`, `normalization`).  
+Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`).  
 Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA` (journaux des activités).
 
 ---
@@ -31,6 +31,12 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 - `README_TECHNIQUE_FR/EN/ES.md` → Manuel technique trilingue  
 - `data_normalization.py` → Script de normalisation des données (dates, chaînes, nombres, champs obligatoires, doublons)  
 
+### core/architecture/modules/orchestration
+- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Charte du module  
+- `BITACORA_FR/EN/ES.md` → Journal de bord trilingue  
+- `README_TECHNIQUE_FR/EN/ES.md` → Manuel technique trilingue  
+- `pipeline_orchestrator.py` → Script d’orchestration du pipeline (collecte → normalisation → conformité → audit/scoring)  
+
 ---
 
 ## ⚙️ Prérequis
@@ -43,12 +49,14 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 ### modules/collection
 - Python 3.10+  
 - Modules standards (`csv`, `json`, `datetime`)  
-- CI/CD : GitHub Actions ou pipelines `infra_technical/ci-cd/`
 
 ### modules/normalization
 - Python 3.10+  
 - Modules standards (`datetime`)  
-- CI/CD : GitHub Actions ou pipelines `infra_technical/ci-cd/`
+
+### modules/orchestration
+- Python 3.10+  
+- Dépendances internes (`data_collection`, `data_normalization`, `structure_validator`, `workflow_checker`)  
 
 ---
 
@@ -75,4 +83,10 @@ pytest tests/
 python data_collection.py
 
 # Vérifier la conformité des données
+pytest tests/
+
+# Exécuter le pipeline complet (collecte → normalisation → conformité)
+python pipeline_orchestrator.py
+
+# Vérifier l’intégration du pipeline
 pytest tests/
