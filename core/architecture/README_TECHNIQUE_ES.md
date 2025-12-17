@@ -1,11 +1,11 @@
----
+
 
 ## 🇪🇸 README_TECHNIQUE_ES.md – core/architecture
 
 ```markdown
 # README Técnico – core/architecture
 
----
+
 
 ## 🎯 Objetivo
 Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`collection`, `normalization`).  
