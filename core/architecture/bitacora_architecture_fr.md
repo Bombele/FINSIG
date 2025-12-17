@@ -1,29 +1,30 @@
-# BITACORA – core/architecture
+# BITACORA – core/architecture/conformity
 
 ---
 
 ## 📅 Journal des activités
 
-- **2025-12-17** – Création du fichier `ARCHITECTURE_GUIDE.md` dans `core/architecture/docs/` pour définir les principes structuraux.  
-- **2025-12-17** – Ajout du `SUB_MODULE_GUIDE_FR.md` comme charte du sous-module.  
-- **2025-12-17** – Début de la déclinaison trilingue des guides (EN/ES).  
-- **2025-12-16** – Validation de la structure racine `core/architecture/` avec dossiers `docs/` et guides prévus.  
+- **2025-12-17** – Recréation complète du script `workflow_checker.py` pour valider la séquence documentaire trilingue (guides, bitácoras, README techniques).  
+- **2025-12-17** – Mise à jour du `structure_validator.py` pour renforcer la vérification des fichiers obligatoires.  
+- **2025-12-17** – Ajout des modèles trilingues pour `README_TECHNIQUE` afin d’uniformiser la documentation technique.  
+- **2025-12-16** – Initialisation du sous-module `conformity/` avec logique de validation institutionnelle.
 
 ---
 
 ## ✅ État des validations
 
-- `ARCHITECTURE_GUIDE.md` validé comme référence centrale.  
-- `SUB_MODULE_GUIDE_FR.md` en place, versions EN/ES en cours de rédaction.  
-- Bitácora initialisée et prête à consigner les prochaines évolutions.  
+- `workflow_checker.py` opérationnel et testé en local.  
+- `structure_validator.py` validé, en attente d’intégration CI/CD.  
+- Documentation technique trilingue en cours de déploiement.  
+- Bitácora mise à jour pour consigner les évolutions.
 
 ---
 
 ## 📌 Notes techniques
 
-- Les guides trilingues doivent être systématiquement ajoutés (`FR`, `EN`, `ES`).  
-- La bitácora doit enregistrer chaque modification de fichiers et de structure.  
-- Les futures étapes incluent :  
-  - Ajout de `ARCHITECTURE_FRAMEWORK.md` (principes structuraux).  
-  - Ajout de `INTEGRATION_GUIDE.md` (interopérabilité).  
-  - Ajout de `COMPLIANCE_ARCHITECTURE.md` (mapping réglementaire).
+- Les validateurs (`workflow_checker.py`, `structure_validator.py`) doivent être intégrés dans les pipelines CI/CD (`infra_technical/ci-cd/`).  
+- Chaque sous-module doit contenir :  
+  - Guides trilingues (`FR`, `EN`, `ES`)  
+  - Bitácoras trilingues (`FR`, `EN`, `ES`)  
+  - README techniques trilingues (`FR`, `EN`, `ES`)  
+- Les scripts de conformité doivent être exécutés avant chaque merge pour garantir la robustesse documentaire et institutionnelle.
