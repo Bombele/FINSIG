@@ -1,57 +1,47 @@
-# BITACORA – core/architecture/conformity
+# BITACORA – core/architecture
 
 ---
 
 ## 📅 Registro de actividades
 
-- **2025-12-17** – Re-creación completa de `workflow_checker.py` para validar el flujo documental trilingüe (guías, bitácoras, README técnicos).  
-- **2025-12-17** – Actualización de `structure_validator.py` para reforzar la verificación de archivos obligatorios.  
-- **2025-12-17** – Incorporación de plantillas trilingües para `README_TECHNIQUE` con el fin de estandarizar la documentación técnica.  
-- **2025-12-16** – Inicialización del submódulo `conformity/` con lógica de validación institucional.
+- **2025-12-17** – Actualización de `README_TECHNIQUE_ES.md` para incluir los módulos `collection` y `normalization`.  
+- **2025-12-17** – Creación de `data_collection.py` (módulo `collection`) para centralizar la recolección institucional de datos (CSV, JSON, API) con registro automático (`collection_log.txt`).  
+- **2025-12-17** – Creación de `data_normalization.py` (módulo `normalization`) para normalizar datos (fechas, cadenas, números, campos obligatorios, duplicados).  
+- **2025-12-17** – Actualización de las `BITACORA` y `README_TECHNIQUE` en versiones trilingües (FR/EN/ES) para garantizar el onboarding internacional.  
+- **2025-12-16** – Re-creación completa de `workflow_checker.py` para validar la secuencia documental trilingüe (guías, bitácoras, README técnicos).  
+- **2025-12-16** – Actualización de `structure_validator.py` para reforzar la verificación de archivos obligatorios.  
+- **2025-12-15** – Inicialización del submódulo `conformity/` con lógica de validación institucional.  
+- **2025-12-14** – Estructuración inicial del submódulo `core/architecture` con guías y documentación.
 
 ---
 
 ## ✅ Estado de validaciones
 
-- `workflow_checker.py` operativo y probado en local.  
-- `structure_validator.py` validado, pendiente de integración en CI/CD.  
-- Documentación técnica trilingüe en proceso de despliegue.  
+- `structure_validator.py` y `workflow_checker.py` operativos y probados en local.  
+- `data_collection.py` operativo, registro confirmado.  
+- `data_normalization.py` operativo, pipeline de normalización probado.  
+- Documentación técnica trilingüe (`FR`, `EN`, `ES`) en marcha para `architecture`, `collection` y `normalization`.  
 - Bitácora actualizada para registrar las evoluciones.
 
 ---
 
 ## 📌 Notas técnicas
 
-- Los validadores deben integrarse en los pipelines CI/CD (`infra_technical/ci-cd/`).  
-- Cada submódulo debe contener: guías, bitácoras y README técnicos en FR/EN/ES.  
-- Los scripts de conformidad deben ejecutarse antes de cada merge para garantizar la solidez documental.
-
-# BITACORA – core/architecture/modules/collection
-
----
-
-## 📅 Registro de actividades
-
-- **2025-12-17** – Creación de `data_collection.py` para centralizar la recolección institucional de datos (CSV, JSON, API).  
-- **2025-12-17** – Implementación de la lógica de validación (presencia del campo `id`) y registro automático en `collection_log.txt`.  
-- **2025-12-17** – Recomendación de crear una carpeta `logs/` para almacenar archivos de seguimiento y mantener limpia la raíz.  
-- **2025-12-16** – Inicialización del submódulo `collection/` con lógica de recolección y trazabilidad.
-
----
-
-## ✅ Estado de validaciones
-
-- `data_collection.py` operativo y probado en local.  
-- Registro automático confirmado (`collection_log.txt` generado en la primera ejecución).  
-- Carpeta `logs/` recomendada para mejor organización.  
-- Bitácora actualizada para registrar las evoluciones.
-
----
-
-## 📌 Notas técnicas
-
+- Los validadores (`structure_validator.py`, `workflow_checker.py`) deben integrarse en los pipelines CI/CD (`infra_technical/ci-cd/`).  
+- Los módulos `collection` y `normalization` deben ejecutarse en secuencia:  
+  1. **Recolección** (`data_collection.py`)  
+  2. **Normalización** (`data_normalization.py`)  
+  3. **Conformidad** (`structure_validator.py`, `workflow_checker.py`)  
+- Cada submódulo debe contener:  
+  - Guías trilingües (`FR`, `EN`, `ES`)  
+  - Bitácoras trilingües (`FR`, `EN`, `ES`)  
+  - README técnicos trilingües (`FR`, `EN`, `ES`)  
 - Los archivos de registro deben colocarse en `logs/` y pueden ignorarse en `.gitignore` si no se versionan.  
-- Cada recolección debe validarse antes de integrarse en los módulos de compliance y auditoría.  
-- Próximos pasos incluyen:  
-  - Añadir reglas de validación avanzadas (formato, campos obligatorios).  
-  - Integración con `infra-technical/checks` para automatizar la conformidad.
+- Los datos deben normalizarse antes de pasar a los módulos de compliance, scoring y auditoría.
+
+---
+
+## 📌 Conclusión
+
+La bitácora `core/architecture` ahora traza la evolución completa del submódulo y sus módulos asociados (`collection`, `normalization`, `conformity`).  
+Garantiza la trazabilidad institucional, la conformidad documental y la solidez técnica.
