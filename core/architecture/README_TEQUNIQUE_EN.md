@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Purpose
-This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`).  
+This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`).  
 It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA` (activity logs).
 
 ---
@@ -18,45 +18,28 @@ It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA
 - `conformity/structure_validator.py` → Documentation validation script  
 - `conformity/workflow_checker.py` → Workflow control script  
 
-### core/architecture/modules/collection
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Module charter  
-- `BITACORA_FR/EN/ES.md` → Trilingual activity log  
-- `README_TECHNIQUE_FR/EN/ES.md` → Trilingual technical manual  
+### modules/collection
 - `data_collection.py` → Data collection and validation script  
 - `logs/collection_log.txt` → Traceability file for collections  
 
-### core/architecture/modules/normalization
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Module charter  
-- `BITACORA_FR/EN/ES.md` → Trilingual activity log  
-- `README_TECHNIQUE_FR/EN/ES.md` → Trilingual technical manual  
+### modules/normalization
 - `data_normalization.py` → Data normalization script (dates, strings, numbers, mandatory fields, duplicates)  
 
-### core/architecture/modules/orchestration
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Module charter  
-- `BITACORA_FR/EN/ES.md` → Trilingual activity log  
-- `README_TECHNIQUE_FR/EN/ES.md` → Trilingual technical manual  
+### modules/orchestration
 - `pipeline_orchestrator.py` → Pipeline orchestration script (collection → normalization → conformity → audit/scoring)  
+
+### modules/schemas
+- `base_schema.py` → Generic institutional schema (id, timestamp, source, value, metadata)  
+- `finance_schema.py` → Schema for financial transactions  
+- `audit_schema.py` → Schema for audit logs  
+- `compliance_schema.py` → Schema for regulatory validations  
 
 ---
 
 ## ⚙️ Requirements
-
-### core/architecture
 - Python 3.10+  
 - Frameworks: `pytest`, `pydantic`  
 - CI/CD: GitHub Actions or pipelines in `infra_technical/ci-cd/`
-
-### modules/collection
-- Python 3.10+  
-- Standard modules (`csv`, `json`, `datetime`)  
-
-### modules/normalization
-- Python 3.10+  
-- Standard modules (`datetime`)  
-
-### modules/orchestration
-- Python 3.10+  
-- Internal dependencies (`data_collection`, `data_normalization`, `structure_validator`, `workflow_checker`)  
 
 ---
 
@@ -64,14 +47,9 @@ It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA
 
 ### core/architecture
 ```bash
-# Validate documentation compliance
-python conformity/structure_validator.py
-
-# Check workflows
-python conformity/workflow_checker.py
-
-# Run tests
-pytest tests/
+python conformity/structure_validator.py   # Validate documentation compliance
+python conformity/workflow_checker.py      # Check workflows
+pytest tests/                              # Run tests
 
 # Collect JSON data
 python data_collection.py
@@ -90,3 +68,7 @@ python pipeline_orchestrator.py
 
 # Validate pipeline integration
 pytest tests/
+
+python finance_schema.py                   # Validate a financial record
+python audit_schema.py                     # Validate an audit log
+python compliance_schema.py                # Validate a compliance rule
