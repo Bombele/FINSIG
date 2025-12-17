@@ -1,16 +1,17 @@
-
+---
 
 ## 🇪🇸 README_TECHNIQUE_ES.md – core/architecture
 
-markdown
+```markdown
 # README Técnico – core/architecture
 
-
+---
 
 ## 🎯 Objetivo
-Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`collection`, `normalization`).  
+Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`).  
 Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
 
+---
 
 ## 📂 Estructura
 
@@ -35,7 +36,13 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - `README_TECHNIQUE_FR/EN/ES.md` → Manual técnico trilingüe  
 - `data_normalization.py` → Script de normalización de datos (fechas, cadenas, números, campos obligatorios, duplicados)  
 
+### core/architecture/modules/orchestration
+- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Carta del módulo  
+- `BITACORA_FR/EN/ES.md` → Registro de actividades trilingüe  
+- `README_TECHNIQUE_FR/EN/ES.md` → Manual técnico trilingüe  
+- `pipeline_orchestrator.py` → Script de orquestación del pipeline (recolección → normalización → conformidad → auditoría/scoring)  
 
+---
 
 ## ⚙️ Requisitos
 
@@ -47,14 +54,16 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 ### modules/collection
 - Python 3.10+  
 - Módulos estándar (`csv`, `json`, `datetime`)  
-- CI/CD: GitHub Actions o pipelines en `infra_technical/ci-cd/`
 
 ### modules/normalization
 - Python 3.10+  
 - Módulos estándar (`datetime`)  
-- CI/CD: GitHub Actions o pipelines en `infra_technical/ci-cd/`
 
+### modules/orchestration
+- Python 3.10+  
+- Dependencias internas (`data_collection`, `data_normalization`, `structure_validator`, `workflow_checker`)  
 
+---
 
 ## 🚀 Uso
 
@@ -79,4 +88,10 @@ pytest tests/
 python data_normalization.py
 
 # Validar los datos normalizados
+pytest tests/
+
+# Ejecutar el pipeline completo (recolección → normalización → conformidad)
+python pipeline_orchestrator.py
+
+# Validar la integración del pipeline
 pytest tests/
