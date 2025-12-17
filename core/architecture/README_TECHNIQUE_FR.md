@@ -34,8 +34,7 @@ python conformity/structure_validator.py
 python conformity/workflow_checker.py
 
 # Lancer les tests
-pytest tests/
-
+pytest tests
 
 
 # README Technique – core/architecture/modules/collection
