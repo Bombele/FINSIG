@@ -42,3 +42,5 @@ FINSIG est la **colonne vertébrale institutionnelle** pour :
 - Les assurances (tarification fiable).  
 - Les régulateurs (conformité et auditabilité).  
 - Les ONG et fintechs (inclusion et transferts sécurisés).
+
+👉 Consultez la documentation exécutive : [docs/README_EXECUTIVE.md](docs/README_EXECUTIVE.md)
