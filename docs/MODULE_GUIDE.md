@@ -1,58 +1,68 @@
-# Module Docs – Guide
-
-## 🎯 Objectif
-Le module `docs/` est le **socle documentaire et institutionnel de FINSIG**.  
-Il centralise la traçabilité, les guides qualité et les principes fondamentaux, garantissant transparence et onboarding international.
-
-## 📂 Structure des fichiers
-
-- **BITACORA.md**  
-  Journal institutionnel des corrections techniques et stratégiques.  
-  Assure la traçabilité et la mémoire collective.
-
-- **QUALITY_GUIDE.md**  
-  Guide qualité pour workflows, pipelines et artefacts.  
-  Définit les standards de robustesse et reproductibilité.
-
-- **PRINCIPLES_GUIDE.md**  
-  Guide des principes fondamentaux (finance, droit, informatique, quantique, humanitaire).  
-  Relie les disciplines aux objectifs institutionnels.
-
-- **DOMAINS_GUIDE.md**  
-  Guide disciplinaire détaillant chaque domaine (`finance`, `law_digital`, `computer_science`, `quantum_science`, `data_science`, `humanitarian`).  
-  Garantit clarté et cohérence interdisciplinaire.
-
-- **TRANSMISSION_GUIDE.md**  
-  Guide multilingue pour onboarding international.  
-  Facilite l’adoption collective par régulateurs, banques et ONG.
-
-- **docs_utils.py**  
-  Fonctions utilitaires : génération automatique de logs, signatures et horodatages.
-
-- **tests/**  
-  - Vérification de la cohérence documentaire.  
-  - Validation de la traçabilité et reproductibilité.  
-  - Contrôle de la conformité aux standards qualité.
+# SUB_MODULE_GUIDE_FR – docs/
 
 ---
 
-## 🧪 Tests
-- `tests/test_bitacora.py` → Vérifie la cohérence du journal institutionnel.  
-- `tests/test_quality_guide.py` → Vérifie la conformité aux standards qualité.  
-- `tests/test_principles_guide.py` → Vérifie la validité des principes fondamentaux.  
-- `tests/test_domains_guide.py` → Vérifie la cohérence disciplinaire.  
-- `tests/test_transmission_guide.py` → Vérifie la transmission multilingue et l’onboarding international.  
+## 🎯 Objectif du module
+Le module `docs/` constitue la **chambre documentaire exécutive** de FINSIG.  
+Il centralise les guides de gouvernance, les index trilingues, les synthèses techniques et les documents d’adoption institutionnelle.  
+Il ne contient pas les guides des sous-modules techniques (qui restent dans leurs dossiers respectifs), mais offre une **vue d’ensemble stratégique** du projet.
 
 ---
 
-## 🧭 Gouvernance et impact institutionnel
-- **Traçabilité** : chaque correction est journalisée et signée.  
-- **Qualité** : standards robustes et reproductibles.  
-- **Institutionnalisation** : démontre que FINSIG repose sur une documentation claire et auditable.  
-- **Impact** : crédibilité renforcée auprès des régulateurs, banques, ONG et institutions académiques.  
+## 📑 Portée
+- **Vue exécutive** : README global, pitch institutionnel, synthèse des modules.  
+- **Index trilingue** : navigation claire en FR/EN/ES.  
+- **Documentation CI/CD** : guides de qualité, déploiement et intégration continue.  
+- **Traçabilité** : BITACORA centralisée, avant distribution dans chaque module.  
+- **Modularité** : chaque dossier thématique (executive, ci, dev, logs, modules) est autonome et interconnecté.
 
 ---
 
-## ✅ Conclusion
-Le dossier `docs/` est le **socle documentaire de FINSIG**.  
-Il garantit la traçabilité, la qualité et la transmission institutionnelle, assurant robustesse et adoption internationale.
+## 📂 Organisation des sous-dossiers
+
+### 📁 executive/
+- `README_EXECUTIVE.md` → Vue d’ensemble du projet.  
+- `EXECUTIVE_SUMMARY.md` → Pitch institutionnel.  
+- `MODULE_GUIDE.md` → Présentation des modules.
+
+### 📁 index/
+- `INDEX_GUIDE.md` → Index détaillé (FR).  
+- `INDEX_GUIDE_EN.md` → Index détaillé (EN).  
+- `INDEX_GUIDE_ES.md` → Index détaillé (ES).
+
+### 📁 ci/
+- `CI_GUIDE.md` → Guide des workflows CI/CD.  
+- `QUALITY_GUIDE.md` → Standards de qualité et validation.
+
+### 📁 dev/
+- `DEV_GUIDE.md` → Guide développeur.  
+- `DEPLOY_GUIDE.md` → Guide de déploiement.
+
+### 📁 logs/
+- `BITACORA.md` → Journal central des validations (copié ensuite dans chaque module).
+
+### 📁 modules/
+- `README-AI.md` → Présentation du module AI.
+
+---
+
+## ⚙️ Fonctionnement
+- Le dossier `docs/` est le **point d’entrée documentaire** pour les partenaires, régulateurs et développeurs.  
+- Chaque sous-dossier est une **chambre thématique** : gouvernance, CI/CD, développement, traçabilité, modules.  
+- Les guides des sous-modules (`core`, `audit`, etc.) sont conservés dans leurs dossiers respectifs pour préserver la modularité.  
+- La BITACORA est initialement centralisée ici, puis distribuée dans chaque module pour assurer la traçabilité locale.
+
+---
+
+## ✅ Impact institutionnel
+- **Clarté** : navigation documentaire structurée et trilingue.  
+- **Traçabilité** : journalisation centralisée puis distribuée.  
+- **Transmission** : onboarding facilité pour tous les profils.  
+- **Adoption** : crédibilité renforcée auprès des institutions grâce à une documentation exécutive claire.
+
+---
+
+## 📌 Conclusion
+Le module `docs/` est la **bibliothèque exécutive** de FINSIG.  
+Il relie les guides stratégiques, les index, les standards techniques et les synthèses institutionnelles.  
+Sa structure modulaire et trilingue incarne la vision constitutionnelle du projet.
