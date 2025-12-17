@@ -64,3 +64,15 @@ python conformity/workflow_checker.py
 
 # Lancer les tests
 pytest tests/
+
+# Normaliser un jeu de données
+python data_normalization.py
+
+# Vérifier la conformité des données normalisées
+pytest tests/
+
+# Collecter des données JSON
+python data_collection.py
+
+# Vérifier la conformité des données
+pytest tests/
