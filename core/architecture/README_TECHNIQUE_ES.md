@@ -2,7 +2,7 @@
 
 ## 🇪🇸 README_TECHNIQUE_ES.md – core/architecture
 
-```markdown
+markdown
 # README Técnico – core/architecture
 
 
@@ -11,7 +11,6 @@
 Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`collection`, `normalization`).  
 Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
 
----
 
 ## 📂 Estructura
 
@@ -36,7 +35,7 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - `README_TECHNIQUE_FR/EN/ES.md` → Manual técnico trilingüe  
 - `data_normalization.py` → Script de normalización de datos (fechas, cadenas, números, campos obligatorios, duplicados)  
 
----
+
 
 ## ⚙️ Requisitos
 
@@ -55,7 +54,7 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - Módulos estándar (`datetime`)  
 - CI/CD: GitHub Actions o pipelines en `infra_technical/ci-cd/`
 
----
+
 
 ## 🚀 Uso
 
