@@ -36,6 +36,8 @@ python conformity/workflow_checker.py
 # Lancer les tests
 pytest tests/
 
+
+
 # README Technique – core/architecture/modules/collection
 
 ---
