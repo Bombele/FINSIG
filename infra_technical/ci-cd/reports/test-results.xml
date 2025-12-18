@@ -1,1 +1,15 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="FINSIG CI/CD Test Suite" tests="6" failures="0" errors="0" skipped="0" time="2.345">
+  <testsuite name="utils.ci_cd_utils" tests="3" failures="0" errors="0" skipped="0" time="1.123">
+    <testcase classname="utils.ci_cd_utils" name="test_generate_hash" time="0.456"/>
+    <testcase classname="utils.ci_cd_utils" name="test_timestamp_now" time="0.321"/>
+    <testcase classname="utils.ci_cd_utils" name="test_log_event" time="0.346"/>
+  </testsuite>
+  <testsuite name="schemas.ci_cd_schema" tests="1" failures="0" errors="0" skipped="0" time="0.234">
+    <testcase classname="schemas.ci_cd_schema" name="test_schema_validation" time="0.234"/>
+  </testsuite>
+  <testsuite name="tests.test_ci_cd_utils" tests="2" failures="0" errors="0" skipped="0" time="0.988">
+    <testcase classname="tests.test_ci_cd_utils" name="test_generate_hash_valid" time="0.456"/>
+    <testcase classname="tests.test_ci_cd_utils" name="test_timestamp_now_valid" time="0.532"/>
+  </testsuite>
+</testsuites>
