@@ -24,6 +24,8 @@
   - `test_lint.yml` → valida estilo, tipado y seguridad rápida.  
   - `test_ci.yml` → orquesta todos los workflows de prueba en paralelo.  
   - `test_ci_cd_utils.py` → valida funciones utilitarias (hash, logs, timestamps, validación de artefactos).  
+- **2025-12-18** – Creación del esquema `ci_cd_schema.json` para validación de workflows y artefactos.  
+- **2025-12-18** – Creación de la guía `CI_CD_GUIDE.md` documentando principios de diseño, metodología y gobernanza.  
 
 ---
 
@@ -42,6 +44,8 @@
 - Alertas críticas configuradas (`finsig-app down`, `postgres down`, CPU/memoria altas).  
 - Documentación técnica trilingüe disponible (FR/EN/ES).  
 - Bitácoras CI/CD actualizadas y alineadas con las evoluciones.  
+- Esquema JSON (`ci_cd_schema.json`) asegura validación de workflows, artefactos y reportes.  
+- Guía CI/CD (`CI_CD_GUIDE.md`) proporciona gobernanza y metodología.  
 
 ---
 
