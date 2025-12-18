@@ -1,112 +1,49 @@
-"""
-test_traceability.py – core/architecture/tests
-
-🎯 Purpose:
-Unit tests for the institutional traceability engine of FINSIG.
-Ensures that:
-- Traceability records are created with unique IDs and timestamps
-- Records are correctly logged, listed, filtered, and cleared
-- Metadata is handled consistently
-- Auditability and reproducibility are guaranteed
-
-✅ Impact:
-Guarantees institutional traceability and auditability across all modules.
-"""
-
-import pytest
 import os
-import json
-from core.architecture.modules.traceability.traceability import TraceRecord, TraceabilityManager
+import csv
+import pytest
+from core.architecture.modules.traceability.traceability import Traceability
 
 
-# -----------------------------
-# 🔧 Fixtures
-# -----------------------------
-
-@pytest.fixture
-def manager(tmp_path):
-    log_path = tmp_path / "traceability_log.json"
-    return TraceabilityManager(log_path=str(log_path))
-
-
-@pytest.fixture
-def sample_record():
-    return TraceRecord(
-        module="scoring",
-        action="calculate_score",
-        metadata={"record_id": "SCORE-001", "value": 85}
-    )
+def test_log_event_creates_entry_with_utc_timestamp():
+    trace = Traceability()
+    trace.log_event("collection", "start", {"source": "API"})
+    assert len(trace.logs) == 1
+    entry = trace.logs[0]
+    # Vérifie que le timestamp est bien en UTC ISO 8601
+    assert entry["timestamp"].endswith("Z")
+    assert "T" in entry["timestamp"]
 
 
-# -----------------------------
-# ✅ Tests
-# -----------------------------
-
-def test_record_creation(sample_record):
-    """
-    Ensure a traceability record is created with required fields.
-    """
-    record_dict = sample_record.to_dict()
-    assert "id" in record_dict
-    assert "timestamp" in record_dict
-    assert record_dict["module"] == "scoring"
-    assert record_dict["action"] == "calculate_score"
-    assert "metadata" in record_dict
+def test_log_event_with_empty_metadata():
+    trace = Traceability()
+    trace.log_event("normalization", "done")
+    entry = trace.logs[0]
+    assert isinstance(entry["metadata"], dict)
+    assert entry["metadata"] == {}
 
 
-def test_log_and_list_records(manager, sample_record):
-    """
-    Ensure records are logged and listed correctly.
-    """
-    manager.log(sample_record)
-    records = manager.list_records()["records"]
-    assert len(records) == 1
-    assert records[0]["module"] == "scoring"
+def test_export_to_csv_creates_file(tmp_path):
+    trace = Traceability()
+    trace.log_event("audit", "validate", {"records": 10})
+    filepath = tmp_path / "traceability_log.csv"
+    trace.export_to_csv(str(filepath))
+
+    assert filepath.exists()
+
+    # Vérifie que le fichier contient bien les colonnes attendues
+    with open(filepath, newline="", encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile)
+        rows = list(reader)
+        assert len(rows) == 1
+        assert "timestamp" in rows[0]
+        assert rows[0]["module"] == "audit"
+        assert rows[0]["action"] == "validate"
 
 
-def test_filter_by_module(manager, sample_record):
-    """
-    Ensure filtering by module returns correct records.
-    """
-    manager.log(sample_record)
-    other_record = TraceRecord(module="storage", action="save", metadata={"id": "ST-001"})
-    manager.log(other_record)
-
-    filtered = manager.filter_by_module("scoring")["records"]
-    assert len(filtered) == 1
-    assert filtered[0]["module"] == "scoring"
-
-
-def test_clear_records(manager, sample_record):
-    """
-    Ensure clearing records resets the log.
-    """
-    manager.log(sample_record)
-    manager.clear()
-    records = manager.list_records()["records"]
-    assert records == []
-
-
-def test_multiple_records(manager):
-    """
-    Ensure multiple records are logged and retrievable.
-    """
-    for i in range(3):
-        rec = TraceRecord(module="collection", action="collect", metadata={"batch": i})
-        manager.log(rec)
-
-    records = manager.list_records()["records"]
-    assert len(records) == 3
-    modules = [r["module"] for r in records]
-    assert all(m == "collection" for m in modules)
-
-
-def test_metadata_optional(manager):
-    """
-    Ensure metadata is optional and does not block logging.
-    """
-    record = TraceRecord(module="normalization", action="normalize")
-    manager.log(record)
-    records = manager.list_records()["records"]
-    assert "metadata" in records[0]
-    assert isinstance(records[0]["metadata"], dict)
+def test_export_to_csv_with_no_logs(tmp_path, capsys):
+    trace = Traceability()
+    filepath = tmp_path / "empty_log.csv"
+    trace.export_to_csv(str(filepath))
+    captured = capsys.readouterr()
+    assert "Aucun log à exporter" in captured.out
+    assert not filepath.exists()
