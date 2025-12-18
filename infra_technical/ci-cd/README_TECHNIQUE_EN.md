@@ -4,37 +4,38 @@
 
 ## 🎯 Purpose
 
-The CI/CD module ensures the **robustness**, **traceability**, and **auditability** of FINSIG’s technical infrastructure.  
+This CI/CD module ensures the **robustness**, **traceability**, and **auditability** of FINSIG’s technical infrastructure.  
 It enables controlled testing, packaging, deployment, and monitoring of all components in a reproducible and compliant environment.  
-This pipeline is designed to operate reliably even under geopolitical constraints, reinforcing institutional credibility.
+The pipeline is designed to operate reliably even under geopolitical constraints, reinforcing institutional credibility.
 
 ---
 
 ## 📂 Structure Overview
 
 ### 🔧 `configs/`
-- `pyproject.toml` → Declares project metadata, dependencies, and tool configurations (pytest, flake8, mypy, bandit).  
-- `requirements.txt` → Lists core, dev, CI/CD, and monitoring dependencies for reproducible environments.  
-- `pytest.ini` → Standardizes test discovery, coverage reports, JUnit output, and logging formats.  
-- `mypy.ini` → Enforces strict type checking, error codes, and plugin support (`pydantic.mypy`).
+- `pyproject.toml` → Project metadata, dependencies, and tool configurations (pytest, flake8, mypy, bandit, docker, prometheus-client).  
+- `requirements.txt` → Hierarchical dependency list (core, dev, CI/CD, monitoring).  
+- `pytest.ini` → Standardized test discovery, coverage reports, JUnit output, and timestamped logs.  
+- `mypy.ini` → Strict type checking, error codes, plugin support (`pydantic.mypy`).
 
-### ⚙️ `workflows/`
-- `ci.yml` → Global orchestration of all CI/CD stages.  
-- `tests.yml` → Executes unit tests with coverage.  
-- `lint.yml` → Enforces code quality and security checks.  
-- `build.yml` → Packages Python artifacts and verifies installability.  
-- `docker.yml` → Builds and pushes Docker images to GHCR.  
-- `deploy.yml` → Simulates staging deployment via Docker Compose.
+### ⚙️ `.github/workflows/`
+- `build-validation.yml` → Validates Python packaging (wheel + sdist), installability, and audit artifacts.  
+- `lint-validation.yml` → Runs flake8, bandit, and mypy for code quality, security, and typing.  
+- `tests-validation.yml` → Executes unit tests with coverage and JUnit reports.  
+- `security-check.yml` → Scans code and dependencies for vulnerabilities (bandit + safety).  
+- `deploy-validation.yml` → Simulates staging deployment via Docker Compose with healthchecks and Prometheus.  
+- `lint-check.yml` → Lightweight linting and type check for fast feedback.  
+- `ci-validation.yml` → Orchestrates all validation workflows in parallel.
 
-### 📈 Monitoring & Alerting
+### 📈 Monitoring & Orchestration
 - `prometheus.yml` → Scrapes metrics from app, database, and exporters.  
 - `alert_rules.yml` → Defines critical alerts (app down, DB down, high CPU/memory).  
 - `docker-compose.yml` → Deploys app, Postgres, exporters, and Prometheus in a local staging environment.
 
 ### 🧪 Testing & Validation
-- `tests/` → Contains validation pipelines (`test_ci.yml`, `test_lint.yml`, `test_build.yml`) and utility tests (`test_ci_cd_utils.py`).  
-- `schemas/` → Defines validation schema for CI/CD workflows and artifacts (`ci_cd_schema.json`).  
-- `utils/` → Provides reusable functions for logging, hashing, and timestamping (`ci_cd_utils.py`).
+- `tests/` → Validation pipelines (`test_ci.yml`, `test_lint.yml`, `test_build.yml`) and utility tests (`test_ci_cd_utils.py`).  
+- `schemas/` → Workflow and artifact validation schema (`ci_cd_schema.json`).  
+- `utils/` → Reusable functions for logging, hashing, and timestamping (`ci_cd_utils.py`).
 
 ### 📚 Documentation
 - `README_TECHNIQUE_FR.md / EN / ES` → Trilingual technical overview.  
@@ -51,7 +52,7 @@ This pipeline is designed to operate reliably even under geopolitical constraint
 
 2. **Linting & Security**  
    - Enforce style rules with `flake8`.  
-   - Detect vulnerabilities using `bandit`.  
+   - Detect vulnerabilities using `bandit` and `safety`.  
    - Apply static type checks via `mypy`.
 
 3. **Build & Packaging**  
@@ -64,7 +65,8 @@ This pipeline is designed to operate reliably even under geopolitical constraint
 
 5. **Staging Deployment**  
    - Simulate full environment via `docker-compose`.  
-   - Includes app, database, exporters, and monitoring.
+   - Includes app, database, exporters, and monitoring.  
+   - Healthchecks on app, DB, and Prometheus.
 
 6. **Monitoring & Alerting**  
    - Prometheus collects metrics.  
