@@ -1,1 +1,21 @@
+finsig-1.0.0.dist-info/
+    METADATA
+    WHEEL
+    RECORD
+    LICENSE
+    top_level.txt
 
+finsig/
+    __init__.py
+    scoring/
+        __init__.py
+        scoring_engine.py
+    storage/
+        __init__.py
+        storage_manager.py
+    traceability/
+        __init__.py
+        traceability_engine.py
+    utils/
+        __init__.py
+        ci_cd_utils.py
