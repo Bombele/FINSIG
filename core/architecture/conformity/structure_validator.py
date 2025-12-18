@@ -1,73 +1,42 @@
-"""
-structure_validator.py – core/architecture/conformity
+from core.architecture.modules.schemas.audit_schema import AuditSchema
+from core.architecture.modules.schemas.compliance_schema import ComplianceSchema
 
-🎯 Purpose:
-This script validates the institutional structure of FINSIG.
-It ensures that each sub-module contains the required documentation:
-- SUB_MODULE_GUIDE in FR/EN/ES
-- BITACORA in FR/EN/ES
-- INDEX_GUIDE if applicable
-- Technical files (framework, compliance, integration)
-
-✅ Impact:
-Guarantees traceability, compliance, and reproducibility across the architecture.
-"""
-
-import os
-
-# Required files per sub-module
-REQUIRED_GUIDES = [
-    "SUB_MODULE_GUIDE_FR.md",
-    "SUB_MODULE_GUIDE_EN.md",
-    "SUB_MODULE_GUIDE_ES.md",
-]
-
-REQUIRED_BITACORAS = [
-    "BITACORA_FR.md",
-    "BITACORA_EN.md",
-    "BITACORA_ES.md",
-]
-
-def validate_submodule(path: str) -> dict:
+def validate_required_fields(schema_obj, required_fields):
     """
-    Validate that a given sub-module contains all required documentation.
-    Returns a dictionary with missing files.
+    Vérifie que tous les champs obligatoires sont présents et non vides.
     """
-    missing = {"guides": [], "bitacoras": []}
+    for field in required_fields:
+        value = getattr(schema_obj, field, None)
+        if value is None or (isinstance(value, str) and not value.strip()):
+            raise ValueError(f"Champ obligatoire manquant ou vide: {field}")
+    return True
 
-    for guide in REQUIRED_GUIDES:
-        if not os.path.exists(os.path.join(path, guide)):
-            missing["guides"].append(guide)
 
-    for bitacora in REQUIRED_BITACORAS:
-        if not os.path.exists(os.path.join(path, bitacora)):
-            missing["bitacoras"].append(bitacora)
-
-    return missing
-
-def validate_core_architecture(base_path: str = "."):
+def validate_schema_signature(schema_obj):
     """
-    Validate the entire core/architecture structure.
+    Vérifie que la signature correspond aux données du schéma.
     """
-    print(f"🔍 Validating structure in {base_path} ...")
+    expected_signature = schema_obj.generate_signature()
+    if schema_obj.signature != expected_signature:
+        raise ValueError(f"Signature invalide pour {schema_obj.__class__.__name__}")
+    return True
 
-    submodules = [
-        "docs",
-        "conformity",
-        "integration",
-        "framework",
-    ]
 
-    for sub in submodules:
-        sub_path = os.path.join(base_path, sub)
-        if os.path.exists(sub_path):
-            result = validate_submodule(sub_path)
-            if result["guides"] or result["bitacoras"]:
-                print(f"⚠️ Missing files in {sub_path}: {result}")
-            else:
-                print(f"✅ {sub_path} is complete.")
-        else:
-            print(f"❌ Submodule {sub} not found at {sub_path}")
+def validate_audit_schema(audit: AuditSchema):
+    """
+    Validation croisée pour AuditSchema.
+    """
+    required_fields = ["id", "timestamp", "actor", "action", "version", "signature"]
+    validate_required_fields(audit, required_fields)
+    validate_schema_signature(audit)
+    return True
 
-if __name__ == "__main__":
-    validate_core_architecture("core/architecture")
+
+def validate_compliance_schema(compliance: ComplianceSchema):
+    """
+    Validation croisée pour ComplianceSchema.
+    """
+    required_fields = ["id", "timestamp", "regulator", "status", "version", "signature"]
+    validate_required_fields(compliance, required_fields)
+    validate_schema_signature(compliance)
+    return True
