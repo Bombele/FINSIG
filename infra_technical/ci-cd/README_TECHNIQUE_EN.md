@@ -48,6 +48,40 @@ The pipeline is designed to operate reliably even under crisis or geopolitical c
 - `BITACORA_CI-CD_FR.md / EN / ES` → Institutional log of CI/CD evolution.  
 - `CI_CD_GUIDE.md` → Design principles, methodology, and governance of CI/CD workflows.
 
+### 📁 reports/
+Contains **reports automatically generated** by CI/CD workflows:  
+- `coverage.xml` → test coverage report.  
+- `test-results.xml` → JUnit report of unit tests.  
+- `lint-report.txt` → flake8/mypy report.  
+- `security-report.json` → bandit/safety report.  
+- `deploy-report.log` → staging deployment report (healthchecks).  
+
+👉 These files ensure **auditability of controls**.
+
+### 📁 artifacts/
+Contains **final products and institutional evidence**:  
+
+#### 🔧 Build
+- `finsig-<version>-py3-none-any.whl`  
+- `finsig-<version>.tar.gz`  
+
+#### 🐳 Docker
+- `docker-image-sha256.txt` → SHA256 hash of the Docker image.  
+- `docker-image.tar` → local export of the image (optional).  
+
+#### 📜 Logs
+- `ci_cd_events.log` → CI/CD events log.  
+- `deploy-report.log` → staging deployment report.  
+
+#### 🔒 Hashes
+- `build-hash.txt` → SHA256 hash of Python packages.  
+- `docker-hash.txt` → SHA256 hash of the Docker image.  
+
+#### ✅ Validation
+- `artifact-validation.json` → file compliant with `ci_cd_schema.json`, listing artifacts, hash, and validation status.  
+
+👉 These files ensure **institutional traceability and external validation**.
+
 ---
 
 ## 🔄 Pipeline Stages
@@ -95,4 +129,7 @@ The pipeline is designed to operate reliably even under crisis or geopolitical c
 
 This CI/CD pipeline is the **technical backbone of FINSIG**.  
 It demonstrates the project’s ability to be tested, secured, packaged, deployed, and monitored in a **transparent and auditable** manner.  
+With the addition of **`reports/`** and **`artifacts/`**, institutional traceability is complete:  
+- `reports/` → control results.  
+- `artifacts/` → final products and institutional evidence.  
 It is a strategic asset for institutional validation, partner onboarding, and regulatory compliance.
