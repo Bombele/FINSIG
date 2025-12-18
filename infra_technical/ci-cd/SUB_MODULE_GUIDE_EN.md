@@ -1,4 +1,4 @@
-```
+
 # SOUS_MODULE_GUIDE – CI/CD (English Version)
 
 ---
@@ -138,4 +138,3 @@ With the addition of reports/, artifacts/, and scripts/ folders, institutional t
 - reports/ → control results.  
 - artifacts/ → finished products and validated institutional proofs.  
 - scripts/ → local reproduction, dynamic validation, offline auditability.
-```
