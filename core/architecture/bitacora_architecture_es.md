@@ -4,18 +4,15 @@
 
 ## 📅 Registro de actividades
 
-- **2025-12-18** – Actualización de `README_TECHNIQUE_ES.md` para incluir los módulos `scoring`, `storage`, `traceability`, `utils` y sus tests unitarios.  
-- **2025-12-18** – Inclusión de `tests/test_structure_validator.py` para validar la conformidad documental.  
-- **2025-12-18** – Inclusión de `tests/test_workflow_checker.py` para validar las secuencias de workflow.  
-- **2025-12-18** – Inclusión de `tests/test_pipeline_orchestrator.py` para validar la orquestación completa del pipeline.  
-- **2025-12-18** – Inclusión de `tests/test_traceability.py` para validar el motor de trazabilidad.  
-- **2025-12-18** – Inclusión de `tests/test_utils.py` para validar las funciones utilitarias.  
-- **2025-12-18** – Creación de `scoring_engine.py` (módulo `scoring`).  
-- **2025-12-18** – Creación de `storage_manager.py` (módulo `storage`).  
-- **2025-12-18** – Creación de `traceability.py` (módulo `traceability`).  
-- **2025-12-18** – Creación de `utils.py` (módulo `utils`).  
+- **2025-12-18** – Actualización de `audit_schema.py` y `compliance_schema.py` con campos `version` y `signature` (SHA256).  
+- **2025-12-18** – Actualización de `structure_validator.py` para validar firmas y campos obligatorios de forma cruzada.  
+- **2025-12-18** – Inclusión de la función `export_to_csv()` en `traceability.py` y uso uniforme de horodatado en UTC.  
+- **2025-12-18** – Inclusión de pruebas unitarias `test_audit_schema.py` y `test_compliance_schema.py` para validación de firmas.  
+- **2025-12-18** – Inclusión del workflow CI/CD `workflows/tests.yml` (pytest + cobertura).  
+- **2025-12-18** – Mejora de `test_pipeline_orchestrator.py` con casos de errores de dependencias.  
+- **2025-12-18** – Mejora de `test_utils.py` con casos límite (`None`, cadenas inválidas, diccionarios vacíos).  
 - **2025-12-17** – Inclusión del módulo `schemas` y creación de archivos asociados.  
-- **2025-12-17** – Actualización de las `BITACORA` y `README_TECHNIQUE` en versiones trilingües.  
+- **2025-12-17** – Actualización de las `BITACORA` y `README_TECHNIQUE` en versiones trilingües (FR/EN/ES).  
 - **2025-12-17** – Creación de `pipeline_orchestrator.py`.  
 - **2025-12-16** – Re-creación de `workflow_checker.py`.  
 - **2025-12-16** – Actualización de `structure_validator.py`.  
@@ -27,14 +24,16 @@
 ## ✅ Estado de validaciones
 
 - Validadores operativos (`structure_validator.py`, `workflow_checker.py`).  
+- Validación cruzada de firmas (`audit_schema`, `compliance_schema`).  
 - Módulos de recolección y normalización probados.  
-- Pipeline de orquestación validado.  
+- Pipeline de orquestación validado (incluyendo errores de dependencias).  
 - Esquemas validados (`base`, `finance`, `audit`, `compliance`).  
 - Motor de scoring operativo.  
 - Gestor de almacenamiento operativo.  
-- Motor de trazabilidad operativo.  
-- Utilidades operativas.  
-- Tests unitarios integrados (`pytest`).  
+- Motor de trazabilidad operativo (UTC + exportación CSV).  
+- Utilidades operativas (casos límite cubiertos).  
+- Pruebas unitarias integradas (`pytest`).  
+- Workflow CI/CD activo (`workflows/tests.yml`).  
 - Documentación trilingüe en marcha.  
 - Bitácora actualizada.
 
@@ -42,5 +41,5 @@
 
 ## 📌 Conclusión
 
-La bitácora `core/architecture` ahora traza la evolución completa del submódulo y sus módulos (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`) junto con sus **tests unitarios**.  
-Garantiza la trazabilidad institucional, la conformidad documental y la solidez técnica.
+La bitácora `core/architecture` ahora traza la evolución completa del submódulo y sus módulos (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`) junto con sus **pruebas unitarias** y el **workflow CI/CD**.  
+Garantiza trazabilidad institucional, conformidad documental, solidez técnica y auditabilidad confiable.
