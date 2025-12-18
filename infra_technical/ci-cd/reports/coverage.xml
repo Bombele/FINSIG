@@ -10,15 +10,15 @@
           <methods>
             <method name="generate_hash" line-rate="1.0" branch-rate="1.0">
               <lines>
-                <line number="10" hits="3"/>
-                <line number="11" hits="3"/>
-                <line number="12" hits="3"/>
+                <line number="10" hits="5"/>
+                <line number="11" hits="5"/>
+                <line number="12" hits="5"/>
               </lines>
             </method>
             <method name="timestamp_now" line-rate="1.0" branch-rate="1.0">
               <lines>
-                <line number="25" hits="2"/>
-                <line number="26" hits="2"/>
+                <line number="25" hits="3"/>
+                <line number="26" hits="3"/>
               </lines>
             </method>
             <method name="log_event" line-rate="1.0" branch-rate="1.0">
@@ -28,16 +28,63 @@
                 <line number="42" hits="4"/>
               </lines>
             </method>
+            <method name="validate_artifact" line-rate="1.0" branch-rate="1.0">
+              <lines>
+                <line number="55" hits="2"/>
+                <line number="56" hits="2"/>
+                <line number="57" hits="2"/>
+              </lines>
+            </method>
           </methods>
           <lines>
-            <line number="10" hits="3"/>
-            <line number="11" hits="3"/>
-            <line number="12" hits="3"/>
-            <line number="25" hits="2"/>
-            <line number="26" hits="2"/>
+            <line number="10" hits="5"/>
+            <line number="11" hits="5"/>
+            <line number="12" hits="5"/>
+            <line number="25" hits="3"/>
+            <line number="26" hits="3"/>
             <line number="40" hits="4"/>
             <line number="41" hits="4"/>
             <line number="42" hits="4"/>
+            <line number="55" hits="2"/>
+            <line number="56" hits="2"/>
+            <line number="57" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="schemas" line-rate="1.0" branch-rate="1.0">
+      <classes>
+        <class name="ci_cd_schema" filename="schemas/ci_cd_schema.json" line-rate="1.0" branch-rate="1.0">
+          <lines>
+            <line number="5" hits="1"/>
+            <line number="12" hits="1"/>
+            <line number="20" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="tests" line-rate="1.0" branch-rate="1.0">
+      <classes>
+        <class name="test_ci_cd_utils" filename="tests/test_ci_cd_utils.py" line-rate="1.0" branch-rate="1.0">
+          <methods>
+            <method name="test_generate_hash" line-rate="1.0" branch-rate="1.0">
+              <lines>
+                <line number="8" hits="2"/>
+                <line number="9" hits="2"/>
+              </lines>
+            </method>
+            <method name="test_timestamp_now" line-rate="1.0" branch-rate="1.0">
+              <lines>
+                <line number="15" hits="2"/>
+                <line number="16" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="2"/>
+            <line number="9" hits="2"/>
+            <line number="15" hits="2"/>
+            <line number="16" hits="2"/>
           </lines>
         </class>
       </classes>
