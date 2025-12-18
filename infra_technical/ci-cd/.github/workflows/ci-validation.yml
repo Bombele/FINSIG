@@ -1,1 +1,21 @@
+name: CI Validation
 
+on:
+  push:
+    paths:
+      - "infra_technical/ci-cd/**"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "infra_technical/ci-cd/**"
+
+jobs:
+  build-validation:
+    uses: ./.github/workflows/build-validation.yml
+
+  lint-validation:
+    uses: ./.github/workflows/lint-validation.yml
+
+  tests-validation:
+    uses: ./.github/workflows/tests-validation.yml
