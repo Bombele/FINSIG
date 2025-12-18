@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Purpose
-This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`).  
+This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`).  
 It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA` (activity logs).
 
 ---
@@ -45,6 +45,10 @@ It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA
 ### modules/traceability
 - `traceability.py` → Institutional traceability engine (log actions, audit, filter by module, clear records)  
 - **Role**: Ensure complete traceability of operations and reproducibility of institutional workflows.
+
+### modules/utils
+- `utils.py` → Institutional utility toolkit (ID generation, timestamps, validations, safe dictionary operations, JSON serialization)  
+- **Role**: Provide reusable and standardized functions for all FINSIG modules.
 
 ---
 
@@ -90,3 +94,5 @@ python scoring_engine.py                   # Calculate a score (risk, compliance
 python storage_manager.py                  # Save, load, list, or delete records in storage
 
 python traceability.py                     # Log and consult traceability actions
+
+python utils.py                            # Test utility functions (IDs, timestamps, validations, JSON)
