@@ -1,11 +1,10 @@
 
-
 # README Técnico – core/architecture
 
 ---
 
 ## 🎯 Objetivo
-Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`).  
+Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`) y sus **tests unitarios**.  
 Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
 
 ---
@@ -28,29 +27,38 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - `data_normalization.py` → Script de normalización de datos (fechas, cadenas, números, campos obligatorios, duplicados)  
 
 ### modules/orchestration
-- `pipeline_orchestrator.py` → Script de orquestación del pipeline (recolección → normalización → conformidad → auditoría/scoring)  
+- `pipeline_orchestrator.py` → Script de orquestación del pipeline  
+- **Tests** : `tests/test_pipeline_orchestrator.py`  
 
 ### modules/schemas
-- `base_schema.py` → Esquema institucional genérico (id, timestamp, source, valor, metadatos)  
+- `base_schema.py` → Esquema institucional genérico  
 - `finance_schema.py` → Esquema para transacciones financieras  
 - `audit_schema.py` → Esquema para registros de auditoría  
 - `compliance_schema.py` → Esquema para validaciones regulatorias  
 
 ### modules/scoring
-- `scoring_engine.py` → Motor institucional de scoring (cálculo de riesgo, conformidad, rendimiento)  
-- **Rol**: proporcionar puntuaciones estandarizadas y auditables para la toma de decisiones institucionales.
+- `scoring_engine.py` → Motor institucional de scoring (riesgo, conformidad, rendimiento)  
 
 ### modules/storage
-- `storage_manager.py` → Gestor institucional de almacenamiento (lectura, escritura, eliminación y trazabilidad de registros)  
-- **Rol**: centralizar y estandarizar el almacenamiento de datos, garantizando trazabilidad y auditabilidad.
+- `storage_manager.py` → Gestor institucional de almacenamiento (guardar, cargar, eliminar, trazabilidad)  
 
 ### modules/traceability
-- `traceability.py` → Motor de trazabilidad institucional (registro de acciones, auditoría, filtrado por módulo, limpieza de registros)  
-- **Rol**: garantizar la trazabilidad completa de las operaciones y la reproducibilidad de los flujos institucionales.
+- `traceability.py` → Motor de trazabilidad institucional  
+- **Tests** : `tests/test_traceability.py`  
 
 ### modules/utils
-- `utils.py` → Conjunto de utilidades institucionales (generación de IDs, timestamps, validaciones, operaciones seguras con diccionarios, serialización JSON)  
-- **Rol**: proporcionar funciones reutilizables y estandarizadas para todos los módulos de FINSIG.
+- `utils.py` → Conjunto de utilidades institucionales  
+- **Tests** : `tests/test_utils.py`  
+
+---
+
+## 📂 Tests unitarios
+
+- `tests/test_structure_validator.py` → Validación de conformidad documental  
+- `tests/test_workflow_checker.py` → Validación de secuencias de workflow  
+- `tests/test_pipeline_orchestrator.py` → Validación del pipeline completo  
+- `tests/test_traceability.py` → Validación del motor de trazabilidad  
+- `tests/test_utils.py` → Validación de funciones utilitarias  
 
 ---
 
@@ -67,7 +75,7 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 ```bash
 python conformity/structure_validator.py   # Validar la conformidad documental
 python conformity/workflow_checker.py      # Verificar los flujos de trabajo
-pytest tests/                              # Ejecutar las pruebas
+pytest tests/                              # Ejecutar todos los tests unitarios
 
 # Recolectar datos JSON
 python data_collection.py
