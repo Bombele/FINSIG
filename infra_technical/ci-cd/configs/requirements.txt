@@ -1,1 +1,36 @@
+# Requirements for FINSIG CI/CD
+# Objectif : garantir robustesse, reproductibilité et auditabilité des environnements
 
+########################
+# Core dependencies
+########################
+requests>=2.31
+pydantic>=2.0
+sqlalchemy>=2.0
+psycopg2-binary>=2.9
+
+########################
+# Development & Testing
+########################
+pytest>=7.0
+pytest-cov>=4.0
+coverage>=7.0
+
+########################
+# Code Quality & Security
+########################
+flake8>=6.0
+mypy>=1.0
+bandit>=1.7
+
+########################
+# CI/CD & Packaging
+########################
+setuptools>=61.0
+wheel>=0.40
+docker>=6.0
+
+########################
+# Monitoring & Metrics
+########################
+prometheus-client>=0.16
