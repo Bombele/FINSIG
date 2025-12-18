@@ -1,6 +1,6 @@
 global:
-  scrape_interval: 15s     # Intervalle de collecte par défaut
-  evaluation_interval: 15s # Intervalle d'évaluation des règles
+  scrape_interval: 15s
+  evaluation_interval: 15s
 
 alerting:
   alertmanagers:
@@ -22,12 +22,12 @@ scrape_configs:
     static_configs:
       - targets: ["finsig-app:8000"]
 
-  # 3️⃣ Monitoring de la base Postgres
+  # 3️⃣ Monitoring de la base Postgres (via exporter)
   - job_name: "postgres"
     static_configs:
-      - targets: ["finsig-db:9187"]   # nécessite l’exporter postgres
+      - targets: ["finsig-db:9187"]
 
-  # 4️⃣ Monitoring du système hôte
+  # 4️⃣ Monitoring du système hôte (via node-exporter)
   - job_name: "node"
     static_configs:
       - targets: ["node-exporter:9100"]
