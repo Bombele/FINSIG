@@ -43,6 +43,13 @@ Il garantit la cohérence institutionnelle, la traçabilité et l’auditabilit�
 - **test_pipeline_orchestrator.py** → Teste l’orchestration complète du pipeline.  
 - **test_traceability.py** → Teste le moteur de traçabilité institutionnelle.  
 - **test_utils.py** → Teste les fonctions utilitaires institutionnelles.  
+- **test_audit_schema.py** → Teste la génération et la validation des signatures pour les journaux d’audit.  
+- **test_compliance_schema.py** → Teste la génération et la validation des signatures pour les validations réglementaires.  
+
+---
+
+## 📂 workflows/
+- **tests.yml** → Fichier GitHub Actions pour exécuter automatiquement `pytest` et la couverture de tests sur chaque commit et pull request.  
 
 ---
 
@@ -60,9 +67,11 @@ Il garantit la cohérence institutionnelle, la traçabilité et l’auditabilit�
 - Utiliser `pipeline_orchestrator.py` comme point d’entrée pour garantir l’ordre et la traçabilité.  
 - Centraliser les schémas dans `schemas/` pour éviter les divergences entre modules.  
 - Exécuter régulièrement les tests unitaires pour garantir robustesse et auditabilité.  
+- Vérifier la validité des signatures SHA256 pour assurer l’intégrité des documents.  
 
 ---
 
 ## 📌 Conclusion
-Le sous-module `core/architecture` est désormais composé de cinq modules clés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`) et d’un **dossier `tests/`** regroupant tous les fichiers de validation (`test_structure_validator.py`, `test_workflow_checker.py`, `test_pipeline_orchestrator.py`, `test_traceability.py`, `test_utils.py`).  
-Cette structuration garantit une gouvernance technique robuste, une conformité documentaire, une traçabilité institutionnelle et une validation systématique par tests unitaires.
+Le sous-module `core/architecture` est désormais composé de cinq modules clés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`) et d’un **dossier `tests/`** regroupant tous les fichiers de validation (`test_structure_validator.py`, `test_workflow_checker.py`, `test_pipeline_orchestrator.py`, `test_traceability.py`, `test_utils.py`, `test_audit_schema.py`, `test_compliance_schema.py`).  
+Un **fichier CI/CD `workflows/tests.yml`** garantit l’exécution automatique des tests et la couverture sur chaque commit.  
+Cette structuration assure une gouvernance technique robuste, une conformité documentaire, une traçabilité institutionnelle et une validation systématique par tests unitaires.
