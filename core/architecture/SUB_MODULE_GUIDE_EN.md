@@ -3,8 +3,8 @@
 ---
 
 ## 🎯 Purpose
-This guide defines the structure and responsibilities of the sub-modules within the `core/architecture` directory.  
-It ensures institutional consistency, traceability, and auditability across FINSIG.
+This guide defines the structure and responsibilities of the sub-modules inside the `core/architecture` directory.  
+It ensures institutional consistency, traceability, and auditability of FINSIG.
 
 ---
 
@@ -12,12 +12,12 @@ It ensures institutional consistency, traceability, and auditability across FINS
 
 ### 1. conformity/
 - **structure_validator.py** → Checks the presence and compliance of mandatory files.  
-- **workflow_checker.py** → Validates documentation sequence and workflow consistency.  
-- **Role**: Ensure institutional and documentation compliance.
+- **workflow_checker.py** → Controls the sequence and consistency of workflows.  
+- **Role**: Ensure documentation and institutional compliance.
 
 ### 2. collection/
 - **data_collection.py** → Collects and validates raw data (CSV, JSON, API).  
-- **logs/collection_log.txt** → Logs collections for traceability.  
+- **logs/collection_log.txt** → Collection logs for traceability.  
 - **Role**: Centralize institutional data collection and guarantee traceability.
 
 ### 3. normalization/
@@ -37,6 +37,15 @@ It ensures institutional consistency, traceability, and auditability across FINS
 
 ---
 
+## 📂 tests/
+- **test_structure_validator.py** → Tests documentation conformity validation.  
+- **test_workflow_checker.py** → Tests workflow sequence validation.  
+- **test_pipeline_orchestrator.py** → Tests full pipeline orchestration.  
+- **test_traceability.py** → Tests the institutional traceability engine.  
+- **test_utils.py** → Tests institutional utility functions.  
+
+---
+
 ## ⚙️ Requirements
 - Python 3.10+  
 - Frameworks: `pytest`, `pydantic`  
@@ -50,9 +59,10 @@ It ensures institutional consistency, traceability, and auditability across FINS
 - Normalize data before passing it to compliance, scoring, and audit modules.  
 - Use `pipeline_orchestrator.py` as the entry point to guarantee order and traceability.  
 - Centralize schemas in `schemas/` to avoid divergence between modules.  
+- Run unit tests regularly to ensure robustness and auditability.  
 
 ---
 
 ## 📌 Conclusion
-The `core/architecture` sub-module now consists of five key modules: `conformity`, `collection`, `normalization`, `orchestration`, and `schemas`.  
-This structure guarantees robust technical governance, documentation compliance, and institutional traceability.
+The `core/architecture` sub-module is now composed of five key modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`) and a **`tests/` directory** containing all validation files (`test_structure_validator.py`, `test_workflow_checker.py`, `test_pipeline_orchestrator.py`, `test_traceability.py`, `test_utils.py`).  
+This structure guarantees robust technical governance, documentation compliance, institutional traceability, and systematic validation through unit tests.
