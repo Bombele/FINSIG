@@ -7,9 +7,8 @@ markdown
 
 
 ## 🎯 Objetivo
-Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`).  
+Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`).  
 Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
-
 
 
 ## 📂 Estructura
@@ -38,13 +37,15 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - `audit_schema.py` → Esquema para registros de auditoría  
 - `compliance_schema.py` → Esquema para validaciones regulatorias  
 
+### modules/scoring
+- `scoring_engine.py` → Motor institucional de scoring (cálculo de riesgo, conformidad, rendimiento)  
+- **Rol**: proporcionar puntuaciones estandarizadas y auditables para la toma de decisiones institucionales.
 
 
 ## ⚙️ Requisitos
 - Python 3.10+  
 - Frameworks: `pytest`, `pydantic`  
 - CI/CD: GitHub Actions o pipelines en `infra_technical/ci-cd/`
-
 
 
 ## 🚀 Uso
@@ -76,3 +77,5 @@ pytest tests/
 python finance_schema.py                   # Validar una transacción financiera
 python audit_schema.py                     # Validar un registro de auditoría
 python compliance_schema.py                # Validar una regla de conformidad
+
+python scoring_engine.py                   # Calcular una puntuación (riesgo, conformidad, rendimiento)
