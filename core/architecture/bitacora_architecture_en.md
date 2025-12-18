@@ -4,9 +4,10 @@
 
 ## 📅 Activity Log
 
-- **2025-12-18** – Updated `README_TECHNIQUE_EN.md` to include the `scoring` and `storage` modules alongside `conformity`, `collection`, `normalization`, `orchestration`, and `schemas`.  
+- **2025-12-18** – Updated `README_TECHNIQUE_EN.md` to include the `scoring`, `storage`, and `traceability` modules alongside `conformity`, `collection`, `normalization`, `orchestration`, and `schemas`.  
 - **2025-12-18** – Created `scoring_engine.py` (module `scoring`) to calculate institutional scores (risk, compliance, performance).  
 - **2025-12-18** – Created `storage_manager.py` (module `storage`) to manage institutional storage (save, load, delete, traceability).  
+- **2025-12-18** – Created `traceability.py` (module `traceability`) to log institutional actions (collection, normalization, conformity, scoring, storage) with auditability.  
 - **2025-12-17** – Updated `README_TECHNIQUE_EN.md` to include the `schemas` module.  
 - **2025-12-17** – Created `base_schema.py`, `finance_schema.py`, `audit_schema.py`, `compliance_schema.py` (module `schemas`).  
 - **2025-12-17** – Updated `BITACORA` and `README_TECHNIQUE` in trilingual versions (FR/EN/ES).  
@@ -26,6 +27,7 @@
 - Schemas validated (`base`, `finance`, `audit`, `compliance`).  
 - Scoring engine operational (risk, compliance, performance).  
 - Storage manager operational (save, load, delete, traceability).  
+- Traceability engine operational (log, filter, clear records).  
 - Trilingual documentation in place.  
 - Bitácora updated.
 
@@ -35,21 +37,23 @@
 
 - Validators integrated into CI/CD.  
 - Execution sequence:  
-  1. Collection  
-  2. Normalization  
-  3. Conformity  
-  4. Orchestration  
-  5. Schemas  
-  6. Scoring  
-  7. Storage  
+  1. Collection (`data_collection.py`)  
+  2. Normalization (`data_normalization.py`)  
+  3. Conformity (`structure_validator.py`, `workflow_checker.py`)  
+  4. Orchestration (`pipeline_orchestrator.py`)  
+  5. Schemas (`base_schema.py`, `finance_schema.py`, `audit_schema.py`, `compliance_schema.py`)  
+  6. Scoring (`scoring_engine.py`)  
+  7. Storage (`storage_manager.py`)  
+  8. Traceability (`traceability.py`)  
 - Each sub-module must contain trilingual guides, bitácoras, and READMEs.  
 - Logs stored in `logs/`.  
 - Data normalized and validated before compliance, scoring, and audit.  
-- Scoring and storage integrated into institutional reports.
+- Scoring and storage integrated into institutional reports.  
+- Traceability ensures reproducibility and auditability of workflows.
 
 ---
 
 ## 📌 Conclusion
 
-The `core/architecture` bitácora now traces the complete evolution of the sub-module and its modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`).  
-It ensures institutional traceability, documentation compliance, and technical robustness.
+The `core/architecture` bitácora now traces the complete evolution of the sub-module and its modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`).  
+It ensures institutional traceability, documentation compliance, and technical robustness, providing a reliable foundation for digital governance and regulatory validation.
