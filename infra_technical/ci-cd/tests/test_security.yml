@@ -1,0 +1,49 @@
+name: Test Security
+
+on:
+  push:
+    paths:
+      - "infra_technical/ci-cd/**"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "infra_technical/ci-cd/**"
+
+jobs:
+  test-security:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # 3. Install security tools
+      - name: Install security tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit safety
+
+      # 4. Run Bandit for static security analysis
+      - name: Run Bandit
+        run: |
+          bandit -r infra_technical/ci-cd -ll -f json -o reports/bandit-report.json
+
+      # 5. Run Safety to check dependencies vulnerabilities
+      - name: Run Safety
+        run: |
+          safety check --full-report --file infra_technical/ci-cd/configs/requirements.txt > reports/safety-report.txt
+
+      # 6. Upload security test reports
+      - name: Upload security test reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: finsig-security-test-reports
+          path: reports/
