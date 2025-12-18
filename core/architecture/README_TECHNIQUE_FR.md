@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Objectif
-Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`).  
+Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`).  
 Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA` (journaux des activités).
 
 ---
@@ -41,6 +41,10 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 ### modules/storage
 - `storage_manager.py` → Gestionnaire institutionnel de stockage (lecture, écriture, suppression et traçabilité des enregistrements)  
 - **Rôle** : centraliser et standardiser le stockage des données, garantissant traçabilité et auditabilité.
+
+### modules/traceability
+- `traceability.py` → Moteur de traçabilité institutionnelle (enregistrement des actions, audit, filtrage par module, nettoyage des journaux)  
+- **Rôle** : assurer la traçabilité complète des opérations et la reproductibilité des workflows institutionnels.
 
 ---
 
@@ -80,3 +84,5 @@ python compliance_schema.py
 python scoring_engine.py                   # Calculer un score (risque, conformité, performance)
 
 python storage_manager.py                  # Sauvegarder, charger, lister ou supprimer des enregistrements
+
+python traceability.py                     # Enregistrer et consulter les actions de traçabilité
