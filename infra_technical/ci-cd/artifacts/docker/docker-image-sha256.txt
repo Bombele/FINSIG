@@ -1,7 +1,7 @@
 # FINSIG – Docker Image Digest
 image: ghcr.io/bombele/finsig:1.0.0
 digest: sha256:7f9c2ba4a2233f0f3f9e6c07b6ad4c0cbb2d2e8f9b4a1c5c9d3e4f8a7b1c6d2e
-created_at: 2025-12-18T16:55:00Z
+created_at: 2025-12-18T16:59:00Z
 source: ci/cd build-validation + docker push (GitHub Actions)
 validation: PASSED
-notes: Digest recorded after successful push to GHCR and local verification via 'docker inspect --format={{.Id}}'
+notes: Digest recorded after successful push to GHCR and verified via 'docker inspect --format={{.Id}}'
