@@ -1,1 +1,44 @@
+name: Run Pytest
+
+on:
+  push:
+    branches:
+      - "**"   # Exécute sur tous les commits, toutes branches
+  pull_request:
+    branches:
+      - "**"   # Exécute aussi sur toutes les PR
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Récupération du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Configuration de Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # 3️⃣ Installation des dépendances
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pytest pytest-cov
+
+      # 4️⃣ Exécution des tests avec couverture
+      - name: Run tests
+        run: |
+          pytest --cov=core/architecture --cov-report=term-missing
+
+      # 5️⃣ Génération du badge de couverture (optionnel)
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ./.coverage
 
