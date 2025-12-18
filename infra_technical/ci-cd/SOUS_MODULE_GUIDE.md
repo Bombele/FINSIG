@@ -45,6 +45,40 @@ Il permet de tester, valider et améliorer les configurations avant leur intégr
 - **test_build.yml** → vérifie l’installation et la reproductibilité des dépendances.  
 - **test_ci_cd_utils.py** → vérifie la robustesse des fonctions utilitaires CI/CD.
 
+### 📂 reports/
+Ce dossier regroupe les **rapports générés automatiquement** par les workflows CI/CD :  
+- `coverage.xml` → rapport de couverture des tests.  
+- `test-results.xml` → rapport JUnit des tests unitaires.  
+- `lint-report.txt` → rapport flake8/mypy.  
+- `security-report.json` → rapport bandit/safety.  
+- `deploy-report.log` → rapport du déploiement staging (healthchecks).  
+
+👉 Ces fichiers servent à l’**auditabilité des contrôles**.
+
+### 📂 artifacts/
+Ce dossier regroupe les **produits finis et preuves institutionnelles** :  
+
+#### 🔧 Build
+- `finsig-<version>-py3-none-any.whl`  
+- `finsig-<version>.tar.gz`  
+
+#### 🐳 Docker
+- `docker-image-sha256.txt` → hash SHA256 de l’image Docker.  
+- `docker-image.tar` → export local de l’image (optionnel).  
+
+#### 📜 Logs
+- `ci_cd_events.log` → journal des événements CI/CD.  
+- `deploy-report.log` → rapport du déploiement staging.  
+
+#### 🔒 Hashes
+- `build-hash.txt` → empreinte SHA256 des paquets Python.  
+- `docker-hash.txt` → empreinte SHA256 de l’image Docker.  
+
+#### ✅ Validation
+- `artifact-validation.json` → fichier conforme au schéma `ci_cd_schema.json`, listant artefacts, hash et statut validé.  
+
+👉 Ces fichiers servent à la **traçabilité institutionnelle et à la validation externe**.
+
 ---
 
 ## 🔄 Workflows CI/CD intégrés
@@ -54,31 +88,31 @@ Il permet de tester, valider et améliorer les configurations avant leur intégr
   → Pipeline principal :  
   - Exécution des tests unitaires et d’intégration.  
   - Vérification de la robustesse des dépendances.  
-  - Export des résultats dans `reports/ci-cd/`.
+  - Export des résultats dans `reports/`.
 
 - **lint-check.yml**  
   → Pipeline de qualité :  
   - Vérification du code avec flake8 et mypy.  
   - Contrôle des règles définies dans `mypy.ini`.  
-  - Journalisation des résultats dans `BITACORA.md`.
+  - Journalisation des résultats dans `reports/lint-report.txt`.
 
 - **build-validation.yml**  
   → Pipeline de build :  
   - Vérification de l’installation des dépendances (`requirements.txt`).  
   - Contrôle de la reproductibilité des environnements.  
-  - Signature et hash des rapports.
+  - Signature et hash des artefacts dans `artifacts/`.
 
 - **docker-pipeline.yml**  
   → Pipeline de conteneurisation :  
   - Construction de l’image Docker.  
   - Push vers GHCR.  
-  - Vérification de l’intégrité de l’image.
+  - Vérification de l’intégrité de l’image (hash dans `artifacts/docker-image-sha256.txt`).
 
 - **deploy-staging.yml**  
   → Pipeline de déploiement :  
   - Simulation via `docker-compose`.  
   - Services : app, db, monitoring, exporters.  
-  - Healthchecks intégrés.
+  - Healthchecks intégrés avec export dans `reports/deploy-report.log`.
 
 ---
 
@@ -89,15 +123,16 @@ Il permet de tester, valider et améliorer les configurations avant leur intégr
 - Les schémas (`schemas/`) garantissent la cohérence et la conformité des workflows.  
 - Les tests (`tests/`) valident la robustesse et la reproductibilité des pipelines.  
 - Les fichiers `prometheus.yml` et `alert_rules.yml` assurent le monitoring et les alertes.  
-- Le `docker-compose.yml` permet un déploiement local complet et auditable.
+- Le `docker-compose.yml` permet un déploiement local complet et auditable.  
+- Les dossiers `reports/` et `artifacts/` assurent la séparation claire entre **résultats des contrôles** et **produits institutionnels validés**.
 
 ---
 
 ## 🧭 Gouvernance et impact institutionnel
 
 - **Expérimentation contrôlée** : le sous-module `ci-cd/` sert de laboratoire pour tester les workflows.  
-- **Traçabilité** : chaque modification est documentée dans `BITACORA_CI-CD_FR.md`.  
-- **Institutionnalisation** : une fois validés, les workflows sont fusionnés dans `finsig/`.  
+- **Traçabilité** : chaque modification est documentée dans les bitácoras CI/CD.  
+- **Institutionnalisation** : une fois validés, les workflows et artefacts sont fusionnés dans `finsig/`.  
 - **Impact** : garantit robustesse, reproductibilité et auditabilité avant adoption officielle.
 
 ---
@@ -105,4 +140,7 @@ Il permet de tester, valider et améliorer les configurations avant leur intégr
 ## ✅ Conclusion
 
 Le sous-module `ci-cd/` est le **laboratoire technique de FINSIG**.  
-Il permet de tester et durcir les workflows CI/CD avant leur intégration institutionnelle dans la branche principale `finsig/`, assurant robustesse, conformité, traçabilité et monitoring.
+Il permet de tester et durcir les workflows CI/CD avant leur intégration institutionnelle dans la branche principale `finsig/`, assurant robustesse, conformité, traçabilité et monitoring.  
+Avec l’ajout des dossiers **`reports/`** et **`artifacts/`**, la traçabilité institutionnelle est complète :  
+- `reports/` → résultats des contrôles.  
+- `artifacts/` → produits finis et preuves institutionnelles.
