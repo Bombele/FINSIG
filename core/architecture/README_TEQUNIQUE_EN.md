@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Purpose
-This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`).  
+This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`).  
 It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA` (activity logs).
 
 ---
@@ -33,6 +33,10 @@ It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA
 - `finance_schema.py` → Schema for financial transactions  
 - `audit_schema.py` → Schema for audit logs  
 - `compliance_schema.py` → Schema for regulatory validations  
+
+### modules/scoring
+- `scoring_engine.py` → Institutional scoring engine (risk, compliance, performance scoring)  
+- **Role**: Provide standardized and auditable scores for institutional decision-making.
 
 ---
 
@@ -72,3 +76,5 @@ pytest tests/
 python finance_schema.py                   # Validate a financial record
 python audit_schema.py                     # Validate an audit log
 python compliance_schema.py                # Validate a compliance rule
+
+python scoring_engine.py                   # Calculate a score (risk, compliance, performance)
