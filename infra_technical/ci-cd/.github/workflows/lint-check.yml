@@ -1,1 +1,55 @@
+name: Lint Check
 
+on:
+  push:
+    paths:
+      - "infra_technical/ci-cd/**"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "infra_technical/ci-cd/**"
+
+jobs:
+  lint-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # 3. Install linting and security tools
+      - name: Install linting tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 bandit mypy
+
+      # 4. Run flake8 for style and complexity
+      - name: Run flake8
+        run: |
+          flake8 infra_technical/ci-cd --max-line-length=100 --statistics
+
+      # 5. Run bandit for security analysis
+      - name: Run bandit
+        run: |
+          bandit -r infra_technical/ci-cd -ll
+
+      # 6. Run mypy for type checking
+      - name: Run mypy
+        run: |
+          mypy infra_technical/ci-cd --config-file infra_technical/ci-cd/configs/mypy.ini
+
+      # 7. Upload lint reports for audit
+      - name: Upload lint reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: finsig-lint-check-reports
+          path: |
+            infra_technical/ci-cd/.mypy_cache
