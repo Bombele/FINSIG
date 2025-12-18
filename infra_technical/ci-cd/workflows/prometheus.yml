@@ -1,0 +1,33 @@
+global:
+  scrape_interval: 15s     # Intervalle de collecte par défaut
+  evaluation_interval: 15s # Intervalle d'évaluation des règles
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["localhost:9093"]
+
+rule_files:
+  - "alert_rules.yml"
+
+scrape_configs:
+  # 1️⃣ Monitoring de Prometheus lui-même
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # 2️⃣ Monitoring de l'application FINSIG
+  - job_name: "finsig-app"
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["finsig-app:8000"]
+
+  # 3️⃣ Monitoring de la base Postgres
+  - job_name: "postgres"
+    static_configs:
+      - targets: ["finsig-db:9187"]   # nécessite l’exporter postgres
+
+  # 4️⃣ Monitoring du système hôte
+  - job_name: "node"
+    static_configs:
+      - targets: ["node-exporter:9100"]
