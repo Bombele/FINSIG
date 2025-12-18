@@ -4,8 +4,9 @@
 
 ## 📅 Journal des activités
 
-- **2025-12-18** – Mise à jour du `README_TECHNIQUE_FR.md` pour inclure le module `scoring` en plus de `conformity`, `collection`, `normalization`, `orchestration` et `schemas`.  
+- **2025-12-18** – Mise à jour du `README_TECHNIQUE_FR.md` pour inclure les modules `scoring` et `storage` en plus de `conformity`, `collection`, `normalization`, `orchestration` et `schemas`.  
 - **2025-12-18** – Création du fichier `scoring_engine.py` (module `scoring`) pour calculer des scores institutionnels (risque, conformité, performance).  
+- **2025-12-18** – Création du fichier `storage_manager.py` (module `storage`) pour gérer le stockage institutionnel (sauvegarde, lecture, suppression, traçabilité).  
 - **2025-12-17** – Mise à jour du `README_TECHNIQUE_FR.md` pour inclure le module `schemas`.  
 - **2025-12-17** – Création du fichier `base_schema.py` (module `schemas`) pour définir le schéma institutionnel générique.  
 - **2025-12-17** – Création du fichier `finance_schema.py` (module `schemas`) pour tracer les transactions financières avec conformité ISO 4217.  
@@ -28,6 +29,7 @@
 - `pipeline_orchestrator.py` opérationnel, orchestration complète validée.  
 - `schemas/` opérationnel avec schémas validés (`base`, `finance`, `audit`, `compliance`).  
 - `scoring_engine.py` opérationnel, calculs de scoring validés (risque, conformité, performance).  
+- `storage_manager.py` opérationnel, gestion du stockage validée (sauvegarde, lecture, suppression, traçabilité).  
 - Documentation technique trilingue (`FR`, `EN`, `ES`) en place pour tous les modules.  
 - Bitácora mise à jour pour consigner les évolutions.
 
@@ -42,18 +44,19 @@
   3. **Conformité** (`structure_validator.py`, `workflow_checker.py`)  
   4. **Orchestration** (`pipeline_orchestrator.py`)  
   5. **Schemas** (`base_schema.py`, `finance_schema.py`, `audit_schema.py`, `compliance_schema.py`)  
-  6. **Scoring** (`scoring_engine.py`) pour produire des scores institutionnels.  
+  6. **Scoring** (`scoring_engine.py`) pour produire des scores institutionnels  
+  7. **Storage** (`storage_manager.py`) pour garantir la traçabilité et la gestion des enregistrements.  
 - Chaque sous-module doit contenir :  
   - Guides trilingues (`FR`, `EN`, `ES`)  
   - Bitácoras trilingues (`FR`, `EN`, `ES`)  
   - README techniques trilingues (`FR`, `EN`, `ES`)  
 - Les fichiers de log doivent être placés dans `logs/` et peuvent être ignorés dans `.gitignore` si non versionnés.  
 - Les données doivent être normalisées et validées par les schémas avant passage dans les modules compliance, scoring et audit.  
-- Les résultats du scoring doivent être intégrés dans les rapports institutionnels et les audits.
+- Les résultats du scoring et du stockage doivent être intégrés dans les rapports institutionnels et les audits.
 
 ---
 
 ## 📌 Conclusion
 
-La bitácora `core/architecture` trace désormais l’évolution complète du sous-module et de ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`).  
-Elle garantit la traçabilité institutionnelle, la conformité documentaire et la robustesse technique.
+La bitácora `core/architecture` trace désormais l’évolution complète du sous-module et de ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`).  
+Elle garantit la traçabilité institutionnelle, la conformité documentaire et la robustesse technique, offrant une base fiable pour la gouvernance numérique et la validation réglementaire.
