@@ -1,62 +1,65 @@
-# GUÍA DEL SUB-MÓDULO – CI/CD
+# README TÉCNICO – Pipeline CI/CD de FINSIG
 
 ---
 
-## 🎯 Objetivo del sub-módulo
+## 🎯 Propósito
 
-El sub-módulo `ci-cd/` está dedicado al **desarrollo, experimentación y fortalecimiento de los workflows CI/CD**.  
-Permite probar, validar y mejorar las configuraciones antes de su integración oficial en la rama principal `finsig/`.
+El módulo CI/CD garantiza la **robustez**, la **trazabilidad** y la **auditabilidad** de la infraestructura técnica de FINSIG.  
+Permite pruebas controladas, empaquetado, despliegue y monitoreo de todos los componentes en un entorno reproducible y conforme.  
+El pipeline está diseñado para operar de manera confiable incluso bajo crisis o restricciones geopolíticas, reforzando la credibilidad institucional.
 
 ---
 
-## 📂 Estructura de directorios
+## 📂 Estructura General
 
-### 📂 docs/
-- **CI_CD_GUIDE.md** → principios de diseño de los workflows CI/CD, metodología y estándares institucionales.  
-- **README_TECHNIQUE_FR.md / EN / ES** → documentación trilingüe del pipeline CI/CD.  
-- **BITACORA_CI-CD_FR.md / EN / ES** → registro institucional de las evoluciones del CI/CD.
+### 🔧 `configs/`
+- `pyproject.toml` → metadatos del proyecto, dependencias y configuraciones de herramientas (pytest, flake8, mypy, bandit, docker, prometheus-client).  
+- `requirements.txt` → lista jerárquica de dependencias (core, dev, CI/CD, monitoreo).  
+- `pytest.ini` → descubrimiento estandarizado de pruebas, reportes de cobertura, salida JUnit y logs con timestamp.  
+- `mypy.ini` → tipado estricto, códigos de error y soporte de plugins (`pydantic.mypy`).
 
-### 📂 workflows/
-- **ci.yml** → pipeline global de integración continua.  
-- **tests.yml** → ejecución de pruebas unitarias con cobertura.  
-- **lint.yml** → verificación del código (flake8 + bandit).  
-- **build.yml** → empaquetado Python y verificación de instalabilidad.  
-- **docker.yml** → construcción y push de la imagen Docker hacia GHCR.  
-- **deploy.yml** → despliegue staging vía docker-compose.  
-- **prometheus.yml** → configuración de monitoreo con Prometheus.  
-- **alert_rules.yml** → reglas de alerta críticas (app caída, DB caída, CPU/memoria).  
-- **docker-compose.yml** → entorno completo (app, db, exporters, monitoreo).
+### ⚙️ `.github/workflows/`
+- `build-validation.yml` → valida empaquetado Python (wheel + sdist), instalabilidad y artefactos auditables.  
+- `lint-validation.yml` → ejecuta flake8, bandit y mypy para calidad, seguridad y tipado.  
+- `tests-validation.yml` → ejecuta pruebas unitarias con cobertura y reportes JUnit.  
+- `security-check.yml` → escanea código y dependencias en busca de vulnerabilidades (bandit + safety).  
+- `deploy-validation.yml` → simula despliegue staging vía Docker Compose con healthchecks y Prometheus.  
+- `lint-check.yml` → linting ligero y chequeo de tipado para retroalimentación rápida.  
+- `ci-validation.yml` → orquesta todos los workflows de validación en paralelo.
 
-### 📂 configs/
-- **pyproject.toml** → definición de dependencias Python.  
-- **requirements.txt** → lista de dependencias experimentales.  
-- **mypy.ini** → configuración de tipado estático.  
-- **pytest.ini** → estandarización de pruebas unitarias e integración.
+### 📈 Monitoreo y Orquestación
+- `prometheus.yml` → scraping de métricas de la app, base de datos y exporters.  
+- `alert_rules.yml` → define alertas críticas (app caída, DB caída, CPU/memoria altas).  
+- `docker-compose.yml` → despliega app, Postgres, exporters y Prometheus en entorno staging local.
 
-### 📂 utils/
-- **ci_cd_utils.py** → funciones utilitarias para automatizar los pipelines CI/CD (logs firmados, timestamps, hash).
+### 🧪 Pruebas y Validación
+- `tests/` → workflows de prueba consolidados:  
+  - `test_build.yml` → valida empaquetado e instalabilidad.  
+  - `test_deploy.yml` → valida despliegue staging y healthchecks.  
+  - `test_security.yml` → valida vulnerabilidades en código y dependencias.  
+  - `test_lint.yml` → valida estilo, tipado y seguridad.  
+  - `test_ci.yml` → orquesta todos los workflows de prueba en paralelo.  
+  - `test_ci_cd_utils.py` → valida funciones utilitarias (hash, logs, timestamps, validación de artefactos).  
+- `schemas/` → esquema de validación de workflows y artefactos (`ci_cd_schema.json`).  
+- `utils/` → funciones reutilizables para logging, hashing y timestamps (`ci_cd_utils.py`).
 
-### 📂 schemas/
-- **ci_cd_schema.json** → esquema de validación de workflows y artefactos CI/CD.
+### 📚 Documentación
+- `README_TECHNIQUE_FR.md / EN / ES` → visión técnica trilingüe.  
+- `BITACORA_CI-CD_FR.md / EN / ES` → registro institucional de la evolución del CI/CD.  
+- `CI_CD_GUIDE.md` → principios de diseño, metodología y gobernanza de los workflows CI/CD.
 
-### 📂 tests/
-- **test_ci.yml** → valida el pipeline CI.  
-- **test_lint.yml** → valida la calidad del código.  
-- **test_build.yml** → valida la instalación y reproducibilidad de dependencias.  
-- **test_ci_cd_utils.py** → valida la robustez de las funciones utilitarias CI/CD.
-
-### 📂 reports/
-Este directorio agrupa los **reportes generados automáticamente** por los workflows CI/CD:  
+### 📁 reports/
+Contiene **reportes generados automáticamente** por los workflows CI/CD:  
 - `coverage.xml` → reporte de cobertura de pruebas.  
 - `test-results.xml` → reporte JUnit de pruebas unitarias.  
 - `lint-report.txt` → reporte flake8/mypy.  
 - `security-report.json` → reporte bandit/safety.  
 - `deploy-report.log` → reporte del despliegue staging (healthchecks).  
 
-👉 Estos archivos sirven para la **auditabilidad de los controles**.
+👉 Estos archivos garantizan la **auditabilidad de los controles**.
 
-### 📂 artifacts/
-Este directorio agrupa los **productos finales y evidencias institucionales**:  
+### 📁 artifacts/
+Contiene **productos finales y evidencias institucionales**:  
 
 #### 🔧 Build
 - `finsig-<version>-py3-none-any.whl`  
@@ -77,70 +80,56 @@ Este directorio agrupa los **productos finales y evidencias institucionales**:
 #### ✅ Validación
 - `artifact-validation.json` → archivo conforme al esquema `ci_cd_schema.json`, listando artefactos, hash y estado de validación.  
 
-👉 Estos archivos sirven para la **trazabilidad institucional y validación externa**.
+👉 Estos archivos garantizan la **trazabilidad institucional y validación externa**.
 
 ---
 
-## 🔄 Workflows CI/CD integrados
+## 🔄 Etapas del Pipeline
 
-### 📂 .github/workflows/
-- **ci-validation.yml**  
-  → Pipeline principal:  
-  - Ejecución de pruebas unitarias e integración.  
-  - Verificación de robustez de dependencias.  
-  - Export de resultados en `reports/`.
+1. **Pruebas**  
+   - Ejecutar pruebas unitarias con `pytest`.  
+   - Medir cobertura y exportar reportes (`coverage.xml`, `test-results.xml`).
 
-- **lint-check.yml**  
-  → Pipeline de calidad:  
-  - Verificación de código con flake8 y mypy.  
-  - Control de reglas definidas en `mypy.ini`.  
-  - Registro de resultados en `reports/lint-report.txt`.
+2. **Linting y Seguridad**  
+   - Validar estilo con `flake8`.  
+   - Detectar vulnerabilidades con `bandit` y `safety`.  
+   - Aplicar tipado estático con `mypy`.
 
-- **build-validation.yml**  
-  → Pipeline de build:  
-  - Verificación de instalación de dependencias (`requirements.txt`).  
-  - Control de reproducibilidad de entornos.  
-  - Firma y hash de artefactos en `artifacts/`.
+3. **Build y Empaquetado**  
+   - Generar artefactos Python (`wheel`, `sdist`).  
+   - Verificar instalabilidad y reproducibilidad.
 
-- **docker-pipeline.yml**  
-  → Pipeline de contenedorización:  
-  - Construcción de imagen Docker.  
-  - Push hacia GHCR.  
-  - Verificación de integridad de la imagen (hash en `artifacts/docker-image-sha256.txt`).
+4. **Dockerización**  
+   - Construir imagen Docker.  
+   - Publicar en GitHub Container Registry (GHCR).
 
-- **deploy-staging.yml**  
-  → Pipeline de despliegue:  
-  - Simulación vía `docker-compose`.  
-  - Servicios: app, db, monitoreo, exporters.  
-  - Healthchecks integrados con export en `reports/deploy-report.log`.
+5. **Despliegue Staging**  
+   - Simular entorno completo vía `docker-compose`.  
+   - Incluye app, base de datos, exporters y monitoreo.  
+   - Healthchecks en app, DB y Prometheus.
+
+6. **Monitoreo y Alertas**  
+   - Prometheus recolecta métricas.  
+   - Alertas críticas se disparan ante fallos o umbrales de recursos.
 
 ---
 
-## ⚙️ Funcionamiento
+## ✅ Impacto Institucional
 
-- Los workflows están definidos en `workflows/` y validados por las configuraciones (`configs/`).  
-- Los utilitarios (`utils/`) aseguran trazabilidad y seguridad de los pipelines.  
-- Los esquemas (`schemas/`) garantizan coherencia y conformidad de los workflows.  
-- Los tests (`tests/`) validan robustez y reproducibilidad de los pipelines.  
-- Los archivos `prometheus.yml` y `alert_rules.yml` aseguran monitoreo y alertas.  
-- El `docker-compose.yml` permite un despliegue local completo y auditable.  
-- Los directorios `reports/` y `artifacts/` aseguran separación clara entre **resultados de controles** y **productos institucionales validados**.
-
----
-
-## 🧭 Gobernanza e impacto institucional
-
-- **Experimentación controlada**: el sub-módulo `ci-cd/` sirve como laboratorio para probar workflows.  
-- **Trazabilidad**: cada modificación se documenta en las bitácoras CI/CD.  
-- **Institucionalización**: una vez validados, los workflows y artefactos se fusionan en `finsig/`.  
-- **Impacto**: garantiza robustez, reproducibilidad y auditabilidad antes de la adopción oficial.
+- **Robustez** → validada mediante pruebas y empaquetado automatizado.  
+- **Cumplimiento** → garantizado con linting, tipado y escaneo de seguridad.  
+- **Auditabilidad** → reportes exportables de cobertura, JUnit y Prometheus.  
+- **Reproducibilidad** → asegurada por Docker y configuraciones estandarizadas.  
+- **Resiliencia** → monitoreo y alertas garantizan continuidad operativa.  
+- **Credibilidad** → documentación trilingüe y bitácoras respaldan validación externa.
 
 ---
 
-## ✅ Conclusión
+## 📌 Conclusión
 
-El sub-módulo `ci-cd/` es el **laboratorio técnico de FINSIG**.  
-Permite probar y fortalecer los workflows CI/CD antes de su integración institucional en la rama principal `finsig/`, asegurando robustez, conformidad, trazabilidad y monitoreo.  
+Este pipeline CI/CD es la **columna vertebral técnica de FINSIG**.  
+Demuestra la capacidad del proyecto para ser probado, asegurado, empaquetado, desplegado y monitoreado de manera **transparente y auditable**.  
 Con la adición de los directorios **`reports/`** y **`artifacts/`**, la trazabilidad institucional está completa:  
 - `reports/` → resultados de controles.  
-- `artifacts/` → productos finales y evidencias institucionales.
+- `artifacts/` → productos finales y evidencias institucionales.  
+Es un activo estratégico para la validación institucional, la incorporación de socios y el cumplimiento regulatorio.
