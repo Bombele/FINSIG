@@ -1,55 +1,91 @@
-# README Technique CI/CD – FINSIG
+# README TECHNIQUE – Pipeline CI/CD de FINSIG
 
 ---
 
 ## 🎯 Objectif
 
-Le pipeline CI/CD de FINSIG est conçu pour garantir la **robustesse**, la **traçabilité** et l’**auditabilité** du projet.  
-Chaque étape assure la qualité du code, la reproductibilité des environnements et la continuité opérationnelle, même en contexte de crise.
+Le module CI/CD assure la **robustesse**, la **traçabilité** et l’**auditabilité** de l’infrastructure technique de FINSIG.  
+Il permet de tester, empaqueter, déployer et surveiller les composants dans un environnement reproductible et conforme.  
+Ce pipeline est conçu pour fonctionner de manière fiable même en contexte de crise, renforçant la crédibilité institutionnelle.
 
 ---
 
-## 🔎 Étapes principales
+## 📂 Structure générale
 
-### 1. **Tests (`tests.yml`)**
-- Exécution des tests unitaires avec `pytest`.
-- Calcul de la couverture avec `pytest-cov`.
-- Génération de rapports pour audit externe.
+### 🔧 `configs/`
+- `pyproject.toml` → métadonnées du projet, dépendances et configuration des outils (pytest, flake8, mypy, bandit).  
+- `requirements.txt` → dépendances organisées par catégories : cœur, développement, CI/CD, monitoring.  
+- `pytest.ini` → standardisation de la découverte des tests, rapports de couverture, sortie JUnit et logs horodatés.  
+- `mypy.ini` → vérification stricte des types, codes d’erreur et support des plugins (`pydantic.mypy`).
 
-### 2. **Lint & Sécurité (`lint.yml`)**
-- Vérification du style et de la complexité du code avec `flake8`.
-- Analyse de sécurité avec `bandit` pour détecter les failles potentielles.
-- Conformité technique et qualité du code assurées.
+### ⚙️ `workflows/`
+- `ci.yml` → orchestration globale des étapes CI/CD.  
+- `tests.yml` → exécution des tests unitaires avec couverture.  
+- `lint.yml` → contrôle qualité et sécurité du code.  
+- `build.yml` → empaquetage Python et vérification d’installabilité.  
+- `docker.yml` → construction et push des images Docker vers GHCR.  
+- `deploy.yml` → simulation de déploiement staging via Docker Compose.
 
-### 3. **Build & Packaging (`build.yml`)**
-- Génération des artefacts Python (`wheel`, `sdist`) via `python -m build`.
-- Vérification de l’installabilité (`pip install dist/*.whl`).
-- Upload des artefacts pour audit et distribution.
+### 📈 Monitoring & Alertes
+- `prometheus.yml` → configuration de Prometheus pour collecter les métriques de l’app, de la base de données et des exporters.  
+- `alert_rules.yml` → règles d’alerte critiques (app down, DB down, CPU/mémoire élevée).  
+- `docker-compose.yml` → déploiement local complet (app, Postgres, exporters, Prometheus).
 
-### 4. **Dockerisation (`docker.yml`)**
-- Construction de l’image Docker avec `docker build`.
-- Push automatique vers GitHub Container Registry (GHCR).
-- Portabilité et reproductibilité garanties.
+### 🧪 Tests & Validation
+- `tests/` → pipelines de validation (`test_ci.yml`, `test_lint.yml`, `test_build.yml`) et tests des utilitaires (`test_ci_cd_utils.py`).  
+- `schemas/` → schéma de validation des workflows et artefacts (`ci_cd_schema.json`).  
+- `utils/` → fonctions utilitaires pour logs, hash et horodatages (`ci_cd_utils.py`).
 
-### 5. **Déploiement Staging (`deploy.yml`)**
-- Simulation de déploiement via `docker-compose`.
-- Services inclus : application FINSIG, base Postgres, monitoring Prometheus.
-- Healthchecks intégrés pour assurer disponibilité et auditabilité.
+### 📚 Documentation
+- `README_TECHNIQUE_FR.md / EN / ES` → documentation technique trilingue.  
+- `BITACORA_CI-CD_FR.md / EN / ES` → journal institutionnel de l’évolution CI/CD.  
+- `CI_CD_GUIDE.md` → principes de conception, méthodologie et gouvernance des workflows CI/CD.
 
 ---
 
-## ✅ Résultats attendus
+## 🔄 Étapes du pipeline
 
-- **Robustesse** validée par les tests unitaires et la couverture.  
-- **Qualité et sécurité** assurées par lint et analyse statique.  
-- **Portabilité** via packaging Python et images Docker.  
-- **Reproductibilité** grâce à Docker Compose et CI/CD automatisé.  
-- **Auditabilité** renforcée par les rapports de couverture, les artefacts buildés et les métriques Prometheus.  
+1. **Tests**  
+   - Exécution des tests unitaires avec `pytest`.  
+   - Mesure de la couverture et export des rapports (`coverage.xml`, `test-results.xml`).
+
+2. **Linting & Sécurité**  
+   - Vérification du style avec `flake8`.  
+   - Analyse des vulnérabilités avec `bandit`.  
+   - Vérification statique des types avec `mypy`.
+
+3. **Build & Empaquetage**  
+   - Génération des artefacts Python (`wheel`, `sdist`).  
+   - Vérification de l’installabilité et de la reproductibilité.
+
+4. **Dockerisation**  
+   - Construction de l’image Docker.  
+   - Push vers GitHub Container Registry (GHCR).
+
+5. **Déploiement Staging**  
+   - Simulation complète via `docker-compose`.  
+   - Services inclus : app, base de données, monitoring, exporters.  
+   - Healthchecks intégrés.
+
+6. **Monitoring & Alertes**  
+   - Prometheus collecte les métriques.  
+   - Alertes critiques activées en cas de panne ou de surcharge.
+
+---
+
+## ✅ Impact institutionnel
+
+- **Robustesse** → validée par les tests et l’empaquetage automatisé.  
+- **Conformité** → assurée par linting, typage et analyse de sécurité.  
+- **Auditabilité** → rapports de couverture, JUnit et métriques Prometheus exportables.  
+- **Reproductibilité** → garantie par Docker et les configs standardisées.  
+- **Résilience** → monitoring et alertes intégrés pour continuité opérationnelle.  
+- **Crédibilité** → documentation trilingue et bitácoras pour validation externe.
 
 ---
 
 ## 📌 Conclusion
 
-Ce pipeline CI/CD constitue la **colonne vertébrale technique** de FINSIG.  
-Il démontre la capacité du projet à être testé, sécurisé, packagé, conteneurisé et déployé de manière **fiable et transparente**.  
-Il s’agit d’un élément clé pour la crédibilité institutionnelle et la validation par des partenaires ou régulateurs.
+Ce pipeline CI/CD est la **colonne vertébrale technique de FINSIG**.  
+Il démontre la capacité du projet à être testé, sécurisé, empaqueté, déployé et surveillé de manière **transparente et auditable**.  
+C’est un atout stratégique pour la validation institutionnelle, l’intégration de partenaires et la conformité réglementaire.
