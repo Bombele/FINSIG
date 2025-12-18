@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Purpose
-This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`).  
+This file provides technical instructions for using and maintaining the `core/architecture` sub-module of FINSIG, along with its associated modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`) and their **unit tests**.  
 It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA` (activity logs).
 
 ---
@@ -26,29 +26,38 @@ It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA
 - `data_normalization.py` → Data normalization script (dates, strings, numbers, mandatory fields, duplicates)  
 
 ### modules/orchestration
-- `pipeline_orchestrator.py` → Pipeline orchestration script (collection → normalization → conformity → audit/scoring)  
+- `pipeline_orchestrator.py` → Pipeline orchestration script  
+- **Tests** : `tests/test_pipeline_orchestrator.py`  
 
 ### modules/schemas
-- `base_schema.py` → Generic institutional schema (id, timestamp, source, value, metadata)  
+- `base_schema.py` → Generic institutional schema  
 - `finance_schema.py` → Schema for financial transactions  
 - `audit_schema.py` → Schema for audit logs  
 - `compliance_schema.py` → Schema for regulatory validations  
 
 ### modules/scoring
 - `scoring_engine.py` → Institutional scoring engine (risk, compliance, performance scoring)  
-- **Role**: Provide standardized and auditable scores for institutional decision-making.
 
 ### modules/storage
-- `storage_manager.py` → Institutional storage manager (read, write, delete, and traceability of records)  
-- **Role**: Centralize and standardize data storage, ensuring traceability and auditability.
+- `storage_manager.py` → Institutional storage manager (read, write, delete, traceability)  
 
 ### modules/traceability
-- `traceability.py` → Institutional traceability engine (log actions, audit, filter by module, clear records)  
-- **Role**: Ensure complete traceability of operations and reproducibility of institutional workflows.
+- `traceability.py` → Institutional traceability engine  
+- **Tests** : `tests/test_traceability.py`  
 
 ### modules/utils
-- `utils.py` → Institutional utility toolkit (ID generation, timestamps, validations, safe dictionary operations, JSON serialization)  
-- **Role**: Provide reusable and standardized functions for all FINSIG modules.
+- `utils.py` → Institutional utility toolkit  
+- **Tests** : `tests/test_utils.py`  
+
+---
+
+## 📂 Unit Tests
+
+- `tests/test_structure_validator.py` → Validation of documentation conformity  
+- `tests/test_workflow_checker.py` → Validation of workflow sequences  
+- `tests/test_pipeline_orchestrator.py` → Validation of the full pipeline  
+- `tests/test_traceability.py` → Validation of the traceability engine  
+- `tests/test_utils.py` → Validation of utility functions  
 
 ---
 
@@ -65,34 +74,10 @@ It complements the `SUB_MODULE_GUIDE` (institutional charters) and the `BITACORA
 ```bash
 python conformity/structure_validator.py   # Validate documentation compliance
 python conformity/workflow_checker.py      # Check workflows
-pytest tests/                              # Run tests
+pytest tests/                              # Run all unit tests
 
-# Collect JSON data
-python data_collection.py
-
-# Validate data compliance
-pytest tests/
-
-# Normalize a dataset
-python data_normalization.py
-
-# Validate normalized data
-pytest tests/
-
-# Run the full pipeline (collection → normalization → conformity)
-python pipeline_orchestrator.py
-
-# Validate pipeline integration
-pytest tests/
-
-python finance_schema.py                   # Validate a financial record
-python audit_schema.py                     # Validate an audit log
-python compliance_schema.py                # Validate a compliance rule
-
-python scoring_engine.py                   # Calculate a score (risk, compliance, performance)
-
-python storage_manager.py                  # Save, load, list, or delete records in storage
-
-python traceability.py                     # Log and consult traceability actions
-
-python utils.py                            # Test utility functions (IDs, timestamps, validations, JSON)
+pytest tests/test_structure_validator.py
+pytest tests/test_workflow_checker.py
+pytest tests/test_pipeline_orchestrator.py
+pytest tests/test_traceability.py
+pytest tests/test_utils.py
