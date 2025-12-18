@@ -26,6 +26,8 @@
   - `test_ci_cd_utils.py` → validates utility functions (hash, logs, timestamps, artifact validation).  
 - **2025-12-18** – Creation of schema `ci_cd_schema.json` for workflow and artifact validation.  
 - **2025-12-18** – Creation of guide `CI_CD_GUIDE.md` documenting design principles, methodology, and governance.  
+- **2025-12-18** – Addition of `reports/` folder for auditability (coverage, JUnit, lint, security, deploy reports).  
+- **2025-12-18** – Addition of `artifacts/` folder for institutional evidence (Python packages, Docker hashes, logs, validation JSON).  
 
 ---
 
@@ -34,18 +36,19 @@
 - CI/CD workflows operational (`tests-validation.yml`, `lint-validation.yml`, `build-validation.yml`, `docker.yml`, `deploy-validation.yml`, `security-check.yml`, `lint-check.yml`, `ci-validation.yml`).  
 - Test workflows consolidated (`test_build.yml`, `test_deploy.yml`, `test_security.yml`, `test_lint.yml`, `test_ci.yml`).  
 - Utility tests validated (`test_ci_cd_utils.py`).  
-- Unit tests executed with coverage and exported reports.  
+- Unit tests executed with coverage and exported reports in `reports/`.  
 - Linting, typing, and security validated (flake8 + bandit + mypy + safety).  
 - Strict typing validated (`mypy.ini`).  
-- Python packaging functional (`wheel`, `sdist`).  
-- Docker image built and pushed to GHCR.  
-- Staging deployment operational via `docker-compose` with healthchecks.  
+- Python packaging functional (`wheel`, `sdist`) stored in `artifacts/build/`.  
+- Docker image built and pushed to GHCR, with SHA256 hash stored in `artifacts/docker/`.  
+- Staging deployment operational via `docker-compose` with healthchecks, logs exported in `reports/deploy-report.log`.  
 - Prometheus monitoring active with exporters (`postgres-exporter`, `node-exporter`).  
 - Critical alerts configured (`finsig-app down`, `postgres down`, high CPU/memory).  
 - Trilingual technical documentation in place (FR/EN/ES).  
 - CI/CD bitácoras updated and aligned with evolutions.  
 - Schema JSON (`ci_cd_schema.json`) ensures validation of workflows, artifacts, and reports.  
 - CI/CD guide (`CI_CD_GUIDE.md`) provides governance and methodology.  
+- Institutional evidence consolidated in `artifacts/` (logs, hashes, validation JSON).  
 
 ---
 
@@ -53,4 +56,5 @@
 
 The `infra_technical/ci-cd` bitácora records the **complete evolution** of the FINSIG CI/CD module.  
 It ensures **institutional traceability**, **technical robustness**, **reinforced security**, and **reliable auditability**.  
+With the addition of **`reports/`** and **`artifacts/`**, the pipeline now provides a **clear separation between control results and institutional evidence**.  
 This CI/CD pipeline is the **operational backbone of FINSIG**, demonstrating its ability to be tested, secured, packaged, containerized, deployed, and monitored in a **transparent and reliable** way.
