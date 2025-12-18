@@ -4,9 +4,9 @@
 
 ## 🎯 Purpose
 
-This CI/CD module ensures the **robustness**, **traceability**, and **auditability** of FINSIG’s technical infrastructure.  
+The CI/CD module ensures **robustness**, **traceability**, and **auditability** of FINSIG’s technical infrastructure.  
 It enables controlled testing, packaging, deployment, and monitoring of all components in a reproducible and compliant environment.  
-The pipeline is designed to operate reliably even under geopolitical constraints, reinforcing institutional credibility.
+The pipeline is designed to operate reliably even under crisis or geopolitical constraints, reinforcing institutional credibility.
 
 ---
 
@@ -36,7 +36,7 @@ The pipeline is designed to operate reliably even under geopolitical constraints
 - `tests/` → Consolidated test workflows:  
   - `test_build.yml` → Validates packaging and installability.  
   - `test_deploy.yml` → Validates staging deployment and healthchecks.  
-  - `test_security.yml` → Validates vulnerabilities in code and dependencies.  
+  - `test_security.yml` → Validates code and dependency vulnerabilities.  
   - `test_lint.yml` → Validates style, typing, and security.  
   - `test_ci.yml` → Orchestrates all test workflows in parallel.  
   - `test_ci_cd_utils.py` → Validates utility functions (hash, logs, timestamps, artifact validation).  
