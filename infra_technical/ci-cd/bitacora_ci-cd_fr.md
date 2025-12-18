@@ -24,6 +24,8 @@
   - `test_lint.yml` → validation du style, du typage et de la sécurité rapide.  
   - `test_ci.yml` → orchestration de tous les workflows de test en parallèle.  
   - `test_ci_cd_utils.py` → validation des fonctions utilitaires (hash, logs, timestamps, validation des artefacts).  
+- **2025-12-18** – Création du schéma `ci_cd_schema.json` pour validation des workflows et artefacts.  
+- **2025-12-18** – Création du guide `CI_CD_GUIDE.md` documentant principes de conception, méthodologie et gouvernance.  
 
 ---
 
@@ -42,6 +44,8 @@
 - Alertes critiques configurées (`finsig-app down`, `postgres down`, CPU/mémoire élevées).  
 - Documentation technique trilingue disponible (FR/EN/ES).  
 - Bitácoras CI/CD mises à jour et alignées avec les évolutions.  
+- Schéma JSON (`ci_cd_schema.json`) assure la validation des workflows, artefacts et rapports.  
+- Guide CI/CD (`CI_CD_GUIDE.md`) fournit gouvernance et méthodologie.  
 
 ---
 
@@ -49,4 +53,4 @@
 
 La bitácora `infra_technical/ci-cd` documente l’**évolution complète** du module CI/CD de FINSIG.  
 Elle garantit la **traçabilité institutionnelle**, la **robustesse technique**, la **sécurité renforcée** et l’**auditabilité fiable**.  
-Ce pipeline CI/CD constitue la **colonne vertébrale opérationnelle de FINSIG**, démontrant sa capacité à être testé, sécurisé, empaqueté, conteneurisé, déployé et surveillé de manière **fiable et transparente**.
+Ce pipeline CI/CD constitue la **colonne vertébrale opérationnelle de FINSIG**, démontrant sa capacité à être testé, sécurisé, empaqueté, conteneurisé, déployé et monitoré de manière **fiable et transparente**.
