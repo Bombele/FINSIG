@@ -1,108 +1,87 @@
-
-# README Técnico – core/architecture
+# README TÉCNICO – core/architecture
 
 ---
 
 ## 🎯 Objetivo
-Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`) y sus **tests unitarios**.  
-Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
+Este módulo define la arquitectura institucional de FINSIG.  
+Garantiza la coherencia documental, la trazabilidad y la auditabilidad mediante submódulos, esquemas normalizados y pruebas unitarias.
 
 ---
 
-## 📂 Estructura
+## 📂 Submódulos
 
-### core/architecture
-- `SUB_MODULE_GUIDE_FR/EN/ES.md` → Carta del submódulo  
-- `BITACORA_FR/EN/ES.md` → Registro de actividades trilingüe  
-- `README_TECHNIQUE_FR/EN/ES.md` → Manual técnico trilingüe  
-- `docs/ARCHITECTURE_GUIDE.md` → Principios estructurales  
-- `conformity/structure_validator.py` → Script de validación documental  
-- `conformity/workflow_checker.py` → Script de control de flujos  
+### 1. conformity/
+- **structure_validator.py** → Verifica la presencia y conformidad de archivos obligatorios.  
+- **workflow_checker.py** → Controla la secuencia documental y la coherencia de los workflows.  
+- **Validación cruzada**: comprueba la integridad de las firmas SHA256 en `audit_schema.py` y `compliance_schema.py`.
 
-### modules/collection
-- `data_collection.py` → Script de recolección y validación de datos  
-- `logs/collection_log.txt` → Archivo de trazabilidad de las recolecciones  
+### 2. collection/
+- **data_collection.py** → Recolecta y valida datos brutos (CSV, JSON, API).  
+- **logs/collection_log.txt** → Registro de las recolecciones para trazabilidad.
 
-### modules/normalization
-- `data_normalization.py` → Script de normalización de datos (fechas, cadenas, números, campos obligatorios, duplicados)  
+### 3. normalization/
+- **data_normalization.py** → Normaliza datos (fechas, cadenas, números, campos obligatorios, duplicados).
 
-### modules/orchestration
-- `pipeline_orchestrator.py` → Script de orquestación del pipeline  
-- **Tests** : `tests/test_pipeline_orchestrator.py`  
+### 4. orchestration/
+- **pipeline_orchestrator.py** → Orquesta el pipeline completo (colección → normalización → conformidad → auditoría/scoring).  
+- **Pruebas de dependencias**: asegura que cada etapa falle si la anterior no se ejecuta correctamente.
 
-### modules/schemas
-- `base_schema.py` → Esquema institucional genérico  
-- `finance_schema.py` → Esquema para transacciones financieras  
-- `audit_schema.py` → Esquema para registros de auditoría  
-- `compliance_schema.py` → Esquema para validaciones regulatorias  
+### 5. schemas/
+- **base_schema.py** → Esquema genérico institucional.  
+- **finance_schema.py** → Esquema para transacciones financieras.  
+- **audit_schema.py** → Esquema para auditorías, incluye campos `version` y `signature` (SHA256).  
+- **compliance_schema.py** → Esquema para validaciones regulatorias, incluye campos `version` y `signature` (SHA256).  
+- **Función generate_signature()** → Genera firma criptográfica para garantizar integridad y autenticidad.
 
-### modules/scoring
-- `scoring_engine.py` → Motor institucional de scoring (riesgo, conformidad, rendimiento)  
+### 6. traceability/
+- **traceability.py** → Motor de trazabilidad institucional.  
+  - Registra eventos con horodatado en UTC (ISO 8601).  
+  - Función `export_to_csv()` para exportar logs a CSV para auditoría externa.
 
-### modules/storage
-- `storage_manager.py` → Gestor institucional de almacenamiento (guardar, cargar, eliminar, trazabilidad)  
-
-### modules/traceability
-- `traceability.py` → Motor de trazabilidad institucional  
-- **Tests** : `tests/test_traceability.py`  
-
-### modules/utils
-- `utils.py` → Conjunto de utilidades institucionales  
-- **Tests** : `tests/test_utils.py`  
+### 7. utils/
+- **utils.py** → Funciones utilitarias institucionales (validaciones, serialización JSON, merge de diccionarios, etc.).  
+- Casos límite probados: valores `None`, cadenas inválidas, diccionarios vacíos.
 
 ---
 
-## 📂 Tests unitarios
+## 📂 tests/
+- **test_structure_validator.py** → Prueba la validación de conformidad documental.  
+- **test_workflow_checker.py** → Prueba la validación de secuencias de workflow.  
+- **test_pipeline_orchestrator.py** → Prueba la orquestación completa y errores de dependencias.  
+- **test_traceability.py** → Prueba el motor de trazabilidad (UTC + exportación CSV).  
+- **test_utils.py** → Prueba funciones utilitarias incluyendo casos límite.  
+- **test_audit_schema.py** → Prueba generación y validación de firmas en auditorías.  
+- **test_compliance_schema.py** → Prueba generación y validación de firmas en conformidad.
 
-- `tests/test_structure_validator.py` → Validación de conformidad documental  
-- `tests/test_workflow_checker.py` → Validación de secuencias de workflow  
-- `tests/test_pipeline_orchestrator.py` → Validación del pipeline completo  
-- `tests/test_traceability.py` → Validación del motor de trazabilidad  
-- `tests/test_utils.py` → Validación de funciones utilitarias  
+---
+
+## 📂 workflows/
+- **tests.yml** → Workflow GitHub Actions que ejecuta automáticamente `pytest` y cobertura de pruebas en cada commit y pull request.  
+  - Python 3.10  
+  - Dependencias: `pytest`, `pytest-cov`, `pydantic`  
+  - Reporte de cobertura (`--cov=core/architecture --cov-report=term-missing`)
 
 ---
 
 ## ⚙️ Requisitos
 - Python 3.10+  
 - Frameworks: `pytest`, `pydantic`  
-- CI/CD: GitHub Actions o pipelines en `infra_technical/ci-cd/`
+- CI/CD: GitHub Actions (`.github/workflows/tests.yml`)
 
 ---
 
-## 🚀 Uso
+## 📌 Buenas prácticas
+- Mantener documentación trilingüe (`FR`, `EN`, `ES`).  
+- Actualizar la `BITACORA` tras cada modificación.  
+- Normalizar datos antes de módulos de conformidad, scoring y auditoría.  
+- Usar `pipeline_orchestrator.py` como punto de entrada.  
+- Centralizar esquemas en `schemas/`.  
+- Ejecutar pruebas unitarias regularmente y verificar cobertura.  
+- Validar firmas SHA256 para garantizar integridad documental.  
+- Exportar trazabilidad en UTC para auditoría externa.
 
-### core/architecture
-```bash
-python conformity/structure_validator.py   # Validar la conformidad documental
-python conformity/workflow_checker.py      # Verificar los flujos de trabajo
-pytest tests/                              # Ejecutar todos los tests unitarios
+---
 
-# Recolectar datos JSON
-python data_collection.py
-
-# Validar la conformidad de los datos
-pytest tests/
-
-# Normalizar un conjunto de datos
-python data_normalization.py
-
-# Validar los datos normalizados
-pytest tests/
-
-# Ejecutar el pipeline completo (recolección → normalización → conformidad)
-python pipeline_orchestrator.py
-
-# Validar la integración del pipeline
-pytest tests/
-
-python finance_schema.py                   # Validar una transacción financiera
-python audit_schema.py                     # Validar un registro de auditoría
-python compliance_schema.py                # Validar una regla de conformidad
-
-python scoring_engine.py                   # Calcular una puntuación (riesgo, conformidad, rendimiento)
-
-python storage_manager.py                  # Guardar, cargar, listar o eliminar registros en almacenamiento
-
-python traceability.py                     # Registrar y consultar acciones de trazabilidad
-
-python utils.py                            # Probar funciones utilitarias (IDs, timestamps, validaciones, JSON)
+## 📌 Conclusión
+El módulo `core/architecture` está compuesto por submódulos robustos (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `traceability`, `utils`) y un conjunto completo de pruebas unitarias.  
+La integración de **firmas SHA256**, **horodatado en UTC**, **exportación CSV** y **workflow CI/CD** asegura una gobernanza técnica sólida, trazabilidad institucional y validación sistemática.
