@@ -1,1 +1,97 @@
-
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CI/CD Workflow Schema",
+  "description": "Schéma de validation institutionnelle pour les workflows CI/CD de FINSIG",
+  "type": "object",
+  "properties": {
+    "workflow": {
+      "type": "string",
+      "description": "Nom du workflow CI/CD (ex: build-validation.yml, test_build.yml)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "failure", "pending"],
+      "description": "État du workflow"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Horodatage ISO 8601 en UTC"
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Liste des artefacts générés et validés",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nom de l’artefact (ex: wheel, sdist, docker-image)"
+          },
+          "path": {
+            "type": "string",
+            "description": "Chemin du fichier ou référence"
+          },
+          "hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "Empreinte SHA256 pour traçabilité"
+          },
+          "validated": {
+            "type": "boolean",
+            "description": "Indique si l’artefact a été validé"
+          }
+        },
+        "required": ["name", "path", "hash", "validated"]
+      }
+    },
+    "reports": {
+      "type": "array",
+      "description": "Rapports générés (tests, lint, sécurité, couverture)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["coverage", "junit", "lint", "security", "deploy", "monitoring"],
+            "description": "Type de rapport"
+          },
+          "path": {
+            "type": "string",
+            "description": "Chemin du rapport"
+          },
+          "validated": {
+            "type": "boolean",
+            "description": "Indique si le rapport est conforme"
+          }
+        },
+        "required": ["type", "path", "validated"]
+      }
+    },
+    "alerts": {
+      "type": "array",
+      "description": "Alertes critiques déclenchées par Prometheus ou healthchecks",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rule": {
+            "type": "string",
+            "description": "Nom de la règle d’alerte"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["triggered", "resolved"],
+            "description": "État de l’alerte"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Horodatage ISO 8601"
+          }
+        },
+        "required": ["rule", "status", "timestamp"]
+      }
+    }
+  },
+  "required": ["workflow", "status", "timestamp", "artifacts", "reports"]
+}
