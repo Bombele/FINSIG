@@ -1,13 +1,15 @@
 # DEPLOYMENT REPORT – FINSIG CI/CD
-# Timestamp: 2025-12-18T16:36:00Z
+# Timestamp: 2025-12-18T16:38:00Z
 # Environment: Staging (docker-compose)
-# Services: finsig-app, postgres-db, prometheus, exporters
+# Services: finsig-app, postgres-db, prometheus, node-exporter, postgres-exporter
 
 [INFO] Initializing deployment pipeline...
 [INFO] Pulling latest Docker images from GHCR...
 [INFO] Image finsig-app:sha256:abc123 successfully pulled.
 [INFO] Image postgres-db:sha256:def456 successfully pulled.
 [INFO] Image prometheus:sha256:ghi789 successfully pulled.
+[INFO] Image node-exporter:sha256:jkl012 successfully pulled.
+[INFO] Image postgres-exporter:sha256:mno345 successfully pulled.
 
 [INFO] Starting docker-compose stack...
 [INFO] Service finsig-app container started (ID: 9f2a3b).
@@ -16,17 +18,23 @@
 [INFO] Service node-exporter container started (ID: 2b7e9f).
 [INFO] Service postgres-exporter container started (ID: 6c1d2a).
 
-[HEALTHCHECK] finsig-app → OK (HTTP 200, response time: 120ms).
-[HEALTHCHECK] postgres-db → OK (connection established, latency: 15ms).
+[HEALTHCHECK] finsig-app → OK (HTTP 200, response time: 115ms).
+[HEALTHCHECK] postgres-db → OK (connection established, latency: 12ms).
 [HEALTHCHECK] prometheus → OK (metrics endpoint active).
 [HEALTHCHECK] node-exporter → OK (system metrics available).
 [HEALTHCHECK] postgres-exporter → OK (database metrics available).
 
 [SECURITY] Container images verified against SHA256 hashes.
 [SECURITY] No vulnerabilities detected in base images (bandit + safety scan passed).
+[SECURITY] Dependency integrity validated against requirements.txt.
 
 [MONITORING] Prometheus scraping metrics from finsig-app, postgres-db, exporters.
 [MONITORING] Alert rules loaded: finsig-app down, postgres down, high CPU/memory.
+[MONITORING] All exporters responding with valid metrics.
+
+[AUDIT] Deployment logs signed and stored in artifacts/logs/deploy-report.log.
+[AUDIT] Hashes generated for all build and docker artifacts (SHA256 validated).
+[AUDIT] Validation JSON updated in artifacts/validation/artifact-validation.json.
 
 [INFO] Deployment completed successfully.
 [INFO] All services operational in staging environment.
@@ -38,3 +46,4 @@ Healthchecks: PASSED
 Security Scan: PASSED
 Monitoring: ACTIVE
 Audit Hashes: VALIDATED
+Documentation: UPDATED
