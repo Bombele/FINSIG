@@ -28,6 +28,13 @@
 - **2025-12-18** – Creation of guide `CI_CD_GUIDE.md` documenting design principles, methodology, and governance.  
 - **2025-12-18** – Addition of `reports/` folder for auditability (coverage, JUnit, lint, security, deploy reports).  
 - **2025-12-18** – Addition of `artifacts/` folder for institutional evidence (Python packages, Docker hashes, logs, validation JSON).  
+- **2025-12-18** – Addition of `scripts/` folder for local orchestration and offline reproducibility:  
+  - `build.sh` → Python packaging and Twine validation.  
+  - `docker.sh` → Docker image build, export, and SHA256 digest.  
+  - `reports.sh` → Unit tests, coverage, lint, and security audits.  
+  - `validate.sh` → Dynamic generation of `artifact-validation.json` with PASSED/FAILED statuses.  
+  - `setup_pipeline.sh` → Dependency installation, environment preparation, and orchestration.  
+  - `pipeline.sh` → Sequential execution of all scripts for full CI/CD reproduction.  
 
 ---
 
@@ -49,6 +56,7 @@
 - Schema JSON (`ci_cd_schema.json`) ensures validation of workflows, artifacts, and reports.  
 - CI/CD guide (`CI_CD_GUIDE.md`) provides governance and methodology.  
 - Institutional evidence consolidated in `artifacts/` (logs, hashes, validation JSON).  
+- Scripts validated for local reproducibility and offline auditability, ensuring autonomy beyond GitHub Actions.  
 
 ---
 
@@ -56,5 +64,5 @@
 
 The `infra_technical/ci-cd` bitácora records the **complete evolution** of the FINSIG CI/CD module.  
 It ensures **institutional traceability**, **technical robustness**, **reinforced security**, and **reliable auditability**.  
-With the addition of **`reports/`** and **`artifacts/`**, the pipeline now provides a **clear separation between control results and institutional evidence**.  
-This CI/CD pipeline is the **operational backbone of FINSIG**, demonstrating its ability to be tested, secured, packaged, containerized, deployed, and monitored in a **transparent and reliable** way.
+With the addition of **`reports/`**, **`artifacts/`**, and **`scripts/`**, the pipeline now provides a **clear separation between control results, institutional evidence, and local reproducibility**.  
+This CI/CD pipeline is the **operational backbone of FINSIG**, demonstrating its ability to be tested, secured, packaged, containerized, deployed, validated, and monitored in a **transparent and reliable** way.
