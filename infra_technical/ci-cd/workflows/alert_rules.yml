@@ -27,3 +27,12 @@ groups:
         annotations:
           summary: "High CPU usage detected"
           description: "CPU usage > 80% for 5 minutes."
+
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage > 80% for 5 minutes."
