@@ -1,0 +1,62 @@
+name: Test Deploy
+
+on:
+  push:
+    paths:
+      - "infra_technical/ci-cd/**"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "infra_technical/ci-cd/**"
+
+jobs:
+  test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Docker
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      # 3. Build Docker images
+      - name: Build Docker images
+        run: |
+          docker-compose -f infra_technical/ci-cd/docker-compose.yml build
+
+      # 4. Start services in staging mode
+      - name: Start services
+        run: |
+          docker-compose -f infra_technical/ci-cd/docker-compose.yml up -d
+
+      # 5. Healthcheck application
+      - name: Healthcheck app
+        run: |
+          sleep 10
+          curl -f http://localhost:8000/health || exit 1
+
+      # 6. Healthcheck database
+      - name: Healthcheck database
+        run: |
+          docker exec $(docker ps -q -f name=postgres) pg_isready -U postgres
+
+      # 7. Healthcheck Prometheus
+      - name: Healthcheck Prometheus
+        run: |
+          curl -f http://localhost:9090/-/ready || exit 1
+
+      # 8. Stop services
+      - name: Stop services
+        run: |
+          docker-compose -f infra_technical/ci-cd/docker-compose.yml down
+
+      # 9. Upload deployment test logs
+      - name: Upload deployment test logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: finsig-deploy-test-logs
+          path: infra_technical/ci-cd/logs/
