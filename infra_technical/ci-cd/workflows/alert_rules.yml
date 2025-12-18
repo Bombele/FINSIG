@@ -1,0 +1,29 @@
+groups:
+  - name: finsig-alerts
+    rules:
+      - alert: FinsigAppDown
+        expr: up{job="finsig-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "FINSIG App is down"
+          description: "No metrics received from finsig-app for 1 minute."
+
+      - alert: PostgresDown
+        expr: up{job="postgres"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Postgres DB is down"
+          description: "No metrics received from finsig-db exporter."
+
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance)(irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage > 80% for 5 minutes."
