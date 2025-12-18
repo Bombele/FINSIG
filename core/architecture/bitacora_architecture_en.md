@@ -4,7 +4,9 @@
 
 ## 📅 Activity Log
 
-- **2025-12-17** – Updated `README_TECHNIQUE_EN.md` to include the `schemas` module alongside `conformity`, `collection`, `normalization`, and `orchestration`.  
+- **2025-12-18** – Updated `README_TECHNIQUE_EN.md` to include the `scoring` module alongside `conformity`, `collection`, `normalization`, `orchestration`, and `schemas`.  
+- **2025-12-18** – Created `scoring_engine.py` (module `scoring`) to calculate institutional scores (risk, compliance, performance).  
+- **2025-12-17** – Updated `README_TECHNIQUE_EN.md` to include the `schemas` module.  
 - **2025-12-17** – Created `base_schema.py` (module `schemas`) to define the generic institutional schema.  
 - **2025-12-17** – Created `finance_schema.py` (module `schemas`) to trace financial transactions with ISO 4217 compliance.  
 - **2025-12-17** – Created `audit_schema.py` (module `schemas`) to trace institutional audit logs.  
@@ -25,6 +27,7 @@
 - `data_normalization.py` operational, normalization pipeline tested.  
 - `pipeline_orchestrator.py` operational, full orchestration validated.  
 - `schemas/` operational with validated schemas (`base`, `finance`, `audit`, `compliance`).  
+- `scoring_engine.py` operational, scoring calculations validated (risk, compliance, performance).  
 - Trilingual technical documentation (`FR`, `EN`, `ES`) in place for all modules.  
 - Bitácora updated to record evolutions.
 
@@ -38,17 +41,18 @@
   2. **Normalization** (`data_normalization.py`)  
   3. **Conformity** (`structure_validator.py`, `workflow_checker.py`)  
   4. **Orchestration** (`pipeline_orchestrator.py`)  
-  5. **Schemas** (`base_schema.py`, `finance_schema.py`, `audit_schema.py`, `compliance_schema.py`) to guarantee data consistency.  
+  5. **Schemas** (`base_schema.py`, `finance_schema.py`, `audit_schema.py`, `compliance_schema.py`)  
+  6. **Scoring** (`scoring_engine.py`) to produce institutional scores.  
 - Each sub-module must contain:  
   - Trilingual guides (`FR`, `EN`, `ES`)  
   - Trilingual bitácoras (`FR`, `EN`, `ES`)  
   - Trilingual technical READMEs (`FR`, `EN`, `ES`)  
 - Log files should be placed in `logs/` and may be ignored in `.gitignore` if not versioned.  
-- Data must be normalized and validated by schemas before passing into compliance, scoring, and audit modules.
+- Data must be normalized and validated by schemas before passing into compliance, scoring, and audit modules.  
+- Scoring results must be integrated into institutional reports and audits.
 
 ---
 
 ## 📌 Conclusion
 
-The `core/architecture` bitácora now traces the complete evolution of the sub-module and its associated modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`).  
-It ensures institutional traceability, documentation compliance, and technical robustness.
+The `core/architecture` bitácora now traces the complete evolution of the sub-module and its associated modules (`conformity`, `collection
