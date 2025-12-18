@@ -38,6 +38,24 @@ services:
       timeout: 10s
       retries: 3
 
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: finsig-postgres-exporter
+    restart: always
+    environment:
+      - DATA_SOURCE_NAME=postgresql://finsig:finsig_pass@db:5432/finsig_db?sslmode=disable
+    ports:
+      - "9187:9187"
+    depends_on:
+      - db
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: finsig-node-exporter
+    restart: always
+    ports:
+      - "9100:9100"
+
   monitoring:
     image: prom/prometheus:latest
     container_name: finsig-monitoring
@@ -45,7 +63,12 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./infra_technical/ci-cd/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./infra_technical/ci-cd/workflows/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./infra_technical/ci-cd/workflows/alert_rules.yml:/etc/prometheus/alert_rules.yml:ro
+    depends_on:
+      - finsig-app
+      - postgres-exporter
+      - node-exporter
     healthcheck:
       test: ["CMD", "wget", "--spider", "http://localhost:9090/-/healthy"]
       interval: 30s
