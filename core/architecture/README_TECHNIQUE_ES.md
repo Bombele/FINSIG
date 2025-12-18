@@ -5,7 +5,7 @@
 ---
 
 ## 🎯 Objetivo
-Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`).  
+Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`).  
 Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
 
 ---
@@ -47,6 +47,10 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 ### modules/traceability
 - `traceability.py` → Motor de trazabilidad institucional (registro de acciones, auditoría, filtrado por módulo, limpieza de registros)  
 - **Rol**: garantizar la trazabilidad completa de las operaciones y la reproducibilidad de los flujos institucionales.
+
+### modules/utils
+- `utils.py` → Conjunto de utilidades institucionales (generación de IDs, timestamps, validaciones, operaciones seguras con diccionarios, serialización JSON)  
+- **Rol**: proporcionar funciones reutilizables y estandarizadas para todos los módulos de FINSIG.
 
 ---
 
@@ -92,3 +96,5 @@ python scoring_engine.py                   # Calcular una puntuación (riesgo, c
 python storage_manager.py                  # Guardar, cargar, listar o eliminar registros en almacenamiento
 
 python traceability.py                     # Registrar y consultar acciones de trazabilidad
+
+python utils.py                            # Probar funciones utilitarias (IDs, timestamps, validaciones, JSON)
