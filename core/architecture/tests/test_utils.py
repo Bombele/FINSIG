@@ -116,3 +116,72 @@ def test_merge_dicts():
     assert merged["a"] == 1
     assert merged["b"] == 3
     assert merged["c"] == 4
+
+# -----------------------------
+# ✅ Tests pour cas limites
+# -----------------------------
+
+def test_generate_id_with_empty_prefix():
+    """
+    Ensure generate_id works even with empty prefix.
+    """
+    uid = utils.generate_id("")
+    assert uid.startswith("-")  # préfixe vide mais ID généré
+
+
+def test_current_timestamp_not_empty():
+    """
+    Ensure current_timestamp never returns an empty string.
+    """
+    ts = utils.current_timestamp()
+    assert ts is not None
+    assert len(ts) > 0
+
+
+def test_validate_not_empty_with_none():
+    """
+    Ensure None value raises ValueError.
+    """
+    with pytest.raises(ValueError):
+        utils.validate_not_empty(None, "field")
+
+
+def test_validate_positive_number_with_zero():
+    """
+    Ensure zero is rejected as non-positive.
+    """
+    with pytest.raises(ValueError):
+        utils.validate_positive_number(0, "amount")
+
+
+def test_to_json_with_empty_dict():
+    """
+    Ensure empty dict is serialized correctly.
+    """
+    json_str = utils.to_json({})
+    parsed = utils.from_json(json_str)
+    assert parsed == {}
+
+
+def test_from_json_with_invalid_string():
+    """
+    Ensure invalid JSON string raises ValueError.
+    """
+    with pytest.raises(ValueError):
+        utils.from_json("not_a_json")
+
+
+def test_safe_get_with_none_dict():
+    """
+    Ensure safe_get handles None dictionary gracefully.
+    """
+    result = utils.safe_get(None, "key", "default")
+    assert result == "default"
+
+
+def test_merge_dicts_with_empty_dicts():
+    """
+    Ensure merging two empty dicts returns empty dict.
+    """
+    merged = utils.merge_dicts({}, {})
+    assert merged == {}
