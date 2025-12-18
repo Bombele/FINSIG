@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  finsig-app:
+    image: ghcr.io/${GITHUB_REPOSITORY}/finsig:latest
+    container_name: finsig-app
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=staging
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - db
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  db:
+    image: postgres:15
+    container_name: finsig-db
+    restart: always
+    environment:
+      - POSTGRES_USER=finsig
+      - POSTGRES_PASSWORD=finsig_pass
+      - POSTGRES_DB=finsig_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finsig"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  monitoring:
+    image: prom/prometheus:latest
+    container_name: finsig-monitoring
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infra_technical/ci-cd/prometheus.yml:/etc/prometheus/prometheus.yml
+
+volumes:
+  db_data:
