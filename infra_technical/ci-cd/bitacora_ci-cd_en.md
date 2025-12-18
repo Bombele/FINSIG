@@ -1,69 +1,41 @@
-# BITACORA – CI/CD (EN)
+# BITACORA – infra_technical/ci-cd
 
 ---
 
-## 🎯 Purpose
+## 📅 Activity Log
 
-This bitácora documents the **evolution and validation** of the CI/CD submodule within FINSIG.  
-It serves as an institutional log to track changes, ensure traceability, and reinforce auditability.
-
----
-
-## 📂 Completed Configurations (`configs/`)
-
-- **`mypy.ini`** → strict type checking enabled, error codes displayed, plugin support (`pydantic.mypy`).  
-- **`pytest.ini`** → standardized test discovery, coverage reports, JUnit output, and institutional logging.  
-- **`pyproject.toml`** → project metadata, dependencies, and tool configurations (pytest, flake8, mypy, bandit, docker, prometheus-client).  
-- **`requirements.txt`** → hierarchical dependency list (core, dev, CI/CD, monitoring) ensuring reproducibility.
-
----
-
-## ⚙️ Workflows (`workflows/`)
-
-- **`ci.yml`** → global orchestration of CI/CD stages.  
-- **`tests.yml`** → unit test execution with coverage.  
-- **`lint.yml`** → code quality and security checks.  
-- **`build.yml`** → Python packaging and installability validation.  
-- **`docker.yml`** → Docker image build and push to GHCR.  
-- **`deploy.yml`** → staging deployment simulation via Docker Compose.
+- **2025-12-18** – Creation and integration of workflow `tests.yml` (pytest + coverage).  
+- **2025-12-18** – Creation of workflow `lint.yml` (flake8 + bandit) for quality and security control.  
+- **2025-12-18** – Creation of workflow `build.yml` (Python packaging + installability check).  
+- **2025-12-18** – Creation of workflow `docker.yml` (Docker image build and push to GHCR).  
+- **2025-12-18** – Creation of workflow `deploy.yml` (staging deployment via docker-compose).  
+- **2025-12-18** – Creation of global workflow `ci.yml` orchestrating the entire pipeline.  
+- **2025-12-18** – Addition of robust `docker-compose.yml` (app, db, exporters, monitoring).  
+- **2025-12-18** – Addition of `prometheus.yml` and `alert_rules.yml` for monitoring and critical alerts.  
+- **2025-12-18** – Completion of configuration files (`mypy.ini`, `pytest.ini`, `pyproject.toml`, `requirements.txt`).  
+- **2025-12-18** – Update of technical READMEs (`README_TECHNIQUE_FR.md`, `README_TECHNIQUE_EN.md`, `README_TECHNIQUE_ES.md`).  
+- **2025-12-18** – Update of CI/CD bitácoras (FR/EN/ES) for institutional traceability.  
 
 ---
 
-## 📈 Monitoring & Orchestration
+## ✅ Validation Status
 
-- **`prometheus.yml`** → Prometheus configuration for metrics collection.  
-- **`alert_rules.yml`** → critical alert rules (app down, DB down, high CPU/memory).  
-- **`docker-compose.yml`** → staging environment with app, Postgres, exporters, and Prometheus monitoring.
-
----
-
-## 🧪 Validation & Testing
-
-- **`tests/`** → validation pipelines (`test_ci.yml`, `test_lint.yml`, `test_build.yml`) and utility tests (`test_ci_cd_utils.py`).  
-- **`schemas/`** → workflow and artifact validation schema (`ci_cd_schema.json`).  
-- **`utils/`** → utility functions for logging, hashing, and timestamping (`ci_cd_utils.py`).
-
----
-
-## 📚 Documentation
-
-- **`README_TECHNIQUE_FR.md / EN / ES`** → trilingual technical overview.  
-- **`BITACORA_CI-CD_FR.md / EN / ES`** → institutional logs of CI/CD evolution.  
-- **`CI_CD_GUIDE.md`** → design principles, methodology, and governance.
-
----
-
-## ✅ Institutional Impact
-
-- **Traceability** → every configuration and workflow is logged and versioned.  
-- **Auditability** → coverage, JUnit, and Prometheus reports are exportable for external validation.  
-- **Robustness** → validated through strict typing, testing, and reproducible builds.  
-- **Resilience** → monitoring and alerting ensure operational continuity.  
-- **Credibility** → trilingual documentation and bitácoras strengthen institutional validation.
+- CI/CD workflows operational (`tests.yml`, `lint.yml`, `build.yml`, `docker.yml`, `deploy.yml`, `ci.yml`).  
+- Unit tests executed with coverage and exported reports.  
+- Linting and security validated (flake8 + bandit).  
+- Strict typing validated (`mypy.ini`).  
+- Python packaging functional (wheel + sdist).  
+- Docker image built and pushed to GHCR.  
+- Staging deployment operational via `docker-compose`.  
+- Prometheus monitoring active with exporters (`postgres-exporter`, `node-exporter`).  
+- Critical alerts configured (`finsig-app down`, `postgres down`, high CPU/memory).  
+- Trilingual technical documentation in place (FR/EN/ES).  
+- CI/CD bitácoras updated and aligned with evolutions.  
 
 ---
 
 ## 📌 Conclusion
 
-The CI/CD submodule is now **fully consolidated**.  
-It provides a reproducible, auditable, and resilient pipeline that supports FINSIG’s institutional credibility and readiness for external audits.
+The `infra_technical/ci-cd` bitácora records the complete evolution of the FINSIG CI/CD module.  
+It ensures **institutional traceability**, **technical robustness**, **reinforced security**, and **reliable auditability**.  
+This CI/CD pipeline is the **operational backbone** of FINSIG, demonstrating its ability to be tested, secured, packaged, containerized, deployed, and monitored in a **transparent and reliable** way.
