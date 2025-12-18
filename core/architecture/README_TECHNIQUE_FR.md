@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Objectif
-Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`).  
+Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`).  
 Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA` (journaux des activités).
 
 ---
@@ -18,21 +18,25 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 - `conformity/structure_validator.py` → Script de validation documentaire  
 - `conformity/workflow_checker.py` → Script de contrôle des workflows  
 
-### core/architecture/modules/collection
+### modules/collection
 - `data_collection.py` → Script de collecte et validation des données  
 - `logs/collection_log.txt` → Fichier de traçabilité des collectes  
 
-### core/architecture/modules/normalization
+### modules/normalization
 - `data_normalization.py` → Script de normalisation des données (dates, chaînes, nombres, champs obligatoires, doublons)  
 
-### core/architecture/modules/orchestration
+### modules/orchestration
 - `pipeline_orchestrator.py` → Script d’orchestration du pipeline (collecte → normalisation → conformité → audit/scoring)  
 
-### core/architecture/modules/schemas
+### modules/schemas
 - `base_schema.py` → Schéma institutionnel générique (id, timestamp, source, valeur, métadonnées)  
 - `finance_schema.py` → Schéma pour les transactions financières  
 - `audit_schema.py` → Schéma pour les journaux d’audit  
 - `compliance_schema.py` → Schéma pour les validations réglementaires  
+
+### modules/scoring
+- `scoring_engine.py` → Moteur institutionnel de scoring (calcul des scores de risque, conformité, performance)  
+- **Rôle** : fournir des scores standardisés et auditables pour la prise de décision institutionnelle.
 
 ---
 
@@ -60,20 +64,20 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 - Framework : `pydantic` pour la validation des schémas  
 - CI/CD : tests automatiques pour garantir la conformité des schémas  
 
+### modules/scoring
+- Python 3.10+  
+- Framework : `pydantic` pour la validation des résultats de scoring  
+- CI/CD : intégration des calculs de scoring dans les pipelines de conformité et d’audit  
+
 ---
 
 ## 🚀 Utilisation
 
 ### core/architecture
 ```bash
-# Vérifier la conformité documentaire
-python conformity/structure_validator.py
-
-# Vérifier les workflows
-python conformity/workflow_checker.py
-
-# Lancer les tests
-pytest tests/
+python conformity/structure_validator.py   # Vérifier la conformité documentaire
+python conformity/workflow_checker.py      # Vérifier les workflows
+pytest tests/                              # Lancer les tests
 
 # Collecter des données JSON
 python data_collection.py
@@ -92,3 +96,5 @@ python audit_schema.py
 
 # Valider une règle de conformité
 python compliance_schema.py
+
+python scoring_engine.py                   # Calculer un score (risque, conformité, performance)
