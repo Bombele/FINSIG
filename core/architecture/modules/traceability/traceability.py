@@ -1,112 +1,55 @@
-"""
-traceability.py – core/architecture/modules/traceability
-
-🎯 Purpose:
-Defines the institutional traceability engine for FINSIG.
-The traceability engine ensures:
-- Logging of all institutional actions (collection, normalization, conformity, scoring, storage)
-- Standardized format with unique ID, timestamp, module, action, and metadata
-- Auditability and reproducibility of institutional workflows
-- Extensibility for integration with compliance and reporting pipelines
-
-✅ Impact:
-Guarantees reliable, auditable, and standardized traceability across all modules.
-"""
-
-import os
-import json
-import uuid
+import csv
 import datetime
-from typing import Dict, Any, Optional
+import os
+from typing import Dict, List, Any
 
 
-class TraceRecord:
+class Traceability:
     """
-    Institutional Traceability Record Schema for FINSIG.
+    Moteur de traçabilité institutionnelle.
+    Permet d'enregistrer des événements avec horodatage en UTC
+    et d'exporter les logs pour audit externe.
     """
 
-    def __init__(self, module: str, action: str, metadata: Optional[Dict[str, Any]] = None):
-        self.id = str(uuid.uuid4())
-        self.timestamp = datetime.datetime.now().isoformat()
-        self.module = module
-        self.action = action
-        self.metadata = metadata or {}
+    def __init__(self):
+        self.logs: List[Dict[str, Any]] = []
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "id": self.id,
-            "timestamp": self.timestamp,
-            "module": self.module,
-            "action": self.action,
-            "metadata": self.metadata,
+    def log_event(self, module: str, action: str, metadata: Dict[str, Any] = None) -> None:
+        """
+        Enregistre un événement avec horodatage en UTC.
+        """
+        timestamp = datetime.datetime.utcnow().isoformat() + "Z"  # format ISO 8601 UTC
+        entry = {
+            "timestamp": timestamp,
+            "module": module,
+            "action": action,
+            "metadata": metadata or {}
         }
+        self.logs.append(entry)
+        print(f"[TRACE] {timestamp} | {module} | {action} | {entry['metadata']}")
 
-
-class TraceabilityManager:
-    """
-    Institutional Traceability Manager for FINSIG.
-    """
-
-    def __init__(self, log_path: str = "./logs/traceability_log.json"):
-        self.log_path = log_path
-        os.makedirs(os.path.dirname(self.log_path), exist_ok=True)
-        if not os.path.exists(self.log_path):
-            with open(self.log_path, "w", encoding="utf-8") as f:
-                json.dump([], f)
-
-    def log(self, record: TraceRecord) -> None:
+    def export_to_csv(self, filepath: str = "logs/traceability_log.csv") -> None:
         """
-        Append a traceability record to the log file.
+        Exporte les logs vers un fichier CSV.
         """
-        with open(self.log_path, "r+", encoding="utf-8") as f:
-            data = json.load(f)
-            data.append(record.to_dict())
-            f.seek(0)
-            json.dump(data, f, ensure_ascii=False, indent=4)
+        if not self.logs:
+            print("⚠️ Aucun log à exporter.")
+            return
 
-    def list_records(self) -> Dict[str, Any]:
-        """
-        List all traceability records.
-        """
-        with open(self.log_path, "r", encoding="utf-8") as f:
-            return {"records": json.load(f)}
+        # Crée le répertoire si nécessaire
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
-    def filter_by_module(self, module: str) -> Dict[str, Any]:
-        """
-        Filter records by module.
-        """
-        with open(self.log_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            filtered = [rec for rec in data if rec.get("module") == module]
-            return {"records": filtered}
+        with open(filepath, mode="w", newline="", encoding="utf-8") as csvfile:
+            fieldnames = ["timestamp", "module", "action", "metadata"]
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-    def clear(self) -> None:
-        """
-        Clear all traceability records.
-        """
-        with open(self.log_path, "w", encoding="utf-8") as f:
-            json.dump([], f)
+            writer.writeheader()
+            for entry in self.logs:
+                writer.writerow({
+                    "timestamp": entry["timestamp"],
+                    "module": entry["module"],
+                    "action": entry["action"],
+                    "metadata": str(entry["metadata"])
+                })
 
-
-# Example usage
-if __name__ == "__main__":
-    manager = TraceabilityManager()
-
-    # Create and log a record
-    record = TraceRecord(
-        module="scoring",
-        action="calculate_score",
-        metadata={"record_id": "SCORE-001", "category": "risk", "value": 85}
-    )
-    manager.log(record)
-    print("✅ Traceability record logged.")
-
-    # List all records
-    print("📋 All records:", manager.list_records())
-
-    # Filter by module
-    print("🔎 Records for scoring:", manager.filter_by_module("scoring"))
-
-    # Clear records (for reset)
-    # manager.clear()
-    # print("🗑️ Traceability log cleared.")
+        print(f"✅ Logs exportés vers {filepath}")
