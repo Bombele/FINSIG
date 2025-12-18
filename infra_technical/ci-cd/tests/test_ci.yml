@@ -1,1 +1,21 @@
+name: Test CI
 
+on:
+  push:
+    paths:
+      - "infra_technical/ci-cd/**"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "infra_technical/ci-cd/**"
+
+jobs:
+  test-build:
+    uses: ./.github/workflows/../infra_technical/ci-cd/tests/test_build.yml
+
+  test-deploy:
+    uses: ./.github/workflows/../infra_technical/ci-cd/tests/test_deploy.yml
+
+  test-security:
+    uses: ./.github/workflows/../infra_technical/ci-cd/tests/test_security.yml
