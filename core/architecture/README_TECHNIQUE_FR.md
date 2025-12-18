@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Objectif
-Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`).  
+Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`).  
 Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA` (journaux des activités).
 
 ---
@@ -38,36 +38,16 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 - `scoring_engine.py` → Moteur institutionnel de scoring (calcul des scores de risque, conformité, performance)  
 - **Rôle** : fournir des scores standardisés et auditables pour la prise de décision institutionnelle.
 
+### modules/storage
+- `storage_manager.py` → Gestionnaire institutionnel de stockage (lecture, écriture, suppression et traçabilité des enregistrements)  
+- **Rôle** : centraliser et standardiser le stockage des données, garantissant traçabilité et auditabilité.
+
 ---
 
 ## ⚙️ Prérequis
-
-### core/architecture
 - Python 3.10+  
 - Frameworks : `pytest`, `pydantic`  
 - CI/CD : GitHub Actions ou pipelines `infra_technical/ci-cd/`
-
-### modules/collection
-- Python 3.10+  
-- Modules standards (`csv`, `json`, `datetime`)  
-
-### modules/normalization
-- Python 3.10+  
-- Modules standards (`datetime`)  
-
-### modules/orchestration
-- Python 3.10+  
-- Dépendances internes (`data_collection`, `data_normalization`, `structure_validator`, `workflow_checker`)  
-
-### modules/schemas
-- Python 3.10+  
-- Framework : `pydantic` pour la validation des schémas  
-- CI/CD : tests automatiques pour garantir la conformité des schémas  
-
-### modules/scoring
-- Python 3.10+  
-- Framework : `pydantic` pour la validation des résultats de scoring  
-- CI/CD : intégration des calculs de scoring dans les pipelines de conformité et d’audit  
 
 ---
 
@@ -98,3 +78,5 @@ python audit_schema.py
 python compliance_schema.py
 
 python scoring_engine.py                   # Calculer un score (risque, conformité, performance)
+
+python storage_manager.py                  # Sauvegarder, charger, lister ou supprimer des enregistrements
