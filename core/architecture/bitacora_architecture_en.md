@@ -4,55 +4,52 @@
 
 ## 📅 Activity Log
 
-- **2025-12-18** – Updated `README_TECHNIQUE_EN.md` to include the `scoring` module alongside `conformity`, `collection`, `normalization`, `orchestration`, and `schemas`.  
+- **2025-12-18** – Updated `README_TECHNIQUE_EN.md` to include the `scoring` and `storage` modules alongside `conformity`, `collection`, `normalization`, `orchestration`, and `schemas`.  
 - **2025-12-18** – Created `scoring_engine.py` (module `scoring`) to calculate institutional scores (risk, compliance, performance).  
+- **2025-12-18** – Created `storage_manager.py` (module `storage`) to manage institutional storage (save, load, delete, traceability).  
 - **2025-12-17** – Updated `README_TECHNIQUE_EN.md` to include the `schemas` module.  
-- **2025-12-17** – Created `base_schema.py` (module `schemas`) to define the generic institutional schema.  
-- **2025-12-17** – Created `finance_schema.py` (module `schemas`) to trace financial transactions with ISO 4217 compliance.  
-- **2025-12-17** – Created `audit_schema.py` (module `schemas`) to trace institutional audit logs.  
-- **2025-12-17** – Created `compliance_schema.py` (module `schemas`) to trace regulatory and institutional validations.  
-- **2025-12-17** – Updated `BITACORA` and `README_TECHNIQUE` in trilingual versions (FR/EN/ES) to ensure international onboarding.  
-- **2025-12-17** – Created `pipeline_orchestrator.py` (module `orchestration`) to orchestrate the full pipeline (collection → normalization → conformity → audit/scoring).  
-- **2025-12-16** – Full recreation of `workflow_checker.py` to validate the trilingual documentation sequence (guides, bitácoras, technical READMEs).  
-- **2025-12-16** – Updated `structure_validator.py` to strengthen mandatory file checks.  
-- **2025-12-15** – Initialization of the `conformity/` sub-module with institutional validation logic.  
-- **2025-12-14** – Initial structuring of the `core/architecture` sub-module with guides and documentation.
+- **2025-12-17** – Created `base_schema.py`, `finance_schema.py`, `audit_schema.py`, `compliance_schema.py` (module `schemas`).  
+- **2025-12-17** – Updated `BITACORA` and `README_TECHNIQUE` in trilingual versions (FR/EN/ES).  
+- **2025-12-17** – Created `pipeline_orchestrator.py` (module `orchestration`).  
+- **2025-12-16** – Recreated `workflow_checker.py` for trilingual documentation validation.  
+- **2025-12-16** – Updated `structure_validator.py`.  
+- **2025-12-15** – Initialized `conformity/` sub-module.  
+- **2025-12-14** – Initial structuring of `core/architecture`.
 
 ---
 
 ## ✅ Validation Status
 
-- `structure_validator.py` and `workflow_checker.py` operational and tested locally.  
-- `data_collection.py` operational, logging confirmed.  
-- `data_normalization.py` operational, normalization pipeline tested.  
-- `pipeline_orchestrator.py` operational, full orchestration validated.  
-- `schemas/` operational with validated schemas (`base`, `finance`, `audit`, `compliance`).  
-- `scoring_engine.py` operational, scoring calculations validated (risk, compliance, performance).  
-- Trilingual technical documentation (`FR`, `EN`, `ES`) in place for all modules.  
-- Bitácora updated to record evolutions.
+- Validators operational (`structure_validator.py`, `workflow_checker.py`).  
+- Collection and normalization modules tested.  
+- Orchestration pipeline validated.  
+- Schemas validated (`base`, `finance`, `audit`, `compliance`).  
+- Scoring engine operational (risk, compliance, performance).  
+- Storage manager operational (save, load, delete, traceability).  
+- Trilingual documentation in place.  
+- Bitácora updated.
 
 ---
 
 ## 📌 Technical Notes
 
-- Validators (`structure_validator.py`, `workflow_checker.py`) must be integrated into CI/CD pipelines (`infra_technical/ci-cd/`).  
-- Modules must be executed in sequence:  
-  1. **Collection** (`data_collection.py`)  
-  2. **Normalization** (`data_normalization.py`)  
-  3. **Conformity** (`structure_validator.py`, `workflow_checker.py`)  
-  4. **Orchestration** (`pipeline_orchestrator.py`)  
-  5. **Schemas** (`base_schema.py`, `finance_schema.py`, `audit_schema.py`, `compliance_schema.py`)  
-  6. **Scoring** (`scoring_engine.py`) to produce institutional scores.  
-- Each sub-module must contain:  
-  - Trilingual guides (`FR`, `EN`, `ES`)  
-  - Trilingual bitácoras (`FR`, `EN`, `ES`)  
-  - Trilingual technical READMEs (`FR`, `EN`, `ES`)  
-- Log files should be placed in `logs/` and may be ignored in `.gitignore` if not versioned.  
-- Data must be normalized and validated by schemas before passing into compliance, scoring, and audit modules.  
-- Scoring results must be integrated into institutional reports and audits.
+- Validators integrated into CI/CD.  
+- Execution sequence:  
+  1. Collection  
+  2. Normalization  
+  3. Conformity  
+  4. Orchestration  
+  5. Schemas  
+  6. Scoring  
+  7. Storage  
+- Each sub-module must contain trilingual guides, bitácoras, and READMEs.  
+- Logs stored in `logs/`.  
+- Data normalized and validated before compliance, scoring, and audit.  
+- Scoring and storage integrated into institutional reports.
 
 ---
 
 ## 📌 Conclusion
 
-The `core/architecture` bitácora now traces the complete evolution of the sub-module and its associated modules (`conformity`, `collection
+The `core/architecture` bitácora now traces the complete evolution of the sub-module and its modules (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`).  
+It ensures institutional traceability, documentation compliance, and technical robustness.
