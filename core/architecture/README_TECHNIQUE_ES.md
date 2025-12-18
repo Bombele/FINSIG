@@ -1,15 +1,14 @@
 
 
-## 🇪🇸 README_TECHNIQUE_ES.md – core/architecture
-
-markdown
 # README Técnico – core/architecture
 
+---
 
 ## 🎯 Objetivo
-Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`).  
+Este archivo proporciona instrucciones técnicas para usar y mantener el submódulo `core/architecture` de FINSIG, junto con sus módulos asociados (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`).  
 Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (registros de actividades).
 
+---
 
 ## 📂 Estructura
 
@@ -41,12 +40,18 @@ Complementa los `SUB_MODULE_GUIDE` (cartas institucionales) y las `BITACORA` (re
 - `scoring_engine.py` → Motor institucional de scoring (cálculo de riesgo, conformidad, rendimiento)  
 - **Rol**: proporcionar puntuaciones estandarizadas y auditables para la toma de decisiones institucionales.
 
+### modules/storage
+- `storage_manager.py` → Gestor institucional de almacenamiento (lectura, escritura, eliminación y trazabilidad de registros)  
+- **Rol**: centralizar y estandarizar el almacenamiento de datos, garantizando trazabilidad y auditabilidad.
+
+---
 
 ## ⚙️ Requisitos
 - Python 3.10+  
 - Frameworks: `pytest`, `pydantic`  
 - CI/CD: GitHub Actions o pipelines en `infra_technical/ci-cd/`
 
+---
 
 ## 🚀 Uso
 
@@ -79,3 +84,5 @@ python audit_schema.py                     # Validar un registro de auditoría
 python compliance_schema.py                # Validar una regla de conformidad
 
 python scoring_engine.py                   # Calcular una puntuación (riesgo, conformidad, rendimiento)
+
+python storage_manager.py                  # Guardar, cargar, listar o eliminar registros en almacenamiento
