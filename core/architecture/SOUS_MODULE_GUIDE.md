@@ -37,6 +37,15 @@ Il garantit la cohérence institutionnelle, la traçabilité et l’auditabilit�
 
 ---
 
+## 📂 tests/
+- **test_structure_validator.py** → Teste la validation de la conformité documentaire.  
+- **test_workflow_checker.py** → Teste la validation des séquences de workflow.  
+- **test_pipeline_orchestrator.py** → Teste l’orchestration complète du pipeline.  
+- **test_traceability.py** → Teste le moteur de traçabilité institutionnelle.  
+- **test_utils.py** → Teste les fonctions utilitaires institutionnelles.  
+
+---
+
 ## ⚙️ Prérequis
 - Python 3.10+  
 - Frameworks : `pytest`, `pydantic`  
@@ -50,9 +59,10 @@ Il garantit la cohérence institutionnelle, la traçabilité et l’auditabilit�
 - Normaliser les données avant passage dans les modules compliance, scoring et audit.  
 - Utiliser `pipeline_orchestrator.py` comme point d’entrée pour garantir l’ordre et la traçabilité.  
 - Centraliser les schémas dans `schemas/` pour éviter les divergences entre modules.  
+- Exécuter régulièrement les tests unitaires pour garantir robustesse et auditabilité.  
 
 ---
 
 ## 📌 Conclusion
-Le sous-module `core/architecture` est désormais composé de cinq modules clés : `conformity`, `collection`, `normalization`, `orchestration`, et `schemas`.  
-Cette structuration garantit une gouvernance technique robuste, une conformité documentaire et une traçabilité institutionnelle.
+Le sous-module `core/architecture` est désormais composé de cinq modules clés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`) et d’un **dossier `tests/`** regroupant tous les fichiers de validation (`test_structure_validator.py`, `test_workflow_checker.py`, `test_pipeline_orchestrator.py`, `test_traceability.py`, `test_utils.py`).  
+Cette structuration garantit une gouvernance technique robuste, une conformité documentaire, une traçabilité institutionnelle et une validation systématique par tests unitaires.
