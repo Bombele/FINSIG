@@ -1,80 +1,28 @@
-"""
-audit_schema.py – core/architecture/modules/schemas
-
-🎯 Purpose:
-Defines the institutional schema for audit logs in FINSIG.
-Audit logs ensure:
-- Traceability of actions across modules
-- Accountability of users and systems
-- Compliance with institutional and regulatory requirements
-- Standardized format for multilingual documentation (FR/EN/ES)
-
-✅ Impact:
-Guarantees reliable, auditable, and standardized tracking of events.
-"""
-
-from typing import Optional, Dict
-from pydantic import BaseModel, Field, validator
-import datetime
+from pydantic import BaseModel, Field
+from typing import Optional
+import hashlib
 
 
-class AuditRecord(BaseModel):
+class AuditSchema(BaseModel):
     """
-    Institutional Audit Record Schema for FINSIG.
+    Schéma institutionnel pour les journaux d'audit.
+    Inclut version et signature pour traçabilité et authenticité.
     """
 
-    id: str = Field(..., description="Unique identifier for the audit record")
-    timestamp: datetime.datetime = Field(..., description="ISO 8601 timestamp of the action")
-    actor: str = Field(..., description="User or system initiating the action")
-    action: str = Field(..., description="Action performed (create, update, delete, validate, etc.)")
-    module: str = Field(..., description="Module where the action occurred (collection, normalization, conformity, orchestration, schemas)")
-    status: str = Field(..., description="Result of the action (success, failure, warning)")
-    details: Optional[Dict] = Field(default_factory=dict, description="Additional contextual information about the action")
+    id: str = Field(..., description="Identifiant unique de l'audit")
+    timestamp: str = Field(..., description="Horodatage ISO 8601 UTC")
+    actor: str = Field(..., description="Auteur ou système ayant généré l'audit")
+    action: str = Field(..., description="Action réalisée")
+    details: dict = Field(..., description="Détails supplémentaires de l'audit")
 
-    @validator("timestamp", pre=True)
-    def validate_timestamp(cls, v):
-        """
-        Ensure timestamp is in ISO 8601 format.
-        """
-        if isinstance(v, str):
-            try:
-                return datetime.datetime.fromisoformat(v)
-            except Exception:
-                raise ValueError("Invalid timestamp format. Must be ISO 8601.")
-        return v
+    # Champs ajoutés
+    version: str = Field(..., description="Version du schéma d'audit")
+    signature: Optional[str] = Field(None, description="Signature SHA256 pour garantir l'intégrité")
 
-    @validator("id")
-    def validate_id(cls, v):
+    def generate_signature(self) -> str:
         """
-        Ensure ID is not empty.
+        Génère une signature SHA256 basée sur les champs critiques.
         """
-        if not v or v.strip() == "":
-            raise ValueError("Audit record ID cannot be empty.")
-        return v
-
-    @validator("status")
-    def validate_status(cls, v):
-        """
-        Ensure status is one of the allowed values.
-        """
-        allowed = {"success", "failure", "warning"}
-        if v.lower() not in allowed:
-            raise ValueError(f"Status must be one of {allowed}")
-        return v.lower()
-
-
-# Example usage
-if __name__ == "__main__":
-    try:
-        record = AuditRecord(
-            id="AUD-001",
-            timestamp="2025-12-17T18:45:00",
-            actor="system",
-            action="validate",
-            module="conformity",
-            status="success",
-            details={"file": "README_TECHNIQUE_FR.md", "message": "Validation passed"}
-        )
-        print("✅ Valid audit record:", record.dict())
-    except Exception as e:
-        print("⚠️ Validation error:", e)
+        raw = f"{self.id}{self.timestamp}{self.actor}{self.action}{self.version}"
+        self.signature = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+        return self.signature
