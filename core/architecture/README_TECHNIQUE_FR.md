@@ -3,7 +3,7 @@
 ---
 
 ## 🎯 Objectif
-Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`).  
+Ce fichier fournit les instructions techniques pour utiliser et maintenir le sous-module `core/architecture` de FINSIG, ainsi que ses modules associés (`conformity`, `collection`, `normalization`, `orchestration`, `schemas`, `scoring`, `storage`, `traceability`, `utils`) et leurs **tests unitaires**.  
 Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA` (journaux des activités).
 
 ---
@@ -26,29 +26,38 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 - `data_normalization.py` → Script de normalisation des données (dates, chaînes, nombres, champs obligatoires, doublons)  
 
 ### modules/orchestration
-- `pipeline_orchestrator.py` → Script d’orchestration du pipeline (collecte → normalisation → conformité → audit/scoring)  
+- `pipeline_orchestrator.py` → Script d’orchestration du pipeline  
+- **Tests** : `tests/test_pipeline_orchestrator.py`  
 
 ### modules/schemas
-- `base_schema.py` → Schéma institutionnel générique (id, timestamp, source, valeur, métadonnées)  
+- `base_schema.py` → Schéma institutionnel générique  
 - `finance_schema.py` → Schéma pour les transactions financières  
 - `audit_schema.py` → Schéma pour les journaux d’audit  
 - `compliance_schema.py` → Schéma pour les validations réglementaires  
 
 ### modules/scoring
-- `scoring_engine.py` → Moteur institutionnel de scoring (calcul des scores de risque, conformité, performance)  
-- **Rôle** : fournir des scores standardisés et auditables pour la prise de décision institutionnelle.
+- `scoring_engine.py` → Moteur institutionnel de scoring (risque, conformité, performance)  
 
 ### modules/storage
-- `storage_manager.py` → Gestionnaire institutionnel de stockage (lecture, écriture, suppression et traçabilité des enregistrements)  
-- **Rôle** : centraliser et standardiser le stockage des données, garantissant traçabilité et auditabilité.
+- `storage_manager.py` → Gestionnaire institutionnel de stockage (lecture, écriture, suppression, traçabilité)  
 
 ### modules/traceability
-- `traceability.py` → Moteur de traçabilité institutionnelle (enregistrement des actions, audit, filtrage par module, nettoyage des journaux)  
-- **Rôle** : assurer la traçabilité complète des opérations et la reproductibilité des workflows institutionnels.
+- `traceability.py` → Moteur de traçabilité institutionnelle  
+- **Tests** : `tests/test_traceability.py`  
 
 ### modules/utils
-- `utils.py` → Ensemble d’utilitaires institutionnels (génération d’IDs, horodatage, validations, opérations sécurisées sur dictionnaires, sérialisation JSON)  
-- **Rôle** : fournir des fonctions réutilisables et standardisées pour tous les modules de FINSIG.
+- `utils.py` → Ensemble d’utilitaires institutionnels  
+- **Tests** : `tests/test_utils.py`  
+
+---
+
+## 📂 Tests unitaires
+
+- `tests/test_structure_validator.py` → Validation de la conformité documentaire  
+- `tests/test_workflow_checker.py` → Validation des séquences de workflow  
+- `tests/test_pipeline_orchestrator.py` → Validation du pipeline complet  
+- `tests/test_traceability.py` → Validation du moteur de traçabilité  
+- `tests/test_utils.py` → Validation des fonctions utilitaires  
 
 ---
 
@@ -65,30 +74,10 @@ Il complète les `SUB_MODULE_GUIDE` (chartes institutionnelles) et les `BITACORA
 ```bash
 python conformity/structure_validator.py   # Vérifier la conformité documentaire
 python conformity/workflow_checker.py      # Vérifier les workflows
-pytest tests/                              # Lancer les tests
+pytest tests/                              # Lancer tous les tests unitaires
 
-# Collecter des données JSON
-python data_collection.py
-
-# Normaliser un jeu de données
-python data_normalization.py
-
-# Exécuter le pipeline complet
-python pipeline_orchestrator.py
-
-# Valider un enregistrement financier
-python finance_schema.py
-
-# Valider un journal d’audit
-python audit_schema.py
-
-# Valider une règle de conformité
-python compliance_schema.py
-
-python scoring_engine.py                   # Calculer un score (risque, conformité, performance)
-
-python storage_manager.py                  # Sauvegarder, charger, lister ou supprimer des enregistrements
-
-python traceability.py                     # Enregistrer et consulter les actions de traçabilité
-
-python utils.py                            # Tester les fonctions utilitaires (IDs, timestamps, validations, JSON)
+pytest tests/test_structure_validator.py
+pytest tests/test_workflow_checker.py
+pytest tests/test_pipeline_orchestrator.py
+pytest tests/test_traceability.py
+pytest tests/test_utils.py
