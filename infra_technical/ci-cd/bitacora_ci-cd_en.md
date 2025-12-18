@@ -1,48 +1,52 @@
-# BITÁCORA FINAL – infra_technical/ci-cd
+# BITÁCORA FINAL – infra_technical/ci-cd (EN)
 
 ---
 
-## 📅 Journal / Registro / Activity Log
+## 📅 Activity Log
 
-- **2025-12-18** – Création / Creación / Creation du workflow `tests-validation.yml` (pytest + couverture / cobertura / coverage).  
-- **2025-12-18** – Création / Creación / Creation du workflow `lint-validation.yml` (flake8 + bandit + mypy pour qualité, sécurité et typage / calidad, seguridad y tipado / quality, security, typing).  
-- **2025-12-18** – Création / Creación / Creation du workflow `build-validation.yml` (packaging Python + vérification installabilité / empaquetado Python + verificación de instalabilidad / Python packaging + installability check).  
-- **2025-12-18** – Création / Creación / Creation du workflow `docker.yml` (construction et push image Docker vers GHCR / construcción y push de imagen Docker a GHCR / Docker image build and push to GHCR).  
-- **2025-12-18** – Création / Creación / Creation du workflow `deploy-validation.yml` (déploiement staging via docker-compose avec healthchecks / despliegue staging vía docker-compose con healthchecks / staging deployment via docker-compose with healthchecks).  
-- **2025-12-18** – Création / Creación / Creation du workflow `security-check.yml` (bandit + safety pour vulnérabilités / vulnerabilidades / vulnerabilities).  
-- **2025-12-18** – Création / Creación / Creation du workflow `lint-check.yml` (contrôle rapide de style et typage / validación rápida de estilo y tipado / fast linting and type check).  
-- **2025-12-18** – Création / Creación / Creation du workflow global `ci-validation.yml` orchestrant l’ensemble du pipeline / orquestando todo el pipeline / orchestrating the entire pipeline.  
-- **2025-12-18** – Ajout / Adición / Addition du fichier `docker-compose.yml` robuste (app, db, exporters, monitoring).  
-- **2025-12-18** – Ajout / Adición / Addition des fichiers `prometheus.yml` et `alert_rules.yml` pour monitoring et alertes critiques / monitoreo y alertas críticas / monitoring and critical alerts.  
-- **2025-12-18** – Remplissage / Completado / Completion des fichiers de configuration (`mypy.ini`, `pytest.ini`, `pyproject.toml`, `requirements.txt`).  
-- **2025-12-18** – Mise à jour / Actualización / Update des README techniques (`README_TECHNIQUE_FR.md`, `README_TECHNIQUE_EN.md`, `README_TECHNIQUE_ES.md`).  
-- **2025-12-18** – Mise à jour / Actualización / Update des bitácoras CI/CD (FR/EN/ES) pour traçabilité institutionnelle / trazabilidad institucional / institutional traceability.  
+- **2025-12-18** – Creation and integration of workflow `tests-validation.yml` (pytest + coverage).  
+- **2025-12-18** – Creation of workflow `lint-validation.yml` (flake8 + bandit + mypy for quality, security, typing).  
+- **2025-12-18** – Creation of workflow `build-validation.yml` (Python packaging + installability check).  
+- **2025-12-18** – Creation of workflow `docker.yml` (Docker image build and push to GHCR).  
+- **2025-12-18** – Creation of workflow `deploy-validation.yml` (staging deployment via docker-compose with healthchecks).  
+- **2025-12-18** – Creation of workflow `security-check.yml` (bandit + safety for vulnerabilities).  
+- **2025-12-18** – Creation of workflow `lint-check.yml` (fast linting and type check).  
+- **2025-12-18** – Creation of global workflow `ci-validation.yml` orchestrating the entire pipeline.  
+- **2025-12-18** – Addition of `docker-compose.yml` (app, database, exporters, monitoring).  
+- **2025-12-18** – Addition of `prometheus.yml` and `alert_rules.yml` for monitoring and critical alerts.  
+- **2025-12-18** – Completion of configuration files (`mypy.ini`, `pytest.ini`, `pyproject.toml`, `requirements.txt`).  
+- **2025-12-18** – Update of technical READMEs (`README_TECHNIQUE_FR.md`, `README_TECHNIQUE_EN.md`, `README_TECHNIQUE_ES.md`).  
+- **2025-12-18** – Update of CI/CD bitácoras (FR/EN/ES) for institutional traceability.  
+- **2025-12-18** – Creation of test workflows:  
+  - `test_build.yml` → validates packaging and installability.  
+  - `test_deploy.yml` → validates staging deployment and healthchecks.  
+  - `test_security.yml` → validates code and dependency vulnerabilities.  
+  - `test_lint.yml` → validates style, typing, and security.  
+  - `test_ci.yml` → orchestrates all test workflows in parallel.  
+  - `test_ci_cd_utils.py` → validates utility functions (hash, logs, timestamps, artifact validation).  
 
 ---
 
-## ✅ État / Estado / Validation Status
+## ✅ Validation Status
 
-- Workflows CI/CD opérationnels / operativos / operational (`tests-validation.yml`, `lint-validation.yml`, `build-validation.yml`, `docker.yml`, `deploy-validation.yml`, `security-check.yml`, `lint-check.yml`, `ci-validation.yml`).  
-- Tests unitaires exécutés avec couverture / ejecutados con cobertura / executed with coverage.  
-- Lint, typage et sécurité validés / lint, tipado y seguridad validados / linting, typing, and security validated (flake8 + bandit + mypy + safety).  
-- Typage strict validé (`mypy.ini`).  
-- Packaging Python fonctionnel / funcional / functional (wheel + sdist).  
-- Image Docker construite et poussée vers GHCR / construida y publicada en GHCR / built and pushed to GHCR.  
-- Déploiement staging opérationnel via `docker-compose` avec healthchecks / operativo vía `docker-compose` con healthchecks / operational via `docker-compose` with healthchecks.  
-- Monitoring Prometheus actif avec exporters (`postgres-exporter`, `node-exporter`).  
-- Alertes critiques configurées (`finsig-app down`, `postgres down`, CPU/mémoire élevées / altas / high).  
-- Documentation technique trilingue en place (FR/EN/ES).  
-- Bitácoras CI/CD mises à jour et alignées avec les évolutions / actualizadas y alineadas / updated and aligned.  
+- CI/CD workflows operational (`tests-validation.yml`, `lint-validation.yml`, `build-validation.yml`, `docker.yml`, `deploy-validation.yml`, `security-check.yml`, `lint-check.yml`, `ci-validation.yml`).  
+- Test workflows consolidated (`test_build.yml`, `test_deploy.yml`, `test_security.yml`, `test_lint.yml`, `test_ci.yml`).  
+- Utility tests validated (`test_ci_cd_utils.py`).  
+- Unit tests executed with coverage and exported reports.  
+- Linting, typing, and security validated (flake8 + bandit + mypy + safety).  
+- Strict typing validated (`mypy.ini`).  
+- Python packaging functional (`wheel`, `sdist`).  
+- Docker image built and pushed to GHCR.  
+- Staging deployment operational via `docker-compose` with healthchecks.  
+- Prometheus monitoring active with exporters (`postgres-exporter`, `node-exporter`).  
+- Critical alerts configured (`finsig-app down`, `postgres down`, high CPU/memory).  
+- Trilingual technical documentation in place (FR/EN/ES).  
+- CI/CD bitácoras updated and aligned with evolutions.  
 
 ---
 
 ## 📌 Conclusion
 
-La bitácora `infra_technical/ci-cd` / La bitácora `infra_technical/ci-cd` / The `infra_technical/ci-cd` bitácora trace l’évolution complète du module CI/CD de FINSIG.  
-Elle garantit / Garantiza / It ensures :  
-- **Traçabilité institutionnelle / Trazabilidad institucional / Institutional traceability**  
-- **Robustesse technique / Robustez técnica / Technical robustness**  
-- **Sécurité renforcée / Seguridad reforzada / Reinforced security**  
-- **Auditabilité fiable / Auditabilidad confiable / Reliable auditability**  
-
-Ce pipeline CI/CD constitue la **colonne vertébrale opérationnelle / columna vertebral operativa / operational backbone** de FINSIG, démontrant sa capacité à être testé, sécurisé, empaqueté, conteneurisé, déployé et surveillé de manière **fiable et transparente / fiable y transparente / reliable and transparent**.
+The `infra_technical/ci-cd` bitácora records the **complete evolution** of the FINSIG CI/CD module.  
+It ensures **institutional traceability**, **technical robustness**, **reinforced security**, and **reliable auditability**.  
+This CI/CD pipeline is the **operational backbone of FINSIG**, demonstrating its ability to be tested, secured, packaged, containerized, deployed, and monitored in a **transparent and reliable** way.
