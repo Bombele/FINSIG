@@ -1,4 +1,4 @@
-# BITÁCORA FINAL – infra_technical/ci-cd (EN)
+# FINAL BITÁCORA – infra_technical/ci-cd (EN)
 
 ---
 
@@ -24,6 +24,8 @@
   - `test_lint.yml` → validates style, typing, and security.  
   - `test_ci.yml` → orchestrates all test workflows in parallel.  
   - `test_ci_cd_utils.py` → validates utility functions (hash, logs, timestamps, artifact validation).  
+- **2025-12-18** – Creation of schema `ci_cd_schema.json` for workflow and artifact validation.  
+- **2025-12-18** – Creation of guide `CI_CD_GUIDE.md` documenting design principles, methodology, and governance.  
 
 ---
 
@@ -42,6 +44,8 @@
 - Critical alerts configured (`finsig-app down`, `postgres down`, high CPU/memory).  
 - Trilingual technical documentation in place (FR/EN/ES).  
 - CI/CD bitácoras updated and aligned with evolutions.  
+- Schema JSON (`ci_cd_schema.json`) ensures validation of workflows, artifacts, and reports.  
+- CI/CD guide (`CI_CD_GUIDE.md`) provides governance and methodology.  
 
 ---
 
