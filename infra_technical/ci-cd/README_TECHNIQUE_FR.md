@@ -13,33 +13,34 @@ Ce pipeline est conçu pour fonctionner de manière fiable même en contexte de 
 ## 📂 Structure générale
 
 ### 🔧 `configs/`
-- `pyproject.toml` → métadonnées du projet, dépendances et configuration des outils (pytest, flake8, mypy, bandit).  
-- `requirements.txt` → dépendances organisées par catégories : cœur, développement, CI/CD, monitoring.  
-- `pytest.ini` → standardisation de la découverte des tests, rapports de couverture, sortie JUnit et logs horodatés.  
-- `mypy.ini` → vérification stricte des types, codes d’erreur et support des plugins (`pydantic.mypy`).
+- `pyproject.toml` → métadonnées du projet, dépendances et configuration des outils (pytest, flake8, mypy, bandit, docker, prometheus-client).  
+- `requirements.txt` → dépendances hiérarchisées (cœur, développement, CI/CD, monitoring).  
+- `pytest.ini` → standardisation des tests, rapports de couverture, sortie JUnit et logs horodatés.  
+- `mypy.ini` → typage strict, codes d’erreur, support des plugins (`pydantic.mypy`).
 
-### ⚙️ `workflows/`
-- `ci.yml` → orchestration globale des étapes CI/CD.  
-- `tests.yml` → exécution des tests unitaires avec couverture.  
-- `lint.yml` → contrôle qualité et sécurité du code.  
-- `build.yml` → empaquetage Python et vérification d’installabilité.  
-- `docker.yml` → construction et push des images Docker vers GHCR.  
-- `deploy.yml` → simulation de déploiement staging via Docker Compose.
+### ⚙️ `.github/workflows/`
+- `build-validation.yml` → validation du packaging Python (`wheel`, `sdist`), installabilité et artefacts pour audit.  
+- `lint-validation.yml` → exécution de flake8, bandit et mypy pour qualité, sécurité et typage.  
+- `tests-validation.yml` → exécution des tests unitaires avec couverture et rapports JUnit.  
+- `security-check.yml` → analyse des vulnérabilités du code et des dépendances (bandit + safety).  
+- `deploy-validation.yml` → simulation de déploiement staging via Docker Compose avec healthchecks et Prometheus.  
+- `lint-check.yml` → contrôle rapide de style et typage.  
+- `ci-validation.yml` → orchestration globale des workflows en parallèle.
 
-### 📈 Monitoring & Alertes
-- `prometheus.yml` → configuration de Prometheus pour collecter les métriques de l’app, de la base de données et des exporters.  
+### 📈 Monitoring & Orchestration
+- `prometheus.yml` → collecte des métriques (app, base de données, exporters).  
 - `alert_rules.yml` → règles d’alerte critiques (app down, DB down, CPU/mémoire élevée).  
 - `docker-compose.yml` → déploiement local complet (app, Postgres, exporters, Prometheus).
 
 ### 🧪 Tests & Validation
-- `tests/` → pipelines de validation (`test_ci.yml`, `test_lint.yml`, `test_build.yml`) et tests des utilitaires (`test_ci_cd_utils.py`).  
+- `tests/` → pipelines de validation (`test_ci.yml`, `test_lint.yml`, `test_build.yml`) et tests utilitaires (`test_ci_cd_utils.py`).  
 - `schemas/` → schéma de validation des workflows et artefacts (`ci_cd_schema.json`).  
 - `utils/` → fonctions utilitaires pour logs, hash et horodatages (`ci_cd_utils.py`).
 
 ### 📚 Documentation
 - `README_TECHNIQUE_FR.md / EN / ES` → documentation technique trilingue.  
-- `BITACORA_CI-CD_FR.md / EN / ES` → journal institutionnel de l’évolution CI/CD.  
-- `CI_CD_GUIDE.md` → principes de conception, méthodologie et gouvernance des workflows CI/CD.
+- `BITACORA_CI-CD_FR.md / EN / ES` → journaux institutionnels de l’évolution CI/CD.  
+- `CI_CD_GUIDE.md` → principes de conception, méthodologie et gouvernance.
 
 ---
 
@@ -51,7 +52,7 @@ Ce pipeline est conçu pour fonctionner de manière fiable même en contexte de 
 
 2. **Linting & Sécurité**  
    - Vérification du style avec `flake8`.  
-   - Analyse des vulnérabilités avec `bandit`.  
+   - Analyse des vulnérabilités avec `bandit` et `safety`.  
    - Vérification statique des types avec `mypy`.
 
 3. **Build & Empaquetage**  
@@ -65,7 +66,7 @@ Ce pipeline est conçu pour fonctionner de manière fiable même en contexte de 
 5. **Déploiement Staging**  
    - Simulation complète via `docker-compose`.  
    - Services inclus : app, base de données, monitoring, exporters.  
-   - Healthchecks intégrés.
+   - Healthchecks intégrés (app, DB, Prometheus).
 
 6. **Monitoring & Alertes**  
    - Prometheus collecte les métriques.  
