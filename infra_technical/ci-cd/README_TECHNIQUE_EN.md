@@ -33,7 +33,13 @@ The pipeline is designed to operate reliably even under geopolitical constraints
 - `docker-compose.yml` → Deploys app, Postgres, exporters, and Prometheus in a local staging environment.
 
 ### 🧪 Testing & Validation
-- `tests/` → Validation pipelines (`test_ci.yml`, `test_lint.yml`, `test_build.yml`) and utility tests (`test_ci_cd_utils.py`).  
+- `tests/` → Consolidated test workflows:  
+  - `test_build.yml` → Validates packaging and installability.  
+  - `test_deploy.yml` → Validates staging deployment and healthchecks.  
+  - `test_security.yml` → Validates vulnerabilities in code and dependencies.  
+  - `test_lint.yml` → Validates style, typing, and security.  
+  - `test_ci.yml` → Orchestrates all test workflows in parallel.  
+  - `test_ci_cd_utils.py` → Validates utility functions (hash, logs, timestamps, artifact validation).  
 - `schemas/` → Workflow and artifact validation schema (`ci_cd_schema.json`).  
 - `utils/` → Reusable functions for logging, hashing, and timestamping (`ci_cd_utils.py`).
 
