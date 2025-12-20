@@ -30,17 +30,17 @@ jobs:
           pip install -r requirements.txt
           pip install mypy
 
-      - name: Run mypy typing checks (captured)
-        run: |
-          mkdir -p artifacts/typing
-          mypy --show-error-codes --hide-error-context --no-error-summary \
-               --pretty --log-file artifacts/typing/mypy.log \
-               . || echo "Mypy found errors"
-          # Afficher un résumé court pour la CI
-          tail -n 200 artifacts/typing/mypy.log || true
+      - name: Run typing checks (strict)
+        run: make typing
+
+      - name: Run typing checks with logs
+        run: make typing-test
 
       - name: Upload typing reports
         uses: actions/upload-artifact@v4
         with:
           name: typing-reports
           path: artifacts/typing/mypy.log
+
+      - name: Typing summary
+        run: make typing-summary
