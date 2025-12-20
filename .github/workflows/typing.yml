@@ -1,46 +1,15 @@
-name: Typing Validation
-
-on:
-  push:
-  pull_request:
-
 jobs:
   typing-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements*.txt') }}
-          restore-keys: |
-            pip-${{ runner.os }}-
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install mypy
-
-      - name: Run typing checks (strict)
-        run: make typing
-
-      - name: Run typing checks with logs
-        run: make typing-test
-
-      - name: Upload typing reports
-        uses: actions/upload-artifact@v4
+      - run: pip install -r requirements.txt mypy
+      - run: make typing-test
+      - run: make typing-summary
+      - uses: actions/upload-artifact@v4
         with:
           name: typing-reports
           path: artifacts/typing/mypy.log
-
-      - name: Typing summary
-        run: make typing-summary
