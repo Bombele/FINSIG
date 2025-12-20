@@ -1,0 +1,49 @@
+name: Deploy Staging
+
+on:
+  workflow_dispatch:   # déclenchement manuel
+  push:
+    branches: [ main ] # ou une branche staging si tu préfères
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupération du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configuration de Docker
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      # 3. Construction de l'image
+      - name: Build Docker image
+        run: |
+          docker build -t finsig-app:staging .
+          mkdir -p infra_technical/ci-cd/artifacts/docker
+          docker save finsig-app:staging -o infra_technical/ci-cd/artifacts/docker/docker-image-staging.tar
+          docker inspect finsig-app:staging --format='{{index .RepoDigests 0}}' > infra_technical/ci-cd/artifacts/docker/docker-image-staging-sha256.txt
+
+      # 4. Déploiement avec docker-compose
+      - name: Deploy with docker-compose
+        run: |
+          docker-compose -f infra_technical/ci-cd/workflows/docker-compose.yml up -d
+          sleep 20  # temps pour que les services démarrent
+
+      # 5. Healthchecks
+      - name: Run healthchecks
+        run: |
+          mkdir -p infra_technical/ci-cd/reports
+          echo "=== Healthcheck report ===" > infra_technical/ci-cd/reports/deploy-report.log
+          docker ps >> infra_technical/ci-cd/reports/deploy-report.log
+          curl -f http://localhost:8000/health >> infra_technical/ci-cd/reports/deploy-report.log || echo "App healthcheck failed" >> infra_technical/ci-cd/reports/deploy-report.log
+          curl -f http://localhost:9090/-/ready >> infra_technical/ci-cd/reports/deploy-report.log || echo "Prometheus not ready" >> infra_technical/ci-cd/reports/deploy-report.log
+
+      # 6. Export des rapports et artefacts
+      - name: Upload deploy reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-reports
+          path: infra_technical/ci-cd/reports/deploy-report.log
