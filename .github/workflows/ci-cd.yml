@@ -1,0 +1,22 @@
+name: Global CI/CD Orchestration
+
+on:
+  workflow_dispatch:   # déclenchement manuel
+  push:
+    branches: [ main ]
+
+jobs:
+  ci-validation:
+    uses: ./.github/workflows/ci.yml
+
+  deploy-staging:
+    needs: ci-validation
+    uses: ./.github/workflows/deploy.yml
+
+  monitoring:
+    needs: deploy-staging
+    uses: ./.github/workflows/monitoring.yml
+
+  test-scripts:
+    needs: ci-validation
+    uses: ./.github/workflows/test-scripts.yml
