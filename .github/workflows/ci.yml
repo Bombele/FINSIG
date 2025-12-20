@@ -1,4 +1,4 @@
-name: CI Validation
+name: CI/CD Extended Pipeline
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-test-lint:
+  ci-validation:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,9 +45,22 @@ jobs:
           bandit -r src/ -f json -o infra_technical/ci-cd/reports/security-report.json || true
           safety check --full-report > infra_technical/ci-cd/reports/safety-report.txt || true
 
-      # 7. Export des artefacts
+      # 7. Build Python (wheel + sdist)
+      - name: Build Python packages
+        run: |
+          python -m pip install build twine
+          python -m build --wheel --sdist
+          twine check dist/*
+          mkdir -p infra_technical/ci-cd/artifacts/build
+          cp dist/* infra_technical/ci-cd/artifacts/build/
+
+      # 8. Construction Docker
+      - name: Build Docker image
+        run: |
+          docker build -t finsig-app:latest .
+          mkdir -p infra_technical/ci-cd/artifacts/docker
+          docker save finsig-app:latest -o infra_technical/ci-cd/artifacts/docker/docker-image.tar
+          docker inspect finsig-app:latest --format='{{index .RepoDigests 0}}' > infra_technical/ci-cd/artifacts/docker/docker-image-sha256.txt
+
+      # 9. Export des artefacts
       - name: Upload reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: ci-reports
-          path: infra_technical/ci-cd/reports/
