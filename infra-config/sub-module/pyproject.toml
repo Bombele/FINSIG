@@ -1,1 +1,72 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
+[project]
+name = "finsig-submodule"
+version = "0.1.0"
+description = "Core Python sub-modules for FINSIG infrastructure"
+authors = [
+    { name = "Camille Bombele Liyama", email = "contact@finsig.org" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "pydantic>=2.0",
+    "sqlalchemy>=2.0",
+    "psycopg2-binary>=2.9",
+    "requests>=2.31",
+    "cryptography>=41.0",
+    "python-dotenv>=1.0",
+    "loguru>=0.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "coverage>=7.3",
+    "flake8>=6.1",
+    "mypy>=1.6",
+    "bandit>=1.7",
+    "safety>=2.3",
+    "black>=23.9",
+    "isort>=5.12",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --cov=src --cov-report=xml --junitxml=reports/test-results.xml"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+
+[tool.flake8]
+max-line-length = 100
+exclude = ["build", "dist", ".venv"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+
+[tool.bandit]
+skips = ["B101", "B404"]
+exclude = ["tests"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
