@@ -13,6 +13,7 @@
 - **2025-12-19** – Ajout de la génération et export des rapports institutionnels (`reports/`) et artefacts (`artifacts/`).  
 - **2025-12-19** – Mise à jour des bitácoras trilingues (FR/EN/ES) pour assurer la traçabilité des workflows.  
 - **2025-12-19** – Création de `WORKFLOWS_GUIDE.md` documentant méthodologie, principes de conception et gouvernance CI/CD.  
+- **2025-12-20** – Création du workflow `typing.yml` pour validation stricte du typage avec `mypy` et export des rapports (`mypy-report.log`, `test-typing-results.xml`).  
 
 ---
 
@@ -24,7 +25,8 @@
 - Workflow de tests des scripts CI/CD validé (`test-scripts.yml`).  
 - Workflow de tests pipeline validé (`test-pipeline.yml`).  
 - Workflow global d’orchestration validé (`ci-cd.yml`).  
-- Rapports exportés dans `reports/` (JUnit, couverture, sécurité, déploiement, monitoring).  
+- Workflow de validation du typage validé (`typing.yml`).  
+- Rapports exportés dans `reports/` (JUnit, couverture, sécurité, déploiement, monitoring, typage).  
 - Artefacts consolidés dans `artifacts/` (build Python, image Docker, hashes, logs).  
 - Guide `WORKFLOWS_GUIDE.md` fournit gouvernance et méthodologie.  
 - Bitácoras mises à jour et alignées avec les évolutions.  
@@ -35,5 +37,5 @@
 
 La bitácora `workflows/` enregistre l’**évolution complète** du sous-module CI/CD de FINSIG.  
 Elle garantit **traçabilité institutionnelle**, **robustesse technique**, **sécurité renforcée** et **auditabilité fiable**.  
-Avec l’intégration de **`reports/`**, **`artifacts/`** et des workflows CI/CD, le module offre une **séparation claire entre validation technique, déploiement, monitoring et auditabilité institutionnelle**.  
-Ce sous-module est la **colonne vertébrale de l’orchestration CI/CD de FINSIG**, démontrant sa capacité à être validé, déployé, monitoré et certifié de manière **transparente et crédible**.
+Avec l’intégration de **`reports/`**, **`artifacts/`** et des workflows CI/CD, le module offre une **séparation claire entre validation technique, déploiement, monitoring, typage et auditabilité institutionnelle**.  
+Ce sous-module est la **colonne vertébrale de l’orchestration CI/CD de FINSIG**, démontrant sa capacité à être validé, déployé, monitoré, typé et certifié de manière **transparente et crédible**.
