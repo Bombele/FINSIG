@@ -1,1 +1,53 @@
+name: CI Validation
 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupération du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configuration de Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Installation des dépendances
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r infra-config/sub-module/requirements.txt
+
+      # 4. Linting et typage
+      - name: Run lint and type checks
+        run: |
+          flake8 src/ --output-file infra_technical/ci-cd/reports/lint-report.txt
+          mypy src/ --config-file infra-config/sub-module/mypy.ini
+
+      # 5. Tests unitaires avec couverture
+      - name: Run tests with coverage
+        run: |
+          pytest --cov=src --cov-report=xml:infra_technical/ci-cd/reports/coverage.xml \
+                 --junitxml=infra_technical/ci-cd/reports/test-results.xml
+
+      # 6. Audit de sécurité
+      - name: Run security checks
+        run: |
+          bandit -r src/ -f json -o infra_technical/ci-cd/reports/security-report.json || true
+          safety check --full-report > infra_technical/ci-cd/reports/safety-report.txt || true
+
+      # 7. Export des artefacts
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-reports
+          path: infra_technical/ci-cd/reports/
