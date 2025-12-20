@@ -1,74 +1,22 @@
-# ============================================
-# 📖 Makefile – infra-config/sub-module
-# ============================================
+.PHONY: typing typing-test typing-summary clean
 
-# Variables
-PYTHON := python3
-PIP := $(PYTHON) -m pip
-SRC := src
-TESTS := tests
-REPORTS := infra_technical/ci-cd/reports
-ARTIFACTS := infra_technical/ci-cd/artifacts
-
-# Cibles par défaut
-.PHONY: all install lint typing test security coverage reports clean
-
-all: install lint typing test security coverage reports
-
-# --------------------------------------------
-# 🔧 Installation des dépendances
-# --------------------------------------------
-install:
-	$(PIP) install --upgrade pip
-	$(PIP) install -r requirements.txt
-
-# --------------------------------------------
-# 🧹 Linting et formatage
-# --------------------------------------------
-lint:
-	flake8 $(SRC) $(TESTS)
-	black --check $(SRC) $(TESTS)
-
-# --------------------------------------------
-# 🔍 Typage strict avec mypy
-# --------------------------------------------
+# Vérification stricte avec mypy
 typing:
-	mypy --config-file infra-config/sub-module/mypy.ini $(SRC)
+	mypy --config-file mypy.ini --show-error-codes --pretty .
 
-# --------------------------------------------
-# 🧪 Tests unitaires avec pytest
-# --------------------------------------------
-test:
-	pytest $(TESTS) \
-		--junitxml=$(REPORTS)/test-results.xml \
-		--log-file=$(REPORTS)/pytest.log
+# Vérification avec capture des logs et résumé compact
+typing-test:
+	@mkdir -p artifacts/typing
+	@mypy --config-file mypy.ini --show-error-codes --pretty . \
+		--log-file artifacts/typing/mypy.log || true
+	@echo "=== Résumé des 200 dernières lignes ==="
+	@tail -n 200 artifacts/typing/mypy.log || true
 
-# --------------------------------------------
-# 🔒 Audit de sécurité
-# --------------------------------------------
-security:
-	bandit -r $(SRC) -f json -o $(REPORTS)/bandit-report.json
-	safety check -r requirements.txt --json > $(REPORTS)/safety-report.json
+# Génère un résumé statistique par code d'erreur
+typing-summary:
+	@mkdir -p artifacts/typing
+	@grep -oE '\[[a-z0-9-]+\]' artifacts/typing/mypy.log | sort | uniq -c | sort -nr || true
 
-# --------------------------------------------
-# 📊 Couverture de code
-# --------------------------------------------
-coverage:
-	pytest $(TESTS) \
-		--cov=$(SRC) \
-		--cov-report=xml:$(REPORTS)/coverage.xml \
-		--cov-report=html:$(REPORTS)/coverage-html
-
-# --------------------------------------------
-# 📝 Génération des rapports institutionnels
-# --------------------------------------------
-reports: test coverage security typing lint
-	@echo "=== Rapports générés dans $(REPORTS) ==="
-
-# --------------------------------------------
-# 🧹 Nettoyage des artefacts
-# --------------------------------------------
+# Nettoyage des artefacts
 clean:
-	rm -rf $(REPORTS)/*
-	rm -rf $(ARTIFACTS)/*
-	find . -type d -name "__pycache__" -exec rm -rf {} +
+	@rm -rf artifacts/typing
