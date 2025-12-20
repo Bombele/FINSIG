@@ -1,0 +1,42 @@
+name: Test CI/CD Scripts
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:   # déclenchement manuel possible
+
+jobs:
+  test-scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupération du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configuration de Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Installation des dépendances
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r infra-config/sub-module/requirements.txt
+
+      # 4. Exécution des tests Pytest sur les scripts CI/CD
+      - name: Run script tests
+        run: |
+          pytest tests/ci_cd_scripts --junitxml=infra_technical/ci-cd/reports/test-scripts-results.xml \
+                                     --cov=scripts --cov-report=xml:infra_technical/ci-cd/reports/test-scripts-coverage.xml
+
+      # 5. Export des rapports
+      - name: Upload script test reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: script-test-reports
+          path: infra_technical/ci-cd/reports/
