@@ -1,0 +1,44 @@
+name: Test Pipeline Scripts
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:   # déclenchement manuel possible
+
+jobs:
+  test-pipeline-scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupération du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configuration de Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Installation des dépendances
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r infra-config/sub-module/requirements.txt
+
+      # 4. Exécution des tests Pytest ciblés
+      - name: Run pipeline script tests
+        run: |
+          pytest tests/ci_cd_scripts/test_validate_script.py \
+                 tests/ci_cd_scripts/test_pipeline_script.py \
+                 --junitxml=infra_technical/ci-cd/reports/test-pipeline-results.xml \
+                 --cov=scripts --cov-report=xml:infra_technical/ci-cd/reports/test-pipeline-coverage.xml
+
+      # 5. Export des rapports
+      - name: Upload pipeline test reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-test-reports
+          path: infra_technical/ci-cd/reports/
